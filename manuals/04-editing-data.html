@@ -179,6 +179,48 @@
             flex-shrink: 0;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
+        .flow-diagram-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .flow-header-box {
+            background: linear-gradient(to right, #FF7825, #FF7825/90);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 10px 15px -3px rgba(255, 120, 37, 0.3), 0 4px 6px -2px rgba(255, 120, 37, 0.2);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+        }
+        .flow-header-box:hover {
+            transform: scale(1.05);
+        }
+        .flow-connector {
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(to bottom, #FF7825, #FF7825/80);
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        .flow-connector::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #FF7825;
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -292,18 +334,14 @@
                 </h2>
                 <div class="bg-gradient-to-br from-white to-[#EFF3FD] rounded-xl p-8 border-2 border-[#FF7825]/20 shadow-lg">
                     <!-- Flow Diagram -->
-                    <div class="flex flex-col items-center space-y-4">
+                    <div class="flow-diagram-container">
                         <!-- Header Box -->
-                        <div class="bg-gradient-to-r from-[#FF7825] to-[#FF7825]/90 text-white rounded-xl px-8 py-4 shadow-lg transform hover:scale-105 transition-transform">
+                        <div class="flow-header-box">
                             <h3 class="text-xl font-bold text-center" data-i18n="content.flow.header">DATA EDITING PROCESS</h3>
                         </div>
                         
-                        <!-- Arrow Down -->
-                        <div class="flex flex-col items-center">
-                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                            </svg>
-                        </div>
+                        <!-- Connecting Line with Arrow -->
+                        <div class="flow-connector"></div>
 
                         <!-- Step 1 -->
                         <div class="flow-step">
@@ -314,12 +352,8 @@
                             </div>
                         </div>
 
-                        <!-- Arrow Down -->
-                        <div class="flex flex-col items-center">
-                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                            </svg>
-                        </div>
+                        <!-- Connecting Line with Arrow -->
+                        <div class="flow-connector"></div>
 
                         <!-- Step 2 -->
                         <div class="flow-step">
@@ -330,12 +364,8 @@
                             </div>
                         </div>
 
-                        <!-- Arrow Down -->
-                        <div class="flex flex-col items-center">
-                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                            </svg>
-                        </div>
+                        <!-- Connecting Line with Arrow -->
+                        <div class="flow-connector"></div>
 
                         <!-- Step 3 -->
                         <div class="flow-step">
@@ -346,12 +376,8 @@
                             </div>
                         </div>
 
-                        <!-- Arrow Down -->
-                        <div class="flex flex-col items-center">
-                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                            </svg>
-                        </div>
+                        <!-- Connecting Line with Arrow -->
+                        <div class="flow-connector"></div>
 
                         <!-- Step 4 -->
                         <div class="flow-step">
@@ -362,12 +388,8 @@
                             </div>
                         </div>
 
-                        <!-- Arrow Down -->
-                        <div class="flex flex-col items-center">
-                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                            </svg>
-                        </div>
+                        <!-- Connecting Line with Arrow -->
+                        <div class="flow-connector"></div>
 
                         <!-- Success Step -->
                         <div class="flow-step-success">
