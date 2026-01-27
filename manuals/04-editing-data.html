@@ -114,6 +114,71 @@
             font-size: 0.875rem;
             line-height: 1.6;
         }
+        .flow-step {
+            background: white;
+            border: 2px solid #FF7825;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        .flow-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(255, 120, 37, 0.2), 0 4px 6px -2px rgba(255, 120, 37, 0.1);
+        }
+        .flow-step-number {
+            background: linear-gradient(135deg, #FF7825 0%, #FF7825/90 100%);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px -1px rgba(255, 120, 37, 0.3);
+        }
+        .flow-step-content {
+            flex: 1;
+        }
+        .flow-step-success {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border: 2px solid #16a34a;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3), 0 4px 6px -2px rgba(34, 197, 94, 0.2);
+            transition: all 0.3s ease;
+        }
+        .flow-step-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2);
+        }
+        .flow-step-number-success {
+            background: white;
+            color: #22c55e;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -215,79 +280,136 @@
     <!-- Main Content -->
     <main class="max-w-5xl mx-auto px-4 py-12">
         <div class="prose prose-lg max-w-none">
-            <p class="text-xl text-gray-700 leading-relaxed mb-8">
+            <p class="text-xl text-gray-700 leading-relaxed mb-8" data-i18n="content.intro">
                 You can freely edit data that has already been saved in Mana MES. This guide explains how to edit Machine Data, Process Data, Production Routes, and SKU data.
             </p>
 
             <!-- Editing Flow Overview -->
             <div class="flow-box">
-                <h2 class="text-2xl font-bold text-[#070711] mb-6 flex items-center">
+                <h2 class="text-2xl font-bold text-[#070711] mb-6 flex items-center" data-i18n="content.flow.title">
                     <span class="text-3xl mr-3">📊</span>
                     Editing Flow Overview
                 </h2>
-                <div class="bg-white rounded-lg p-6 border-2 border-gray-200">
-                    <pre class="bg-transparent text-gray-800 p-0 m-0">┌─────────────────────────────────────────┐
-│         DATA EDITING PROCESS             │
-└─────────────────────────────────────────┘
-                    │
-                    ▼
-        ┌───────────────────────┐
-        │  Locate Item to Edit  │
-        └───────────┬───────────┘
-                    │
-                    ▼
-        ┌───────────────────────┐
-        │  Click Edit Button    │
-        │  (ปุ่มแก้ไข)           │
-        └───────────┬───────────┘
-                    │
-                    ▼
-        ┌───────────────────────┐
-        │  Modify Information   │
-        └───────────┬───────────┘
-                    │
-                    ▼
-        ┌───────────────────────┐
-        │  Click Update         │
-        │  (อัปเดตข้อมูล)         │
-        └───────────┬───────────┘
-                    │
-                    ▼
-        ┌───────────────────────┐
-        │  Changes Saved        │
-        └───────────────────────┘</pre>
+                <div class="bg-gradient-to-br from-white to-[#EFF3FD] rounded-xl p-8 border-2 border-[#FF7825]/20 shadow-lg">
+                    <!-- Flow Diagram -->
+                    <div class="flex flex-col items-center space-y-4">
+                        <!-- Header Box -->
+                        <div class="bg-gradient-to-r from-[#FF7825] to-[#FF7825]/90 text-white rounded-xl px-8 py-4 shadow-lg transform hover:scale-105 transition-transform">
+                            <h3 class="text-xl font-bold text-center" data-i18n="content.flow.header">DATA EDITING PROCESS</h3>
+                        </div>
+                        
+                        <!-- Arrow Down -->
+                        <div class="flex flex-col items-center">
+                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Step 1 -->
+                        <div class="flow-step">
+                            <div class="flow-step-number">1</div>
+                            <div class="flow-step-content">
+                                <h4 class="font-bold text-lg text-[#070711]" data-i18n="content.flow.step1.title">Locate Item to Edit</h4>
+                                <p class="text-gray-600 text-sm mt-1" data-i18n="content.flow.step1.desc">Find the data you want to modify</p>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Down -->
+                        <div class="flex flex-col items-center">
+                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flow-step">
+                            <div class="flow-step-number">2</div>
+                            <div class="flow-step-content">
+                                <h4 class="font-bold text-lg text-[#070711]" data-i18n="content.flow.step2.title">Click Edit Button</h4>
+                                <p class="text-gray-600 text-sm mt-1" data-i18n="content.flow.step2.desc">(ปุ่มแก้ไข)</p>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Down -->
+                        <div class="flex flex-col items-center">
+                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flow-step">
+                            <div class="flow-step-number">3</div>
+                            <div class="flow-step-content">
+                                <h4 class="font-bold text-lg text-[#070711]" data-i18n="content.flow.step3.title">Modify Information</h4>
+                                <p class="text-gray-600 text-sm mt-1" data-i18n="content.flow.step3.desc">Update the fields you need to change</p>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Down -->
+                        <div class="flex flex-col items-center">
+                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="flow-step">
+                            <div class="flow-step-number">4</div>
+                            <div class="flow-step-content">
+                                <h4 class="font-bold text-lg text-[#070711]" data-i18n="content.flow.step4.title">Click Update</h4>
+                                <p class="text-gray-600 text-sm mt-1" data-i18n="content.flow.step4.desc">(อัปเดตข้อมูล)</p>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Down -->
+                        <div class="flex flex-col items-center">
+                            <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Success Step -->
+                        <div class="flow-step-success">
+                            <div class="flow-step-number-success">✓</div>
+                            <div class="flow-step-content">
+                                <h4 class="font-bold text-lg text-white" data-i18n="content.flow.step5.title">Changes Saved</h4>
+                                <p class="text-white/90 text-sm mt-1" data-i18n="content.flow.step5.desc">Your updates are now active</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- General Editing Process -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">General Editing Process</h2>
-                <p class="text-lg text-gray-700 mb-6">To edit any master data:</p>
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.general.title">General Editing Process</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.general.intro">To edit any master data:</p>
 
                 <div class="info-box">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">🔄</span>
-                        <strong class="text-[#070711]">Standard Editing Steps</strong>
+                        <strong class="text-[#070711]" data-i18n="content.general.stepsTitle">Standard Editing Steps</strong>
                     </div>
                     <div class="space-y-4 mt-4">
                         <div class="flex items-start bg-white rounded-lg p-4">
                             <span class="text-2xl mr-4">1️⃣</span>
                             <div>
-                                <strong class="text-[#070711]">Click Edit Button</strong>
-                                <p class="text-gray-600 text-sm">(ปุ่มแก้ไข)</p>
+                                <strong class="text-[#070711]" data-i18n="content.general.step1.title">Click Edit Button</strong>
+                                <p class="text-gray-600 text-sm" data-i18n="content.general.step1.desc">(ปุ่มแก้ไข)</p>
                             </div>
                         </div>
                         <div class="flex items-start bg-white rounded-lg p-4">
                             <span class="text-2xl mr-4">2️⃣</span>
                             <div>
-                                <strong class="text-[#070711]">Enter New Information</strong>
+                                <strong class="text-[#070711]" data-i18n="content.general.step2.title">Enter New Information</strong>
                             </div>
                         </div>
                         <div class="flex items-start bg-white rounded-lg p-4">
                             <span class="text-2xl mr-4">3️⃣</span>
                             <div>
-                                <strong class="text-[#070711]">Click Update</strong>
-                                <p class="text-gray-600 text-sm">(อัปเดตข้อมูล)</p>
+                                <strong class="text-[#070711]" data-i18n="content.general.step3.title">Click Update</strong>
+                                <p class="text-gray-600 text-sm" data-i18n="content.general.step3.desc">(อัปเดตข้อมูล)</p>
                             </div>
                         </div>
                     </div>
@@ -296,39 +418,39 @@
 
             <!-- Editing Machine Data -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Editing Machine Data (การแก้ไข ข้อมูลเครื่องจักร)</h2>
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.machine.title">Editing Machine Data (การแก้ไข ข้อมูลเครื่องจักร)</h2>
 
                 <div class="nav-box">
                     <div class="flex items-center mb-2">
                         <span class="text-2xl mr-3">📍</span>
-                        <strong class="text-[#070711]">Navigation Path</strong>
+                        <strong class="text-[#070711]" data-i18n="content.machine.navTitle">Navigation Path</strong>
                     </div>
-                    <p class="text-gray-700 ml-9">ข้อมูลอุปกรณ์ (Equipment Data)</p>
+                    <p class="text-gray-700 ml-9" data-i18n="content.machine.navPath">ข้อมูลอุปกรณ์ (Equipment Data)</p>
                 </div>
 
                 <div class="space-y-4 my-8">
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Locate the machine you want to edit in the <strong>ข้อมูลอุปกรณ์</strong> (Equipment Data) menu.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.machine.step1">Locate the machine you want to edit in the <strong>ข้อมูลอุปกรณ์</strong> (Equipment Data) menu.</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Click the <strong>Edit</strong> button (ปุ่มแก้ไข) for that machine.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.machine.step2">Click the <strong>Edit</strong> button (ปุ่มแก้ไข) for that machine.</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Modify the machine details (process name and other information).</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.machine.step3">Modify the machine details (process name and other information).</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Click <strong>Update</strong> to save your changes.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.machine.step4">Click <strong>Update</strong> to save your changes.</h3>
                         </div>
                     </div>
                 </div>
@@ -337,142 +459,166 @@
                 <div class="my-8 space-y-6">
                     <div>
                         <img src="../artwork/edit%20machine%201.png" alt="Editing Machine Data - Step 1" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
-                        <p class="text-center text-gray-600 text-sm mt-3 italic">Editing Machine Data - Locating and Selecting Machine</p>
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.machine.img1">Editing Machine Data - Locating and Selecting Machine</p>
                     </div>
                     <div>
                         <img src="../artwork/edit%20machine%202.png" alt="Editing Machine Data - Step 2" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
-                        <p class="text-center text-gray-600 text-sm mt-3 italic">Editing Machine Data - Edit Form</p>
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.machine.img2">Editing Machine Data - Edit Form</p>
                     </div>
                 </div>
 
                 <div class="checklist-box">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">✅</span>
-                        <strong class="text-[#070711]">Completion Checklist</strong>
+                        <strong class="text-[#070711]" data-i18n="content.machine.checklistTitle">Completion Checklist</strong>
                     </div>
                     <ul class="space-y-2 ml-9">
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Navigate to Equipment Data menu</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Locate machine to edit</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Edit button</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Modify machine details</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Update to save</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.machine.checklist1">Navigate to Equipment Data menu</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.machine.checklist2">Locate machine to edit</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.machine.checklist3">Click Edit button</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.machine.checklist4">Modify machine details</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.machine.checklist5">Click Update to save</span></li>
                     </ul>
                 </div>
             </section>
 
             <!-- Editing Process Data -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Editing Process Data (การแก้ไข ข้อมูลหลักกระบวนการผลิต)</h2>
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.process.title">Editing Process Data (การแก้ไข ข้อมูลหลักกระบวนการผลิต)</h2>
 
                 <div class="nav-box">
                     <div class="flex items-center mb-2">
                         <span class="text-2xl mr-3">📍</span>
-                        <strong class="text-[#070711]">Navigation Path</strong>
+                        <strong class="text-[#070711]" data-i18n="content.process.navTitle">Navigation Path</strong>
                     </div>
-                    <p class="text-gray-700 ml-9">ข้อมูลการผลิต > ข้อมูลหลักกระบวนการผลิต</p>
-                    <p class="text-gray-600 ml-9 text-sm">(Production Data > Process Data)</p>
+                    <p class="text-gray-700 ml-9" data-i18n="content.process.navPath">ข้อมูลการผลิต > ข้อมูลหลักกระบวนการผลิต</p>
+                    <p class="text-gray-600 ml-9 text-sm" data-i18n="content.process.navPathEn">(Production Data > Process Data)</p>
                 </div>
 
                 <div class="space-y-4 my-8">
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักกระบวนการผลิต</strong> (Process Data).</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.process.step1">Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักกระบวนการผลิต</strong> (Process Data).</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Find the process you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.process.step2">Find the process you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Modify the process name and other details.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.process.step3">Modify the process name and other details.</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Click <strong>Update</strong> to save your changes.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.process.step4">Click <strong>Update</strong> to save your changes.</h3>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Edit Process Images -->
+                <div class="my-8 space-y-6">
+                    <div>
+                        <img src="../artwork/edit%20op.png" alt="Editing Process Data - Step 1" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.process.img1">Editing Process Data - Locating and Selecting Process</p>
+                    </div>
+                    <div>
+                        <img src="../artwork/edit%20edit%20op2.png" alt="Editing Process Data - Step 2" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.process.img2">Editing Process Data - Edit Form</p>
                     </div>
                 </div>
 
                 <div class="checklist-box">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">✅</span>
-                        <strong class="text-[#070711]">Completion Checklist</strong>
+                        <strong class="text-[#070711]" data-i18n="content.process.checklistTitle">Completion Checklist</strong>
                     </div>
                     <ul class="space-y-2 ml-9">
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Navigate to Process Data</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Locate process to edit</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Edit button</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Modify process details</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Update to save</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.process.checklist1">Navigate to Process Data</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.process.checklist2">Locate process to edit</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.process.checklist3">Click Edit button</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.process.checklist4">Modify process details</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.process.checklist5">Click Update to save</span></li>
                     </ul>
                 </div>
             </section>
 
             <!-- Editing Production Routes -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Editing Production Routes (การแก้ไข เส้นทางการผลิต)</h2>
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.routes.title">Editing Production Routes (การแก้ไข เส้นทางการผลิต)</h2>
 
                 <div class="nav-box">
                     <div class="flex items-center mb-2">
                         <span class="text-2xl mr-3">📍</span>
-                        <strong class="text-[#070711]">Navigation Path</strong>
+                        <strong class="text-[#070711]" data-i18n="content.routes.navTitle">Navigation Path</strong>
                     </div>
-                    <p class="text-gray-700 ml-9">ข้อมูลการผลิต > เส้นทางการผลิต</p>
-                    <p class="text-gray-600 ml-9 text-sm">(Production Data > Production Routes)</p>
+                    <p class="text-gray-700 ml-9" data-i18n="content.routes.navPath">ข้อมูลการผลิต > เส้นทางการผลิต</p>
+                    <p class="text-gray-600 ml-9 text-sm" data-i18n="content.routes.navPathEn">(Production Data > Production Routes)</p>
                 </div>
 
                 <div class="space-y-4 my-8">
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>เส้นทางการผลิต</strong> (Production Routes).</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step1">Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>เส้นทางการผลิต</strong> (Production Routes).</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Find the production route you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step2">Find the production route you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Modify the sequence of steps (Step) as needed.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step3">Modify the sequence of steps (Step) as needed.</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Click <strong>Update</strong> to save your changes.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step4">Click <strong>Update</strong> to save your changes.</h3>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Edit Production Routes Images -->
+                <div class="my-8 space-y-6">
+                    <div>
+                        <img src="../artwork/edit%20routing.png" alt="Editing Production Routes - Step 1" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.routes.img1">Editing Production Routes - Locating and Selecting Route</p>
+                    </div>
+                    <div>
+                        <img src="../artwork/edit%20routing2.png" alt="Editing Production Routes - Step 2" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.routes.img2">Editing Production Routes - Edit Form</p>
                     </div>
                 </div>
 
                 <div class="bg-yellow-50 border-l-4 border-yellow-400 rounded-lg p-6">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">⚠️</span>
-                        <strong class="text-[#070711]">Important Note</strong>
+                        <strong class="text-[#070711]" data-i18n="content.routes.noteTitle">Important Note</strong>
                     </div>
-                    <p class="text-gray-700 mb-2">When editing Production Routes:</p>
+                    <p class="text-gray-700 mb-2" data-i18n="content.routes.noteIntro">When editing Production Routes:</p>
                     <ul class="space-y-2 ml-9">
                         <li class="flex items-center">
                             <span class="text-yellow-600 mr-2">•</span>
-                            <span>Ensure step sequence is logical</span>
+                            <span data-i18n="content.routes.note1">Ensure step sequence is logical</span>
                         </li>
                         <li class="flex items-center">
                             <span class="text-yellow-600 mr-2">•</span>
-                            <span>Keep steps complete</span>
+                            <span data-i18n="content.routes.note2">Keep steps complete</span>
                         </li>
                         <li class="flex items-center">
                             <span class="text-yellow-600 mr-2">•</span>
-                            <span>Verify all steps are connected</span>
+                            <span data-i18n="content.routes.note3">Verify all steps are connected</span>
                         </li>
                     </ul>
                 </div>
@@ -480,122 +626,142 @@
                 <div class="checklist-box mt-6">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">✅</span>
-                        <strong class="text-[#070711]">Completion Checklist</strong>
+                        <strong class="text-[#070711]" data-i18n="content.routes.checklistTitle">Completion Checklist</strong>
                     </div>
                     <ul class="space-y-2 ml-9">
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Navigate to Production Routes</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Locate route to edit</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Edit button</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Modify step sequence</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Verify sequence logic</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Update to save</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.routes.checklist1">Navigate to Production Routes</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.routes.checklist2">Locate route to edit</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.routes.checklist3">Click Edit button</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.routes.checklist4">Modify step sequence</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.routes.checklist5">Verify sequence logic</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.routes.checklist6">Click Update to save</span></li>
                     </ul>
                 </div>
             </section>
 
             <!-- Editing SKU Data -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Editing SKU Data (การแก้ไข ข้อมูลหลักสินค้า (SKU))</h2>
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.sku.title">Editing SKU Data (การแก้ไข ข้อมูลหลักสินค้า (SKU))</h2>
 
                 <div class="nav-box">
                     <div class="flex items-center mb-2">
                         <span class="text-2xl mr-3">📍</span>
-                        <strong class="text-[#070711]">Navigation Path</strong>
+                        <strong class="text-[#070711]" data-i18n="content.sku.navTitle">Navigation Path</strong>
                     </div>
-                    <p class="text-gray-700 ml-9">ข้อมูลการผลิต > ข้อมูลหลักสินค้า (SKU)</p>
-                    <p class="text-gray-600 ml-9 text-sm">(Production Data > SKU Master Data)</p>
+                    <p class="text-gray-700 ml-9" data-i18n="content.sku.navPath">ข้อมูลการผลิต > ข้อมูลหลักสินค้า (SKU)</p>
+                    <p class="text-gray-600 ml-9 text-sm" data-i18n="content.sku.navPathEn">(Production Data > SKU Master Data)</p>
                 </div>
 
                 <div class="space-y-4 my-8">
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักสินค้า (SKU)</strong> (SKU Master Data).</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step1">Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักสินค้า (SKU)</strong> (SKU Master Data).</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Find the SKU you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step2">Find the SKU you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Modify the product details (Product Code, Product Name, Unit of Measure) and components.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step3">Modify the product details (Product Code, Product Name, Unit of Measure) and components.</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Click <strong>Update</strong> to save your changes.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step4">Click <strong>Update</strong> to save your changes.</h3>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Edit SKU Images -->
+                <div class="my-8 space-y-6">
+                    <div>
+                        <img src="../artwork/edit%20sku1.png" alt="Editing SKU Data - Step 1" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.sku.img1">Editing SKU Data - Locating and Selecting SKU</p>
+                    </div>
+                    <div>
+                        <img src="../artwork/edit%20sku2.png" alt="Editing SKU Data - Step 2" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.sku.img2">Editing SKU Data - Edit Form</p>
                     </div>
                 </div>
 
                 <div class="info-box">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">📋</span>
-                        <strong class="text-[#070711]">Editable SKU Fields</strong>
+                        <strong class="text-[#070711]" data-i18n="content.sku.fieldsTitle">Editable SKU Fields</strong>
                     </div>
                     <div class="bg-white rounded-lg p-4 mt-3 space-y-2">
-                        <div>• Product Code</div>
-                        <div>• Product Name</div>
-                        <div>• Unit of Measure</div>
-                        <div>• Components (Add/Remove)</div>
+                        <div data-i18n="content.sku.field1">• Product Code</div>
+                        <div data-i18n="content.sku.field2">• Product Name</div>
+                        <div data-i18n="content.sku.field3">• Unit of Measure</div>
+                        <div data-i18n="content.sku.field4">• Components (Add/Remove)</div>
                     </div>
                 </div>
 
                 <div class="checklist-box mt-6">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">✅</span>
-                        <strong class="text-[#070711]">Completion Checklist</strong>
+                        <strong class="text-[#070711]" data-i18n="content.sku.checklistTitle">Completion Checklist</strong>
                     </div>
                     <ul class="space-y-2 ml-9">
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Navigate to SKU Master Data</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Locate SKU to edit</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Edit button</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Modify product details</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Update components if needed</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Update to save</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.sku.checklist1">Navigate to SKU Master Data</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.sku.checklist2">Locate SKU to edit</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.sku.checklist3">Click Edit button</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.sku.checklist4">Modify product details</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.sku.checklist5">Update components if needed</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.sku.checklist6">Click Update to save</span></li>
                     </ul>
                 </div>
             </section>
 
             <!-- Editing Work Orders -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Editing Work Orders (WO)</h2>
-                <p class="text-lg text-gray-700 mb-6">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.wo.title">Editing Work Orders (WO)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.wo.intro">
                     If you need to add information to a work order or if there was an error in the order, you can edit it in 3 different locations.
                 </p>
 
                 <div class="info-box">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">📝</span>
-                        <strong class="text-[#070711]">Work Order Editing</strong>
+                        <strong class="text-[#070711]" data-i18n="content.wo.editingTitle">Work Order Editing</strong>
                     </div>
                     <div class="bg-white rounded-lg p-4 mt-3 space-y-3">
-                        <p class="font-semibold text-[#070711]">Edit buttons available at:</p>
+                        <p class="font-semibold text-[#070711]" data-i18n="content.wo.locationsTitle">Edit buttons available at:</p>
                         <ul class="space-y-2 ml-4">
                             <li class="flex items-center">
                                 <span class="text-[#FF7825] mr-2">•</span>
-                                <span>Location 1: [Edit Button]</span>
+                                <span data-i18n="content.wo.location1">Location 1: [Edit Button]</span>
                             </li>
                             <li class="flex items-center">
                                 <span class="text-[#FF7825] mr-2">•</span>
-                                <span>Location 2: [Edit Button]</span>
+                                <span data-i18n="content.wo.location2">Location 2: [Edit Button]</span>
                             </li>
                             <li class="flex items-center">
                                 <span class="text-[#FF7825] mr-2">•</span>
-                                <span>Location 3: [Edit Button]</span>
+                                <span data-i18n="content.wo.location3">Location 3: [Edit Button]</span>
                             </li>
                         </ul>
                         <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mt-4">
                             <div class="flex items-start">
                                 <span class="text-xl mr-2">⚠️</span>
-                                <p class="text-yellow-800 text-sm">Edit promptly to avoid production issues</p>
+                                <p class="text-yellow-800 text-sm" data-i18n="content.wo.warning">Edit promptly to avoid production issues</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Edit Work Order Image -->
+                <div class="my-8">
+                    <div>
+                        <img src="../artwork/edit%20wo.png" alt="Editing Work Orders" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                        <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.wo.img1">Editing Work Orders - Edit Interface</p>
                     </div>
                 </div>
 
@@ -603,8 +769,8 @@
                     <div class="flex items-start">
                         <span class="text-2xl mr-4">ℹ️</span>
                         <div>
-                            <strong class="text-[#070711] text-lg">Note:</strong>
-                            <p class="text-gray-700 mt-1">The manual indicates that work order editing can be done at multiple points. Look for the Edit button in the work order interface to make corrections.</p>
+                            <strong class="text-[#070711] text-lg" data-i18n="content.wo.noteTitle">Note:</strong>
+                            <p class="text-gray-700 mt-1" data-i18n="content.wo.note">The manual indicates that work order editing can be done at multiple points. Look for the Edit button in the work order interface to make corrections.</p>
                         </div>
                     </div>
                 </div>
@@ -612,23 +778,23 @@
 
             <!-- Tips -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Tips for Editing Data</h2>
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.tips.title">Tips for Editing Data</h2>
                 <div class="space-y-4">
                     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-                        <h4 class="font-semibold text-lg text-[#070711] mb-2">Bulk Updates</h4>
-                        <p class="text-gray-700">If you need to update multiple items, consider using the Bulk Upload feature with your previously used CSV file. The system will automatically detect and update the data.</p>
+                        <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.tips.tip1.title">Bulk Updates</h4>
+                        <p class="text-gray-700" data-i18n="content.tips.tip1.desc">If you need to update multiple items, consider using the Bulk Upload feature with your previously used CSV file. The system will automatically detect and update the data.</p>
                     </div>
                     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-                        <h4 class="font-semibold text-lg text-[#070711] mb-2">Data Integrity</h4>
-                        <p class="text-gray-700">When editing Production Routes, ensure the sequence of steps remains logical and complete.</p>
+                        <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.tips.tip2.title">Data Integrity</h4>
+                        <p class="text-gray-700" data-i18n="content.tips.tip2.desc">When editing Production Routes, ensure the sequence of steps remains logical and complete.</p>
                     </div>
                     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-                        <h4 class="font-semibold text-lg text-[#070711] mb-2">SKU Components</h4>
-                        <p class="text-gray-700">When editing SKU data, you can add or remove components as needed.</p>
+                        <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.tips.tip3.title">SKU Components</h4>
+                        <p class="text-gray-700" data-i18n="content.tips.tip3.desc">When editing SKU data, you can add or remove components as needed.</p>
                     </div>
                     <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
-                        <h4 class="font-semibold text-lg text-[#070711] mb-2">Work Orders</h4>
-                        <p class="text-gray-700">Edit work orders promptly if errors are detected to avoid production issues.</p>
+                        <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.tips.tip4.title">Work Orders</h4>
+                        <p class="text-gray-700" data-i18n="content.tips.tip4.desc">Edit work orders promptly if errors are detected to avoid production issues.</p>
                     </div>
                 </div>
             </section>
@@ -657,6 +823,129 @@
                     title: "Editing Saved Data",
                     subtitle: "Modify existing master data and work orders",
                     previous: "Previous"
+                },
+                content: {
+                    intro: "You can freely edit data that has already been saved in Mana MES. This guide explains how to edit Machine Data, Process Data, Production Routes, and SKU data.",
+                    flow: {
+                        title: "Editing Flow Overview",
+                        header: "DATA EDITING PROCESS",
+                        step1: { title: "Locate Item to Edit", desc: "Find the data you want to modify" },
+                        step2: { title: "Click Edit Button", desc: "(ปุ่มแก้ไข)" },
+                        step3: { title: "Modify Information", desc: "Update the fields you need to change" },
+                        step4: { title: "Click Update", desc: "(อัปเดตข้อมูล)" },
+                        step5: { title: "Changes Saved", desc: "Your updates are now active" }
+                    },
+                    general: {
+                        title: "General Editing Process",
+                        intro: "To edit any master data:",
+                        stepsTitle: "Standard Editing Steps",
+                        step1: { title: "Click Edit Button", desc: "(ปุ่มแก้ไข)" },
+                        step2: { title: "Enter New Information" },
+                        step3: { title: "Click Update", desc: "(อัปเดตข้อมูล)" }
+                    },
+                    machine: {
+                        title: "Editing Machine Data (การแก้ไข ข้อมูลเครื่องจักร)",
+                        navTitle: "Navigation Path",
+                        navPath: "ข้อมูลอุปกรณ์ (Equipment Data)",
+                        step1: "Locate the machine you want to edit in the <strong>ข้อมูลอุปกรณ์</strong> (Equipment Data) menu.",
+                        step2: "Click the <strong>Edit</strong> button (ปุ่มแก้ไข) for that machine.",
+                        step3: "Modify the machine details (process name and other information).",
+                        step4: "Click <strong>Update</strong> to save your changes.",
+                        img1: "Editing Machine Data - Locating and Selecting Machine",
+                        img2: "Editing Machine Data - Edit Form",
+                        checklistTitle: "Completion Checklist",
+                        checklist1: "Navigate to Equipment Data menu",
+                        checklist2: "Locate machine to edit",
+                        checklist3: "Click Edit button",
+                        checklist4: "Modify machine details",
+                        checklist5: "Click Update to save"
+                    },
+                    process: {
+                        title: "Editing Process Data (การแก้ไข ข้อมูลหลักกระบวนการผลิต)",
+                        navTitle: "Navigation Path",
+                        navPath: "ข้อมูลการผลิต > ข้อมูลหลักกระบวนการผลิต",
+                        navPathEn: "(Production Data > Process Data)",
+                        step1: "Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักกระบวนการผลิต</strong> (Process Data).",
+                        step2: "Find the process you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).",
+                        step3: "Modify the process name and other details.",
+                        step4: "Click <strong>Update</strong> to save your changes.",
+                        img1: "Editing Process Data - Locating and Selecting Process",
+                        img2: "Editing Process Data - Edit Form",
+                        checklistTitle: "Completion Checklist",
+                        checklist1: "Navigate to Process Data",
+                        checklist2: "Locate process to edit",
+                        checklist3: "Click Edit button",
+                        checklist4: "Modify process details",
+                        checklist5: "Click Update to save"
+                    },
+                    routes: {
+                        title: "Editing Production Routes (การแก้ไข เส้นทางการผลิต)",
+                        navTitle: "Navigation Path",
+                        navPath: "ข้อมูลการผลิต > เส้นทางการผลิต",
+                        navPathEn: "(Production Data > Production Routes)",
+                        step1: "Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>เส้นทางการผลิต</strong> (Production Routes).",
+                        step2: "Find the production route you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).",
+                        step3: "Modify the sequence of steps (Step) as needed.",
+                        step4: "Click <strong>Update</strong> to save your changes.",
+                        img1: "Editing Production Routes - Locating and Selecting Route",
+                        img2: "Editing Production Routes - Edit Form",
+                        noteTitle: "Important Note",
+                        noteIntro: "When editing Production Routes:",
+                        note1: "Ensure step sequence is logical",
+                        note2: "Keep steps complete",
+                        note3: "Verify all steps are connected",
+                        checklistTitle: "Completion Checklist",
+                        checklist1: "Navigate to Production Routes",
+                        checklist2: "Locate route to edit",
+                        checklist3: "Click Edit button",
+                        checklist4: "Modify step sequence",
+                        checklist5: "Verify sequence logic",
+                        checklist6: "Click Update to save"
+                    },
+                    sku: {
+                        title: "Editing SKU Data (การแก้ไข ข้อมูลหลักสินค้า (SKU))",
+                        navTitle: "Navigation Path",
+                        navPath: "ข้อมูลการผลิต > ข้อมูลหลักสินค้า (SKU)",
+                        navPathEn: "(Production Data > SKU Master Data)",
+                        step1: "Go to <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักสินค้า (SKU)</strong> (SKU Master Data).",
+                        step2: "Find the SKU you want to edit and click the <strong>Edit</strong> button (ปุ่มแก้ไข).",
+                        step3: "Modify the product details (Product Code, Product Name, Unit of Measure) and components.",
+                        step4: "Click <strong>Update</strong> to save your changes.",
+                        img1: "Editing SKU Data - Locating and Selecting SKU",
+                        img2: "Editing SKU Data - Edit Form",
+                        fieldsTitle: "Editable SKU Fields",
+                        field1: "• Product Code",
+                        field2: "• Product Name",
+                        field3: "• Unit of Measure",
+                        field4: "• Components (Add/Remove)",
+                        checklistTitle: "Completion Checklist",
+                        checklist1: "Navigate to SKU Master Data",
+                        checklist2: "Locate SKU to edit",
+                        checklist3: "Click Edit button",
+                        checklist4: "Modify product details",
+                        checklist5: "Update components if needed",
+                        checklist6: "Click Update to save"
+                    },
+                    wo: {
+                        title: "Editing Work Orders (WO)",
+                        intro: "If you need to add information to a work order or if there was an error in the order, you can edit it in 3 different locations.",
+                        editingTitle: "Work Order Editing",
+                        locationsTitle: "Edit buttons available at:",
+                        location1: "Location 1: [Edit Button]",
+                        location2: "Location 2: [Edit Button]",
+                        location3: "Location 3: [Edit Button]",
+                        img1: "Editing Work Orders - Edit Interface",
+                        warning: "Edit promptly to avoid production issues",
+                        noteTitle: "Note:",
+                        note: "The manual indicates that work order editing can be done at multiple points. Look for the Edit button in the work order interface to make corrections."
+                    },
+                    tips: {
+                        title: "Tips for Editing Data",
+                        tip1: { title: "Bulk Updates", desc: "If you need to update multiple items, consider using the Bulk Upload feature with your previously used CSV file. The system will automatically detect and update the data." },
+                        tip2: { title: "Data Integrity", desc: "When editing Production Routes, ensure the sequence of steps remains logical and complete." },
+                        tip3: { title: "SKU Components", desc: "When editing SKU data, you can add or remove components as needed." },
+                        tip4: { title: "Work Orders", desc: "Edit work orders promptly if errors are detected to avoid production issues." }
+                    }
                 }
             },
             th: {
@@ -671,6 +960,129 @@
                     title: "การแก้ไขข้อมูลที่บันทึกไว้",
                     subtitle: "แก้ไขข้อมูลหลักและใบสั่งงานที่มีอยู่",
                     previous: "ก่อนหน้า"
+                },
+                content: {
+                    intro: "คุณสามารถแก้ไขข้อมูลที่บันทึกไว้ใน Mana MES ได้อย่างอิสระ คู่มือนี้อธิบายวิธีการแก้ไขข้อมูลเครื่องจักร ข้อมูลกระบวนการผลิต เส้นทางการผลิต และข้อมูล SKU",
+                    flow: {
+                        title: "ภาพรวมกระบวนการแก้ไข",
+                        header: "กระบวนการแก้ไขข้อมูล",
+                        step1: { title: "ค้นหารายการที่ต้องการแก้ไข", desc: "ค้นหาข้อมูลที่คุณต้องการแก้ไข" },
+                        step2: { title: "คลิกปุ่มแก้ไข", desc: "(ปุ่มแก้ไข)" },
+                        step3: { title: "แก้ไขข้อมูล", desc: "อัปเดตฟิลด์ที่คุณต้องการเปลี่ยน" },
+                        step4: { title: "คลิกอัปเดต", desc: "(อัปเดตข้อมูล)" },
+                        step5: { title: "บันทึกการเปลี่ยนแปลง", desc: "การอัปเดตของคุณใช้งานได้แล้ว" }
+                    },
+                    general: {
+                        title: "กระบวนการแก้ไขทั่วไป",
+                        intro: "ในการแก้ไขข้อมูลหลักใดๆ:",
+                        stepsTitle: "ขั้นตอนการแก้ไขมาตรฐาน",
+                        step1: { title: "คลิกปุ่มแก้ไข", desc: "(ปุ่มแก้ไข)" },
+                        step2: { title: "ป้อนข้อมูลใหม่" },
+                        step3: { title: "คลิกอัปเดต", desc: "(อัปเดตข้อมูล)" }
+                    },
+                    machine: {
+                        title: "การแก้ไขข้อมูลเครื่องจักร (การแก้ไข ข้อมูลเครื่องจักร)",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "ข้อมูลอุปกรณ์ (Equipment Data)",
+                        step1: "ค้นหาเครื่องจักรที่ต้องการแก้ไขในเมนู <strong>ข้อมูลอุปกรณ์</strong> (Equipment Data)",
+                        step2: "คลิกปุ่ม <strong>แก้ไข</strong> (ปุ่มแก้ไข) สำหรับเครื่องจักรนั้น",
+                        step3: "แก้ไขรายละเอียดเครื่องจักร (ชื่อกระบวนการและข้อมูลอื่นๆ)",
+                        step4: "คลิก <strong>อัปเดต</strong> เพื่อบันทึกการเปลี่ยนแปลง",
+                        img1: "การแก้ไขข้อมูลเครื่องจักร - การค้นหาและเลือกเครื่องจักร",
+                        img2: "การแก้ไขข้อมูลเครื่องจักร - ฟอร์มแก้ไข",
+                        checklistTitle: "รายการตรวจสอบความสมบูรณ์",
+                        checklist1: "ไปที่เมนูข้อมูลอุปกรณ์",
+                        checklist2: "ค้นหาเครื่องจักรที่ต้องการแก้ไข",
+                        checklist3: "คลิกปุ่มแก้ไข",
+                        checklist4: "แก้ไขรายละเอียดเครื่องจักร",
+                        checklist5: "คลิกอัปเดตเพื่อบันทึก"
+                    },
+                    process: {
+                        title: "การแก้ไขข้อมูลหลักกระบวนการผลิต (การแก้ไข ข้อมูลหลักกระบวนการผลิต)",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "ข้อมูลการผลิต > ข้อมูลหลักกระบวนการผลิต",
+                        navPathEn: "(Production Data > Process Data)",
+                        step1: "ไปที่ <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักกระบวนการผลิต</strong> (Process Data)",
+                        step2: "ค้นหากระบวนการที่ต้องการแก้ไขและคลิกปุ่ม <strong>แก้ไข</strong> (ปุ่มแก้ไข)",
+                        step3: "แก้ไขชื่อกระบวนการและรายละเอียดอื่นๆ",
+                        step4: "คลิก <strong>อัปเดต</strong> เพื่อบันทึกการเปลี่ยนแปลง",
+                        img1: "การแก้ไขข้อมูลหลักกระบวนการผลิต - การค้นหาและเลือกกระบวนการ",
+                        img2: "การแก้ไขข้อมูลหลักกระบวนการผลิต - ฟอร์มแก้ไข",
+                        checklistTitle: "รายการตรวจสอบความสมบูรณ์",
+                        checklist1: "ไปที่ข้อมูลหลักกระบวนการผลิต",
+                        checklist2: "ค้นหากระบวนการที่ต้องการแก้ไข",
+                        checklist3: "คลิกปุ่มแก้ไข",
+                        checklist4: "แก้ไขรายละเอียดกระบวนการ",
+                        checklist5: "คลิกอัปเดตเพื่อบันทึก"
+                    },
+                    routes: {
+                        title: "การแก้ไขเส้นทางการผลิต (การแก้ไข เส้นทางการผลิต)",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "ข้อมูลการผลิต > เส้นทางการผลิต",
+                        navPathEn: "(Production Data > Production Routes)",
+                        step1: "ไปที่ <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>เส้นทางการผลิต</strong> (Production Routes)",
+                        step2: "ค้นหาเส้นทางการผลิตที่ต้องการแก้ไขและคลิกปุ่ม <strong>แก้ไข</strong> (ปุ่มแก้ไข)",
+                        step3: "แก้ไขลำดับขั้นตอน (Step) ตามต้องการ",
+                        step4: "คลิก <strong>อัปเดต</strong> เพื่อบันทึกการเปลี่ยนแปลง",
+                        img1: "การแก้ไขเส้นทางการผลิต - การค้นหาและเลือกเส้นทาง",
+                        img2: "การแก้ไขเส้นทางการผลิต - ฟอร์มแก้ไข",
+                        noteTitle: "หมายเหตุสำคัญ",
+                        noteIntro: "เมื่อแก้ไขเส้นทางการผลิต:",
+                        note1: "ตรวจสอบให้แน่ใจว่าลำดับขั้นตอนมีความสมเหตุสมผล",
+                        note2: "ให้ขั้นตอนครบถ้วน",
+                        note3: "ตรวจสอบว่าขั้นตอนทั้งหมดเชื่อมต่อกัน",
+                        checklistTitle: "รายการตรวจสอบความสมบูรณ์",
+                        checklist1: "ไปที่เส้นทางการผลิต",
+                        checklist2: "ค้นหาเส้นทางที่ต้องการแก้ไข",
+                        checklist3: "คลิกปุ่มแก้ไข",
+                        checklist4: "แก้ไขลำดับขั้นตอน",
+                        checklist5: "ตรวจสอบตรรกะของลำดับ",
+                        checklist6: "คลิกอัปเดตเพื่อบันทึก"
+                    },
+                    sku: {
+                        title: "การแก้ไขข้อมูลหลักสินค้า (SKU) (การแก้ไข ข้อมูลหลักสินค้า (SKU))",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "ข้อมูลการผลิต > ข้อมูลหลักสินค้า (SKU)",
+                        navPathEn: "(Production Data > SKU Master Data)",
+                        step1: "ไปที่ <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักสินค้า (SKU)</strong> (SKU Master Data)",
+                        step2: "ค้นหา SKU ที่ต้องการแก้ไขและคลิกปุ่ม <strong>แก้ไข</strong> (ปุ่มแก้ไข)",
+                        step3: "แก้ไขรายละเอียดสินค้า (รหัสสินค้า ชื่อสินค้า หน่วยวัด) และส่วนประกอบ",
+                        step4: "คลิก <strong>อัปเดต</strong> เพื่อบันทึกการเปลี่ยนแปลง",
+                        img1: "การแก้ไขข้อมูลหลักสินค้า (SKU) - การค้นหาและเลือก SKU",
+                        img2: "การแก้ไขข้อมูลหลักสินค้า (SKU) - ฟอร์มแก้ไข",
+                        fieldsTitle: "ฟิลด์ SKU ที่แก้ไขได้",
+                        field1: "• รหัสสินค้า",
+                        field2: "• ชื่อสินค้า",
+                        field3: "• หน่วยวัด",
+                        field4: "• ส่วนประกอบ (เพิ่ม/ลบ)",
+                        checklistTitle: "รายการตรวจสอบความสมบูรณ์",
+                        checklist1: "ไปที่ข้อมูลหลักสินค้า (SKU)",
+                        checklist2: "ค้นหา SKU ที่ต้องการแก้ไข",
+                        checklist3: "คลิกปุ่มแก้ไข",
+                        checklist4: "แก้ไขรายละเอียดสินค้า",
+                        checklist5: "อัปเดตส่วนประกอบหากจำเป็น",
+                        checklist6: "คลิกอัปเดตเพื่อบันทึก"
+                    },
+                    wo: {
+                        title: "การแก้ไขใบสั่งงาน (WO)",
+                        intro: "หากคุณต้องการเพิ่มข้อมูลในใบสั่งงานหรือมีข้อผิดพลาดในคำสั่งงาน คุณสามารถแก้ไขได้ใน 3 จุดที่แตกต่างกัน",
+                        editingTitle: "การแก้ไขใบสั่งงาน",
+                        locationsTitle: "ปุ่มแก้ไขมีอยู่ที่:",
+                        location1: "ตำแหน่งที่ 1: [ปุ่มแก้ไข]",
+                        location2: "ตำแหน่งที่ 2: [ปุ่มแก้ไข]",
+                        location3: "ตำแหน่งที่ 3: [ปุ่มแก้ไข]",
+                        img1: "การแก้ไขใบสั่งงาน - อินเทอร์เฟซแก้ไข",
+                        warning: "แก้ไขทันทีเพื่อหลีกเลี่ยงปัญหาการผลิต",
+                        noteTitle: "หมายเหตุ:",
+                        note: "คู่มือระบุว่าการแก้ไขใบสั่งงานสามารถทำได้หลายจุด ค้นหาปุ่มแก้ไขในอินเทอร์เฟซใบสั่งงานเพื่อทำการแก้ไข"
+                    },
+                    tips: {
+                        title: "เคล็ดลับสำหรับการแก้ไขข้อมูล",
+                        tip1: { title: "การอัปเดตแบบกลุ่ม", desc: "หากคุณต้องการอัปเดตหลายรายการ พิจารณาใช้ฟีเจอร์ Bulk Upload ด้วยไฟล์ CSV ที่ใช้ก่อนหน้านี้ ระบบจะตรวจจับและอัปเดตข้อมูลโดยอัตโนมัติ" },
+                        tip2: { title: "ความสมบูรณ์ของข้อมูล", desc: "เมื่อแก้ไขเส้นทางการผลิต ตรวจสอบให้แน่ใจว่าลำดับขั้นตอนยังคงสมเหตุสมผลและครบถ้วน" },
+                        tip3: { title: "ส่วนประกอบ SKU", desc: "เมื่อแก้ไขข้อมูล SKU คุณสามารถเพิ่มหรือลบส่วนประกอบตามต้องการ" },
+                        tip4: { title: "ใบสั่งงาน", desc: "แก้ไขใบสั่งงานทันทีหากพบข้อผิดพลาดเพื่อหลีกเลี่ยงปัญหาการผลิต" }
+                    }
                 }
             }
         };
@@ -697,20 +1109,35 @@
             // Update all elements with data-i18n attribute
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
+                if (!key) return;
+                
                 const keys = key.split('.');
                 let translation = translations[lang];
                 
-                for (let k of keys) {
-                    if (translation && translation[k]) {
+                if (!translation) {
+                    console.warn('Translation not found for language:', lang);
+                    return;
+                }
+                
+                // Navigate through nested object structure
+                for (let i = 0; i < keys.length; i++) {
+                    const k = keys[i];
+                    if (translation && typeof translation === 'object' && k in translation) {
                         translation = translation[k];
                     } else {
+                        // If key not found, keep original text and log warning
+                        console.warn('Translation key not found:', key, 'for language:', lang);
                         translation = null;
                         break;
                     }
                 }
                 
-                if (translation) {
-                    element.textContent = translation;
+                // Apply translation if found
+                if (translation && typeof translation === 'string') {
+                    element.innerHTML = translation;
+                } else if (translation && typeof translation === 'object') {
+                    // If translation is still an object, try to stringify it
+                    element.innerHTML = JSON.stringify(translation);
                 }
             });
         }
