@@ -333,6 +333,12 @@
                     </div>
                 </div>
 
+                <!-- OEE Dashboard Image -->
+                <div class="my-8">
+                    <img src="../artwork/dashboard.png" alt="OEE Dashboard" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.oee.img1">OEE Dashboard - Real-time Production Overview</p>
+                </div>
+
                 <div class="info-box mt-8">
                     <h4 class="font-semibold text-lg text-[#070711] mb-3" data-i18n="content.oee.featuresTitle">กราฟ</h4>
                     <p class="text-gray-700 mb-2" data-i18n="content.oee.featuresDesc">แสดงแนวโน้ม OEE รายวัน/รายกะ และสาเหตุหลักที่ทำให้เครื่องหยุด (Top Downtime Reasons)</p>
@@ -386,6 +392,12 @@
                             <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value4.desc">ดูคำสั่งงาน</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- WIP Tracking Image -->
+                <div class="my-8">
+                    <img src="../artwork/wip%20tracking.png" alt="WIP Tracking" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.wip.img1">WIP Tracking - Work in Progress Dashboard</p>
                 </div>
             </section>
 
@@ -443,6 +455,12 @@
                             <h3 class="font-semibold text-lg text-[#070711]"><strong>Timeline View:</strong> The system will display a colored bar showing the time period when the machine was stopped, giving you a visual overview.</h3>
                         </div>
                     </div>
+                </div>
+
+                <!-- Downtime Management Image -->
+                <div class="my-8">
+                    <img src="../artwork/downtime%20management.png" alt="Downtime Management" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.downtime.img1">Downtime Management - Adding and Viewing Downtime Records</p>
                 </div>
 
                 <div class="info-box">
@@ -578,6 +596,7 @@
                         metric4: { title: "Quality (คุณภาพ)", measure: "What it measures: How many good quality products are produced", desc: "Indicates the percentage of acceptable output" },
                         featuresTitle: "Dashboard Features",
                         featuresDesc: "The dashboard also includes:",
+                        img1: "OEE Dashboard - Real-time Production Overview",
                         accessTitle: "How to Access",
                         accessDesc: "Go to the สถานะการทำงาน (WIP and OEE) menu to view the OEE Dashboard and see real-time production overview."
                     },
@@ -588,7 +607,8 @@
                         value1: { title: "Today's Completed Items", desc: "(รายการสำเร็จในวันนี้) - Check if production meets targets" },
                         value2: { title: "Total Defects", desc: "(จำนวนของเสียทั้งหมด) - View defects in the production line" },
                         value3: { title: "Work in Production Line", desc: "(งานในไลน์ผลิต) - See what work is pending" },
-                        value4: { title: "Current Production Orders", desc: "(เอกสารสั่งผลิตปัจจุบัน) - View active work orders" }
+                        value4: { title: "Current Production Orders", desc: "(เอกสารสั่งผลิตปัจจุบัน) - View active work orders" },
+                        img1: "WIP Tracking - Work in Progress Dashboard"
                     },
                     downtime: {
                         title: "Manually Adding Downtime Records",
@@ -598,7 +618,8 @@
                         step1: "Go to the การหยุดผลิต (Downtime) menu.",
                         step2: "Click + เพิ่มบันทึก (+ Add Record).",
                         step3: { title: "Enter the following information:", item1: "รหัสเครื่อง (Machine Code)", item2: "เวลาที่เริ่มหยุด-สิ้นสุด (Start and End Time)", item3: "สาเหตุ (Cause) - Examples: machine breakdown, waiting for materials, break time" },
-                        step4: "Timeline: The system will display a colored bar showing the time period when the machine stopped, providing a visual overview."
+                        step4: "Timeline: The system will display a colored bar showing the time period when the machine stopped, providing a visual overview.",
+                        img1: "Downtime Management - Adding and Viewing Downtime Records"
                     }
                 }
             },
@@ -639,6 +660,7 @@
                         metric4: { title: "Quality (คุณภาพ)", measure: "ผลิตของดีได้มากน้อยแค่ไหน", desc: "บ่งชี้เปอร์เซ็นต์ของผลผลิตที่ยอมรับได้" },
                         featuresTitle: "กราฟ",
                         featuresDesc: "แสดงแนวโน้ม OEE รายวัน/รายกะ และสาเหตุหลักที่ทำให้เครื่องหยุด (Top Downtime Reasons)",
+                        img1: "OEE Dashboard - ภาพรวมการผลิตแบบ Real-time",
                         accessTitle: "วิธีการเข้าถึง",
                         accessDesc: "ไปที่เมนู สถานะการทำงาน (WIP and OEE) เพื่อดู OEE Dashboard และดูภาพรวมการผลิตแบบ Real-time"
                     },
@@ -649,7 +671,8 @@
                         value1: { title: "รายการสำเร็จในวันนี้", desc: "เพื่อดูว่าทำได้ตามเป้าหรือไม่" },
                         value2: { title: "จำนวนของเสียทั้งหมด", desc: "เพื่อดูของเสียในไลน์การผลิต" },
                         value3: { title: "งานในไลน์ผลิต", desc: "มีงานอะไรค้างอยู่บ้าง" },
-                        value4: { title: "เอกสารสั่งผลิตปัจจุบัน", desc: "ดูคำสั่งงาน" }
+                        value4: { title: "เอกสารสั่งผลิตปัจจุบัน", desc: "ดูคำสั่งงาน" },
+                        img1: "WIP Tracking - แดชบอร์ดงานที่กำลังดำเนินการ"
                     },
                     downtime: {
                         title: "การจัดการการหยุดผลิต (Downtime Management)",
@@ -659,7 +682,8 @@
                         step1: "ไปที่เมนู การหยุดผลิต (Downtime)",
                         step2: "คลิก + เพิ่มบันทึก",
                         step3: { title: "ระบุข้อมูล:", item1: "รหัสเครื่อง (Machine Code)", item2: "เวลาที่เริ่มหยุด-สิ้นสุด (Start and End Time)", item3: "สาเหตุ (Cause) - เช่น เครื่องเสีย, รอของ, พักเบรค" },
-                        step4: "Timeline: ระบบจะแสดงแถบสีช่วงเวลาที่เครื่องจักรหยุดทำงานให้เห็นภาพรวม"
+                        step4: "Timeline: ระบบจะแสดงแถบสีช่วงเวลาที่เครื่องจักรหยุดทำงานให้เห็นภาพรวม",
+                        img1: "การจัดการการหยุดผลิต - การเพิ่มและดูบันทึกการหยุดผลิต"
                     }
                 }
             }
@@ -699,8 +723,10 @@
                     }
                 }
                 
-                if (translation) {
-                    element.textContent = translation;
+                if (translation && typeof translation === 'string') {
+                    element.innerHTML = translation;
+                } else if (translation) {
+                    element.textContent = String(translation);
                 }
             });
         }
