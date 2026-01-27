@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manual - Mana MES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mana-orange': '#FF7825',
+                        'mana-dark': '#070711',
+                        'mana-dark-blue': '#28334E',
+                        'mana-light': '#EFF3FD',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        /* IBM Plex Sans Thai Font Faces */
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('IBM_Plex_Sans_Thai/IBMPlexSansThai-Thin.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('IBM_Plex_Sans_Thai/IBMPlexSansThai-ExtraLight.ttf') format('truetype');
+            font-weight: 200;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('IBM_Plex_Sans_Thai/IBMPlexSansThai-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('IBM_Plex_Sans_Thai/IBMPlexSansThai-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('IBM_Plex_Sans_Thai/IBMPlexSansThai-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('IBM_Plex_Sans_Thai/IBMPlexSansThai-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('IBM_Plex_Sans_Thai/IBMPlexSansThai-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        body[lang="th"] {
+            font-family: 'IBM Plex Sans Thai', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Top Menu Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#070711] border-b border-[#28334E]/50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="mana_logo.png" alt="Mana MES Logo" class="h-8 md:h-10 w-auto">
+                    <span class="text-xl md:text-2xl font-bold text-white tracking-tight group-hover:text-[#FF7825] transition">Mana MES</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.home">Home</a>
+                    <a href="user-manual.html" class="text-[#FF7825] font-medium" data-i18n="nav.userManual">User Manual</a>
+                    <a href="index.html#contact" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.contact">Contact</a>
+                    
+                    <!-- Language Selector -->
+                    <div class="relative group">
+                        <button id="lang-btn" class="flex items-center gap-2 text-gray-300 hover:text-[#FF7825] font-medium transition px-3 py-2 rounded-lg hover:bg-white/5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                            </svg>
+                            <span id="lang-display">EN</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-[#28334E] rounded-lg shadow-xl border border-[#28334E]/50 overflow-hidden z-50">
+                            <a href="#" data-lang="en" class="lang-option block px-4 py-3 text-gray-300 hover:bg-[#FF7825] hover:text-white transition flex items-center justify-between">
+                                <span>English</span>
+                                <span class="text-xs">EN</span>
+                            </a>
+                            <a href="#" data-lang="th" class="lang-option block px-4 py-3 text-gray-300 hover:bg-[#FF7825] hover:text-white transition flex items-center justify-between">
+                                <span>ไทย</span>
+                                <span class="text-xs">TH</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-[#FF7825] rounded-lg transition" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#070711] border-t border-[#28334E]/50">
+            <div class="px-4 py-4 space-y-1">
+                <a href="index.html" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.home">Home</a>
+                <a href="user-manual.html" class="block py-3 text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.userManual">User Manual</a>
+                <a href="index.html#contact" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.contact">Contact</a>
+                <div class="border-t border-[#28334E]/50 mt-2 pt-2">
+                    <div class="px-4 py-2 text-gray-400 text-sm font-medium" data-i18n="nav.language">Language / ภาษา</div>
+                    <a href="#" data-lang="en" class="lang-option block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition">English (EN)</a>
+                    <a href="#" data-lang="th" class="lang-option block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition">ไทย (TH)</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer to prevent content from sitting under fixed nav -->
+    <div class="h-16 md:h-20"></div>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-[#070711] to-[#28334E] py-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight" data-i18n="page.title">
+                User Manual
+            </h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto font-light" data-i18n="page.subtitle">
+                Step-by-step guides to help you get started with Mana MES and master all features
+            </p>
+        </div>
+    </section>
+
+    <!-- Tutorials Grid -->
+    <section class="py-20 px-4 bg-[#EFF3FD]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Tutorial 1: System Overview -->
+                <a href="manuals/05-system-overview.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.systemOverview.title">
+                        System Overview
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.systemOverview.desc">
+                        Understand the main menu structure, navigation categories, and how to change the system language.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Tutorial 2: Setup Master Data -->
+                <a href="manuals/01-setup-master-data.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.setupMasterData.title">
+                        Setup Master Data
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.setupMasterData.desc">
+                        Learn how to set up Machine Data, Process Data, Production Routes, and SKUs. Includes bulk upload tips.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Tutorial 3: Running Production -->
+                <a href="manuals/02-running-production.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.runningProduction.title">
+                        Running Production
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.runningProduction.desc">
+                        Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Tutorial 4: Monitoring -->
+                <a href="manuals/03-monitoring.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.monitoring.title">
+                        Monitoring
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.monitoring.desc">
+                        Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Tutorial 5: Editing Data -->
+                <a href="manuals/04-editing-data.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.editingData.title">
+                        Editing Data
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.editingData.desc">
+                        Learn how to edit Machine Data, Process Data, Production Routes, and SKU data after it has been saved.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#070711] text-white py-12 px-4 mt-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="mana_logo.png" alt="Mana MES Logo" class="h-12 w-auto mr-3">
+                        <h3 class="text-2xl font-bold text-[#FF7825] tracking-tight">Mana MES</h3>
+                    </div>
+                    <p class="text-gray-400 font-light" data-i18n="footer.description">
+                        Modern Manufacturing Execution System for the digital factory era.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white" data-i18n="footer.contactTitle">Contact Us</h4>
+                    <div class="space-y-3 text-gray-400">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <a href="mailto:support@mana-mes.com" class="hover:text-[#FF7825] transition font-light">support@mana-mes.com</a>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-3 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                            <span class="font-light">Line: @Manames</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-white" data-i18n="footer.quickLinks">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html" class="hover:text-[#FF7825] transition font-light" data-i18n="nav.home">Home</a></li>
+                        <li><a href="user-manual.html" class="hover:text-[#FF7825] transition font-light" data-i18n="nav.userManual">User Manual</a></li>
+                        <li><a href="index.html#contact" class="hover:text-[#FF7825] transition font-light" data-i18n="nav.contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-[#28334E] pt-8 text-center text-gray-400">
+                <p class="font-light">&copy; 2026 Mana MES. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translation object
+        const translations = {
+            en: {
+                nav: {
+                    home: "Home",
+                    userManual: "User Manual",
+                    contact: "Contact",
+                    language: "Language / ภาษา"
+                },
+                page: {
+                    title: "User Manual",
+                    subtitle: "Step-by-step guides to help you get started with Mana MES and master all features"
+                },
+                tutorials: {
+                    readGuide: "Read Guide",
+                    systemOverview: {
+                        title: "System Overview",
+                        desc: "Understand the main menu structure, navigation categories, and how to change the system language."
+                    },
+                    setupMasterData: {
+                        title: "Setup Master Data",
+                        desc: "Learn how to set up Machine Data, Process Data, Production Routes, and SKUs. Includes bulk upload tips."
+                    },
+                    runningProduction: {
+                        title: "Running Production",
+                        desc: "Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations."
+                    },
+                    monitoring: {
+                        title: "Monitoring",
+                        desc: "Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records."
+                    },
+                    editingData: {
+                        title: "Editing Data",
+                        desc: "Learn how to edit Machine Data, Process Data, Production Routes, and SKU data after it has been saved."
+                    }
+                },
+                footer: {
+                    description: "Modern Manufacturing Execution System for the digital factory era.",
+                    contactTitle: "Contact Us",
+                    quickLinks: "Quick Links"
+                }
+            },
+            th: {
+                nav: {
+                    home: "หน้าแรก",
+                    userManual: "คู่มือการใช้งาน",
+                    contact: "ติดต่อ",
+                    language: "Language / ภาษา"
+                },
+                page: {
+                    title: "คู่มือการใช้งาน",
+                    subtitle: "คู่มือทีละขั้นตอนเพื่อช่วยให้คุณเริ่มต้นใช้งาน Mana MES และเชี่ยวชาญฟีเจอร์ทั้งหมด"
+                },
+                tutorials: {
+                    readGuide: "อ่านคู่มือ",
+                    systemOverview: {
+                        title: "ภาพรวมระบบ",
+                        desc: "ทำความเข้าใจโครงสร้างเมนูหลัก หมวดหมู่การนำทาง และวิธีเปลี่ยนภาษาของระบบ"
+                    },
+                    setupMasterData: {
+                        title: "ตั้งค่าข้อมูลหลัก",
+                        desc: "เรียนรู้วิธีตั้งค่าข้อมูลเครื่องจักร ข้อมูลกระบวนการ เส้นทางการผลิต และ SKU รวมถึงเคล็ดลับการอัปโหลดแบบกลุ่ม"
+                    },
+                    runningProduction: {
+                        title: "การสั่งงานและการผลิต",
+                        desc: "คู่มือทีละขั้นตอนในการสร้างใบสั่งงาน (WO/OP) และเลือกเครื่องจักรสำหรับการดำเนินงานการผลิต"
+                    },
+                    monitoring: {
+                        title: "การติดตาม",
+                        desc: "ทำความเข้าใจตัวชี้วัดแดชบอร์ด OEE (ความพร้อมใช้งาน ประสิทธิภาพ คุณภาพ) และเรียนรู้วิธีเพิ่มบันทึกการหยุดทำงานด้วยตนเอง"
+                    },
+                    editingData: {
+                        title: "การแก้ไขข้อมูล",
+                        desc: "เรียนรู้วิธีแก้ไขข้อมูลเครื่องจักร ข้อมูลกระบวนการ เส้นทางการผลิต และข้อมูล SKU หลังจากบันทึกแล้ว"
+                    }
+                },
+                footer: {
+                    description: "ระบบบริหารจัดการการผลิตยุคใหม่สำหรับยุคโรงงานดิจิทัล",
+                    contactTitle: "ติดต่อเรา",
+                    quickLinks: "ลิงก์ด่วน"
+                }
+            }
+        };
+
+        // Get current language from localStorage or default to 'en'
+        let currentLang = localStorage.getItem('language') || 'en';
+
+        // Function to update language display
+        function updateLanguageDisplay(lang) {
+            const langDisplay = document.getElementById('lang-display');
+            if (langDisplay) {
+                langDisplay.textContent = lang.toUpperCase();
+            }
+        }
+
+        // Function to translate page
+        function translatePage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            document.documentElement.lang = lang;
+            document.body.lang = lang;
+            updateLanguageDisplay(lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                
+                for (let k of keys) {
+                    if (translation && translation[k]) {
+                        translation = translation[k];
+                    } else {
+                        translation = null;
+                        break;
+                    }
+                }
+                
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            translatePage(currentLang);
+            updateLanguageDisplay(currentLang);
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+                var menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
+            
+            // Language dropdown toggle
+            document.getElementById('lang-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                var dropdown = document.getElementById('lang-dropdown');
+                dropdown.classList.toggle('hidden');
+            });
+            
+            // Language selection handlers
+            document.querySelectorAll('.lang-option').forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    translatePage(lang);
+                    document.getElementById('lang-dropdown').classList.add('hidden');
+                });
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                var dropdown = document.getElementById('lang-dropdown');
+                var btn = document.getElementById('lang-btn');
+                if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

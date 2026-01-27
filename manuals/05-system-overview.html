@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Overview - Mana MES Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mana-orange': '#FF7825',
+                        'mana-dark': '#070711',
+                        'mana-dark-blue': '#28334E',
+                        'mana-light': '#EFF3FD',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        /* IBM Plex Sans Thai Font Faces */
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Thin.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-ExtraLight.ttf') format('truetype');
+            font-weight: 200;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        body[lang="th"] {
+            font-family: 'IBM Plex Sans Thai', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        .info-box {
+            background: #EFF3FD;
+            border-left: 4px solid #FF7825;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
+        .nav-box {
+            background: #fff7ed;
+            border-left: 4px solid #FF7825;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Top Menu Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#070711] border-b border-[#28334E]/50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <a href="../index.html" class="flex items-center gap-3 group">
+                    <img src="../mana_logo.png" alt="Mana MES Logo" class="h-8 md:h-10 w-auto">
+                    <span class="text-xl md:text-2xl font-bold text-white tracking-tight group-hover:text-[#FF7825] transition">Mana MES</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="../index.html" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.home">Home</a>
+                    <a href="../user-manual.html" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.userManual">User Manual</a>
+                    <a href="../index.html#contact" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.contact">Contact</a>
+                    
+                    <!-- Language Selector -->
+                    <div class="relative group">
+                        <button id="lang-btn" class="flex items-center gap-2 text-gray-300 hover:text-[#FF7825] font-medium transition px-3 py-2 rounded-lg hover:bg-white/5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                            </svg>
+                            <span id="lang-display">EN</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-[#28334E] rounded-lg shadow-xl border border-[#28334E]/50 overflow-hidden z-50">
+                            <a href="#" data-lang="en" class="lang-option block px-4 py-3 text-gray-300 hover:bg-[#FF7825] hover:text-white transition flex items-center justify-between">
+                                <span>English</span>
+                                <span class="text-xs">EN</span>
+                            </a>
+                            <a href="#" data-lang="th" class="lang-option block px-4 py-3 text-gray-300 hover:bg-[#FF7825] hover:text-white transition flex items-center justify-between">
+                                <span>ไทย</span>
+                                <span class="text-xs">TH</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-[#FF7825] rounded-lg transition" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#070711] border-t border-[#28334E]/50">
+            <div class="px-4 py-4 space-y-1">
+                <a href="../index.html" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.home">Home</a>
+                <a href="../user-manual.html" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.userManual">User Manual</a>
+                <a href="../index.html#contact" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.contact">Contact</a>
+                <div class="border-t border-[#28334E]/50 mt-2 pt-2">
+                    <div class="px-4 py-2 text-gray-400 text-sm font-medium" data-i18n="nav.language">Language / ภาษา</div>
+                    <a href="#" data-lang="en" class="lang-option block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition">English (EN)</a>
+                    <a href="#" data-lang="th" class="lang-option block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition">ไทย (TH)</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer to prevent content from sitting under fixed nav -->
+    <div class="h-16 md:h-20"></div>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-[#070711] to-[#28334E] py-12 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <a href="../user-manual.html" class="inline-flex items-center text-white hover:text-[#FF7825] transition group">
+                    <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span class="font-medium" data-i18n="page.backToManual">Back to User Manual</span>
+                </a>
+                <a href="01-setup-master-data.html" class="inline-flex items-center text-white hover:text-[#FF7825] transition group">
+                    <span class="font-medium mr-2" data-i18n="page.next">Next</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="text-center">
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight" data-i18n="page.title">
+                    System Overview
+                </h1>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto font-light" data-i18n="page.subtitle">
+                    Learn about the main menu structure and navigation in Mana MES
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-gray-700 leading-relaxed mb-8" data-i18n="content.intro">
+                เมื่อเข้าสู่ระบบ Mana MES ผู้ใช้งานจะพบกับเมนูหลักทางด้านซ้ายมือ คู่มือนี้จะช่วยให้คุณเข้าใจโครงสร้างเมนูและวิธีการนำทางในระบบ
+            </p>
+
+            <!-- Main Menu Control Bar -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.mainMenu.title">แถบควบคุมเมนูหลัก</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.mainMenu.intro">
+                    เมื่อเข้าสู่ระบบ ผู้ใช้งานจะพบกับเมนูหลักทางด้านซ้ายมือ ซึ่งแบ่งออกเป็นหมวดหมู่ดังนี้:
+                </p>
+
+                <div class="info-box">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl mr-3">📋</span>
+                        <strong class="text-[#070711] text-xl" data-i18n="content.mainMenu.categoriesTitle">หมวดหมู่เมนูหลัก</strong>
+                    </div>
+                    <div class="space-y-4 mt-4">
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-start">
+                                <span class="text-[#FF7825] text-xl mr-3 mt-1">•</span>
+                                <div>
+                                    <strong class="text-[#070711] text-lg">สถานะการทำงาน (WIP and OEE)</strong>
+                                    <p class="text-gray-600 mt-1" data-i18n="content.mainMenu.wipDesc">ดูภาพรวมการผลิตแบบ Real-time</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-start">
+                                <span class="text-[#FF7825] text-xl mr-3 mt-1">•</span>
+                                <div>
+                                    <strong class="text-[#070711] text-lg">ข้อมูลการผลิต (Production Data)</strong>
+                                    <p class="text-gray-600 mt-1" data-i18n="content.mainMenu.productionDesc">จัดการใบสั่งงาน (WO) และข้อมูลสินค้า (SKU)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-start">
+                                <span class="text-[#FF7825] text-xl mr-3 mt-1">•</span>
+                                <div>
+                                    <strong class="text-[#070711] text-lg">ข้อมูลอุปกรณ์ (Equipment Data)</strong>
+                                    <p class="text-gray-600 mt-1" data-i18n="content.mainMenu.equipmentDesc">จัดการข้อมูลเครื่องจักรและการหยุดเครื่อง (Downtime)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-start">
+                                <span class="text-[#FF7825] text-xl mr-3 mt-1">•</span>
+                                <div>
+                                    <strong class="text-[#070711] text-lg">บันทึกกิจกรรม (Activity Log)</strong>
+                                    <p class="text-gray-600 mt-1" data-i18n="content.mainMenu.activityDesc">ดูประวัติการใช้งานระบบ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Overview Image -->
+                <div class="my-8">
+                    <img src="../artwork/system%20overview.png" alt="System Overview - Main Menu Control Bar" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.mainMenu.imageCaption">System Overview - แถบควบคุมเมนูหลัก</p>
+                </div>
+            </section>
+
+            <!-- Language Switching -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.language.title">การเปลี่ยนภาษา</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.language.intro">
+                    เข้าสู่เมนูเปลี่ยนภาษาด้วยเมนูโปรไฟล์ มุมบนขวา
+                </p>
+
+                <div class="nav-box">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]" data-i18n="content.language.navTitle">เส้นทางการนำทาง</strong>
+                    </div>
+                    <p class="text-gray-700 ml-9" data-i18n="content.language.navPath">เมนูโปรไฟล์ (มุมบนขวา) → Language Settings</p>
+                </div>
+
+                <div class="space-y-4 my-8">
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.language.step1">ค้นหาไอคอนเมนูโปรไฟล์ที่มุมบนขวาของหน้าจอ</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.language.step2">คลิกที่เมนูโปรไฟล์เพื่อเปิดเมนูแบบเลื่อนลง</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.language.step3">เลือกภาษาที่ต้องการจากตัวเลือกภาษา</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language Change Image -->
+                <div class="my-8">
+                    <img src="../artwork/language%20change.png" alt="System Overview - Language Change" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.language.imageCaption">System Overview - การเปลี่ยนภาษา</p>
+                </div>
+            </section>
+
+            <!-- Quick Reference -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.quickRef.title">ข้อมูลอ้างอิงด่วน</h2>
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
+                    <h3 class="font-semibold text-lg text-[#070711] mb-4" data-i18n="content.quickRef.tipsTitle">เคล็ดลับการนำทางเมนู</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span data-i18n="content.quickRef.tip1">เมนูหลักจะแสดงอยู่ทางด้านซ้ายของหน้าจอเสมอ เพื่อให้เข้าถึงฟีเจอร์ทั้งหมดได้ง่าย</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span data-i18n="content.quickRef.tip2">แต่ละหมวดหมู่เมนูจะจัดกลุ่มฟังก์ชันที่เกี่ยวข้องกันไว้ด้วยกันเพื่อการจัดระเบียบที่ดีขึ้น</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span data-i18n="content.quickRef.tip3">ใช้ Activity Log เพื่อตรวจสอบประวัติการใช้งานระบบและติดตามการเปลี่ยนแปลง</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span data-i18n="content.quickRef.tip4">สามารถเปลี่ยนภาษาได้ตลอดเวลาผ่านเมนูโปรไฟล์โดยไม่กระทบต่อข้อมูลของคุณ</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#070711] text-white py-8 px-4 mt-16">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400 font-light">&copy; 2026 Mana MES. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Translation object
+        const translations = {
+            en: {
+                nav: {
+                    home: "Home",
+                    userManual: "User Manual",
+                    contact: "Contact",
+                    language: "Language / ภาษา"
+                },
+                page: {
+                    backToManual: "Back to User Manual",
+                    title: "System Overview",
+                    subtitle: "Learn about the main menu structure and navigation in Mana MES",
+                    next: "Next"
+                },
+                content: {
+                    intro: "When you enter the Mana MES system, you'll find the main menu on the left side. This guide will help you understand the menu structure and how to navigate the system.",
+                    mainMenu: {
+                        title: "Main Menu Control Bar",
+                        intro: "When entering the system, users will find the main menu on the left side, which is divided into the following categories:",
+                        categoriesTitle: "Main Menu Categories",
+                        wipDesc: "View real-time production overview",
+                        productionDesc: "Manage work orders (WO) and product data (SKU)",
+                        equipmentDesc: "Manage machine data and downtime",
+                        activityDesc: "View system usage history",
+                        imageCaption: "System Overview - Main Menu Control Bar"
+                    },
+                    language: {
+                        title: "Changing Language",
+                        intro: "You can change the system language through the profile menu in the top right corner.",
+                        navTitle: "Navigation Path",
+                        navPath: "Profile Menu (Top Right) → Language Settings",
+                        step1: "Locate the profile menu icon in the top right corner of the screen.",
+                        step2: "Click on the profile menu to open the dropdown.",
+                        step3: "Select your preferred language from the language options.",
+                        imageCaption: "System Overview - Language Change"
+                    },
+                    quickRef: {
+                        title: "Quick Reference",
+                        tipsTitle: "Menu Navigation Tips",
+                        tip1: "The main menu is always visible on the left side of the screen for easy access to all features.",
+                        tip2: "Each menu category groups related functions together for better organization.",
+                        tip3: "Use the Activity Log to review your system usage history and track changes.",
+                        tip4: "The language can be changed at any time through the profile menu without affecting your data."
+                    }
+                }
+            },
+            th: {
+                nav: {
+                    home: "หน้าแรก",
+                    userManual: "คู่มือการใช้งาน",
+                    contact: "ติดต่อ",
+                    language: "Language / ภาษา"
+                },
+                page: {
+                    backToManual: "กลับไปที่คู่มือการใช้งาน",
+                    title: "ภาพรวมระบบ",
+                    subtitle: "เรียนรู้เกี่ยวกับโครงสร้างเมนูหลักและการนำทางใน Mana MES",
+                    next: "ถัดไป"
+                },
+                content: {
+                    intro: "เมื่อเข้าสู่ระบบ Mana MES ผู้ใช้งานจะพบกับเมนูหลักทางด้านซ้ายมือ คู่มือนี้จะช่วยให้คุณเข้าใจโครงสร้างเมนูและวิธีการนำทางในระบบ",
+                    mainMenu: {
+                        title: "แถบควบคุมเมนูหลัก",
+                        intro: "เมื่อเข้าสู่ระบบ ผู้ใช้งานจะพบกับเมนูหลักทางด้านซ้ายมือ ซึ่งแบ่งออกเป็นหมวดหมู่ดังนี้:",
+                        categoriesTitle: "หมวดหมู่เมนูหลัก",
+                        wipDesc: "ดูภาพรวมการผลิตแบบ Real-time",
+                        productionDesc: "จัดการใบสั่งงาน (WO) และข้อมูลสินค้า (SKU)",
+                        equipmentDesc: "จัดการข้อมูลเครื่องจักรและการหยุดเครื่อง (Downtime)",
+                        activityDesc: "ดูประวัติการใช้งานระบบ",
+                        imageCaption: "System Overview - แถบควบคุมเมนูหลัก"
+                    },
+                    language: {
+                        title: "การเปลี่ยนภาษา",
+                        intro: "เข้าสู่เมนูเปลี่ยนภาษาด้วยเมนูโปรไฟล์ มุมบนขวา",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "เมนูโปรไฟล์ (มุมบนขวา) → Language Settings",
+                        step1: "ค้นหาไอคอนเมนูโปรไฟล์ที่มุมบนขวาของหน้าจอ",
+                        step2: "คลิกที่เมนูโปรไฟล์เพื่อเปิดเมนูแบบเลื่อนลง",
+                        step3: "เลือกภาษาที่ต้องการจากตัวเลือกภาษา",
+                        imageCaption: "System Overview - การเปลี่ยนภาษา"
+                    },
+                    quickRef: {
+                        title: "ข้อมูลอ้างอิงด่วน",
+                        tipsTitle: "เคล็ดลับการนำทางเมนู",
+                        tip1: "เมนูหลักจะแสดงอยู่ทางด้านซ้ายของหน้าจอเสมอ เพื่อให้เข้าถึงฟีเจอร์ทั้งหมดได้ง่าย",
+                        tip2: "แต่ละหมวดหมู่เมนูจะจัดกลุ่มฟังก์ชันที่เกี่ยวข้องกันไว้ด้วยกันเพื่อการจัดระเบียบที่ดีขึ้น",
+                        tip3: "ใช้ Activity Log เพื่อตรวจสอบประวัติการใช้งานระบบและติดตามการเปลี่ยนแปลง",
+                        tip4: "สามารถเปลี่ยนภาษาได้ตลอดเวลาผ่านเมนูโปรไฟล์โดยไม่กระทบต่อข้อมูลของคุณ"
+                    }
+                }
+            }
+        };
+
+        // Get current language from localStorage or default to 'th' (Thai)
+        let currentLang = localStorage.getItem('language') || 'th';
+
+        // Function to update language display
+        function updateLanguageDisplay(lang) {
+            const langDisplay = document.getElementById('lang-display');
+            if (langDisplay) {
+                langDisplay.textContent = lang.toUpperCase();
+            }
+        }
+
+        // Function to translate page
+        function translatePage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            document.documentElement.lang = lang;
+            document.body.lang = lang;
+            updateLanguageDisplay(lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                
+                for (let k of keys) {
+                    if (translation && translation[k]) {
+                        translation = translation[k];
+                    } else {
+                        translation = null;
+                        break;
+                    }
+                }
+                
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            translatePage(currentLang);
+            updateLanguageDisplay(currentLang);
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+                var menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
+            
+            // Language dropdown toggle
+            document.getElementById('lang-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                var dropdown = document.getElementById('lang-dropdown');
+                dropdown.classList.toggle('hidden');
+            });
+            
+            // Language selection handlers
+            document.querySelectorAll('.lang-option').forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    translatePage(lang);
+                    document.getElementById('lang-dropdown').classList.add('hidden');
+                });
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                var dropdown = document.getElementById('lang-dropdown');
+                var btn = document.getElementById('lang-btn');
+                if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Production - Mana MES Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mana-orange': '#FF7825',
+                        'mana-dark': '#070711',
+                        'mana-dark-blue': '#28334E',
+                        'mana-light': '#EFF3FD',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        /* IBM Plex Sans Thai Font Faces */
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Thin.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-ExtraLight.ttf') format('truetype');
+            font-weight: 200;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        body[lang="th"] {
+            font-family: 'IBM Plex Sans Thai', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        .flow-box {
+            background: linear-gradient(135deg, #EFF3FD 0%, #ffffff 100%);
+            border: 2px solid #FF7825;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .info-box {
+            background: #EFF3FD;
+            border-left: 4px solid #FF7825;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
+        .checklist-box {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
+        .nav-box {
+            background: #fff7ed;
+            border-left: 4px solid #FF7825;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .metric-card {
+            background: white;
+            border: 2px solid #EFF3FD;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Top Menu Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#070711] border-b border-[#28334E]/50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <a href="../index.html" class="flex items-center gap-3 group">
+                    <img src="../mana_logo.png" alt="Mana MES Logo" class="h-8 md:h-10 w-auto">
+                    <span class="text-xl md:text-2xl font-bold text-white tracking-tight group-hover:text-[#FF7825] transition">Mana MES</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="../index.html" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.home">Home</a>
+                    <a href="../user-manual.html" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.userManual">User Manual</a>
+                    <a href="../index.html#contact" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.contact">Contact</a>
+                    
+                    <!-- Language Selector -->
+                    <div class="relative group">
+                        <button id="lang-btn" class="flex items-center gap-2 text-gray-300 hover:text-[#FF7825] font-medium transition px-3 py-2 rounded-lg hover:bg-white/5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                            </svg>
+                            <span id="lang-display">EN</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-[#28334E] rounded-lg shadow-xl border border-[#28334E]/50 overflow-hidden z-50">
+                            <a href="#" data-lang="en" class="lang-option block px-4 py-3 text-gray-300 hover:bg-[#FF7825] hover:text-white transition flex items-center justify-between">
+                                <span>English</span>
+                                <span class="text-xs">EN</span>
+                            </a>
+                            <a href="#" data-lang="th" class="lang-option block px-4 py-3 text-gray-300 hover:bg-[#FF7825] hover:text-white transition flex items-center justify-between">
+                                <span>ไทย</span>
+                                <span class="text-xs">TH</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-[#FF7825] rounded-lg transition" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#070711] border-t border-[#28334E]/50">
+            <div class="px-4 py-4 space-y-1">
+                <a href="../index.html" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.home">Home</a>
+                <a href="../user-manual.html" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.userManual">User Manual</a>
+                <a href="../index.html#contact" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.contact">Contact</a>
+                <div class="border-t border-[#28334E]/50 mt-2 pt-2">
+                    <div class="px-4 py-2 text-gray-400 text-sm font-medium" data-i18n="nav.language">Language / ภาษา</div>
+                    <a href="#" data-lang="en" class="lang-option block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition">English (EN)</a>
+                    <a href="#" data-lang="th" class="lang-option block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition">ไทย (TH)</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer to prevent content from sitting under fixed nav -->
+    <div class="h-16 md:h-20"></div>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-[#070711] to-[#28334E] py-12 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <a href="../user-manual.html" class="inline-flex items-center text-white hover:text-[#FF7825] transition group">
+                    <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span class="font-medium" data-i18n="page.backToManual">Back to User Manual</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <a href="02-running-production.html" class="inline-flex items-center text-white hover:text-[#FF7825] transition group">
+                        <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        <span class="font-medium" data-i18n="page.previous">Previous</span>
+                    </a>
+                    <a href="04-editing-data.html" class="inline-flex items-center text-white hover:text-[#FF7825] transition group">
+                        <span class="font-medium mr-2" data-i18n="page.next">Next</span>
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center">
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight" data-i18n="page.title">
+                    Monitoring Production Performance
+                </h1>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto font-light" data-i18n="page.subtitle">
+                    Track OEE metrics and manage downtime
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-gray-700 leading-relaxed mb-8" data-i18n="content.intro">
+                Mana MES มีเครื่องมือติดตามที่ครอบคลุมเพื่อวัดผลประสิทธิภาพโรงงานตามมาตรฐานสากล และการดูภาพรวมการผลิตของโรงงาน
+            </p>
+            <p class="text-lg text-gray-600 mb-12" data-i18n="content.intro2">
+                คู่มือนี้ครอบคลุมวิธีการอ่าน OEE Dashboard metrics และวิธีการเพิ่มบันทึก Downtime ด้วยตนเอง
+            </p>
+
+            <!-- Monitoring Overview -->
+            <div class="flow-box">
+                <h2 class="text-2xl font-bold text-[#070711] mb-6 flex items-center" data-i18n="content.overview.title">
+                    <span class="text-3xl mr-3">📊</span>
+                    ภาพรวมการติดตาม
+                </h2>
+                <p class="text-gray-600 mb-6 text-center" data-i18n="content.overview.description">ระบบติดตามการผลิตประกอบด้วย:</p>
+                <div class="grid md:grid-cols-3 gap-4 mt-6">
+                    <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300 text-center">
+                        <div class="text-4xl mb-3">📈</div>
+                        <h3 class="text-lg font-bold text-[#070711] mb-2" data-i18n="content.overview.card1.title">OEE Dashboard</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="content.overview.card1.desc">แดชบอร์ดข้อมูลเชิงลึก</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300 text-center">
+                        <div class="text-4xl mb-3">🔄</div>
+                        <h3 class="text-lg font-bold text-[#070711] mb-2" data-i18n="content.overview.card2.title">WIP Tracking</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="content.overview.card2.desc">การติดตามงาน</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300 text-center">
+                        <div class="text-4xl mb-3">⏸️</div>
+                        <h3 class="text-lg font-bold text-[#070711] mb-2" data-i18n="content.overview.card3.title">Downtime Records</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="content.overview.card3.desc">บันทึกการหยุดผลิต</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OEE Dashboard -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.oee.title">OEE Dashboard (แดชบอร์ดข้อมูลเชิงลึก)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.oee.intro">
+                    หน้าจอสรุปผลสำหรับผู้จัดการ เพื่อดู "สุขภาพ" ของโรงงาน
+                </p>
+
+                <div class="nav-box">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]" data-i18n="content.oee.navTitle">เส้นทางการนำทาง</strong>
+                    </div>
+                    <p class="text-gray-700 ml-9" data-i18n="content.oee.navPath">สถานะการทำงาน (WIP and OEE)</p>
+                </div>
+
+                <h3 class="text-2xl font-bold text-[#070711] mb-6 mt-8" data-i18n="content.oee.metricsTitle">ค่าที่แสดงผล</h3>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.oee.metricsDesc">แดชบอร์ดแสดงค่าต่อไปนี้:</p>
+
+                <!-- OEE Metric -->
+                <div class="metric-card">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🎯</span>
+                        <h4 class="text-xl font-bold text-[#070711]" data-i18n="content.oee.metric1.title">OEE (Overall Equipment Effectiveness)</h4>
+                    </div>
+                    <div class="space-y-2">
+                        <p data-i18n="content.oee.metric1.measure">ประสิทธิผลโดยรวมของเครื่องจักร</p>
+                        <div class="bg-[#FF7825]/10 rounded-lg p-3">
+                            <p data-i18n="content.oee.metric1.target">เป้าหมายมาตรฐาน: <span class="text-[#FF7825] font-bold">85%</span></p>
+                        </div>
+                        <p class="text-gray-600" data-i18n="content.oee.metric1.desc">นี่คือตัวชี้วัดหลักของประสิทธิภาพการผลิตของโรงงาน</p>
+                    </div>
+                </div>
+
+                <!-- Availability Metric -->
+                <div class="metric-card">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">⏰</span>
+                        <h4 class="text-xl font-bold text-[#070711]" data-i18n="content.oee.metric2.title">Availability (ความพร้อมใช้งาน)</h4>
+                    </div>
+                    <div class="space-y-2">
+                        <p data-i18n="content.oee.metric2.measure">เครื่องจักรเดินเครื่องได้ตามเวลาที่กำหนดหรือไม่</p>
+                        <p class="text-gray-600" data-i18n="content.oee.metric2.desc">บ่งชี้ว่าเครื่องจักรของคุณพร้อมใช้งานเมื่อควรจะทำงานหรือไม่</p>
+                    </div>
+                </div>
+
+                <!-- Performance Metric -->
+                <div class="metric-card">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">⚡</span>
+                        <h4 class="text-xl font-bold text-[#070711]" data-i18n="content.oee.metric3.title">Performance (ประสิทธิภาพ)</h4>
+                    </div>
+                    <div class="space-y-2">
+                        <p data-i18n="content.oee.metric3.measure">ผลิตได้เร็วตามความเร็วมาตรฐานหรือไม่</p>
+                        <p class="text-gray-600" data-i18n="content.oee.metric3.desc">แสดงว่าคุณกำลังผลิตในอัตราที่คาดหวังหรือไม่</p>
+                    </div>
+                </div>
+
+                <!-- Quality Metric -->
+                <div class="metric-card">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">✨</span>
+                        <h4 class="text-xl font-bold text-[#070711]" data-i18n="content.oee.metric4.title">Quality (คุณภาพ)</h4>
+                    </div>
+                    <div class="space-y-2">
+                        <p data-i18n="content.oee.metric4.measure">ผลิตของดีได้มากน้อยแค่ไหน</p>
+                        <p class="text-gray-600" data-i18n="content.oee.metric4.desc">บ่งชี้เปอร์เซ็นต์ของผลผลิตที่ยอมรับได้</p>
+                    </div>
+                </div>
+
+                <div class="info-box mt-8">
+                    <h4 class="font-semibold text-lg text-[#070711] mb-3" data-i18n="content.oee.featuresTitle">กราฟ</h4>
+                    <p class="text-gray-700 mb-2" data-i18n="content.oee.featuresDesc">แสดงแนวโน้ม OEE รายวัน/รายกะ และสาเหตุหลักที่ทำให้เครื่องหยุด (Top Downtime Reasons)</p>
+                </div>
+
+                <div class="nav-box mt-6">
+                    <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.oee.accessTitle">วิธีการเข้าถึง</h4>
+                    <p class="text-gray-700" data-i18n="content.oee.accessDesc">ไปที่เมนู <strong>สถานะการทำงาน (WIP and OEE)</strong> เพื่อดู OEE Dashboard และดูภาพรวมการผลิตแบบ Real-time</p>
+                </div>
+            </section>
+
+            <!-- WIP Tracking -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.wip.title">WIP Tracking (การติดตามงาน)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.wip.intro">
+                    หน้าจอสรุปผลเพื่อดูงานทั้งหมดที่ดำเนินงานอยู่
+                </p>
+
+                <div class="info-box">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">📋</span>
+                        <strong class="text-[#070711]" data-i18n="content.wip.valuesTitle">ค่าที่แสดงผล</strong>
+                    </div>
+                    <div class="space-y-4 mt-4">
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <span class="text-green-600 text-xl mr-3">✅</span>
+                                <strong class="text-[#070711]" data-i18n="content.wip.value1.title">รายการสำเร็จในวันนี้</strong>
+                            </div>
+                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value1.desc">เพื่อดูว่าทำได้ตามเป้าหรือไม่</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <span class="text-red-600 text-xl mr-3">❌</span>
+                                <strong class="text-[#070711]" data-i18n="content.wip.value2.title">จำนวนของเสียทั้งหมด</strong>
+                            </div>
+                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value2.desc">เพื่อดูของเสียในไลน์การผลิต</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <span class="text-blue-600 text-xl mr-3">🔄</span>
+                                <strong class="text-[#070711]" data-i18n="content.wip.value3.title">งานในไลน์ผลิต</strong>
+                            </div>
+                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value3.desc">มีงานอะไรค้างอยู่บ้าง</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <span class="text-purple-600 text-xl mr-3">📄</span>
+                                <strong class="text-[#070711]" data-i18n="content.wip.value4.title">เอกสารสั่งผลิตปัจจุบัน</strong>
+                            </div>
+                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value4.desc">ดูคำสั่งงาน</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manually Adding Downtime -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6">Manually Adding Downtime Records</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Normally, downtime is automatically recorded when an operator stops production. However, you can also manually add downtime records.
+                </p>
+
+                <div class="nav-box">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]">Navigation Path</strong>
+                    </div>
+                    <p class="text-gray-700 ml-9">การหยุดผลิต (Downtime)</p>
+                </div>
+
+                <div class="space-y-4 my-8">
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]">Go to the <strong>การหยุดผลิต</strong> (Downtime) menu.</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]">Click <strong>+ เพิ่มบันทึก</strong> (+ Add Record).</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711] mb-2">Enter the following information:</h3>
+                            <ul class="space-y-1 ml-4">
+                                <li class="flex items-center">
+                                    <span class="text-[#FF7825] mr-2">•</span>
+                                    <span><strong>รหัสเครื่อง</strong> (Machine Code)</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-[#FF7825] mr-2">•</span>
+                                    <span><strong>เวลาที่เริ่มหยุด-สิ้นสุด</strong> (Start and End Time)</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-[#FF7825] mr-2">•</span>
+                                    <span><strong>สาเหตุ</strong> (Cause) - Examples: machine breakdown, waiting for materials, break time</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]"><strong>Timeline View:</strong> The system will display a colored bar showing the time period when the machine was stopped, giving you a visual overview.</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">📋</span>
+                        <strong class="text-[#070711]">Downtime Record Form</strong>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 mt-3 space-y-3">
+                        <div><strong>Machine Code:</strong> [Select]</div>
+                        <div><strong>Start Time:</strong> [HH:MM]</div>
+                        <div><strong>End Time:</strong> [HH:MM]</div>
+                        <div>
+                            <strong>Cause:</strong> [Select/Enter]
+                            <ul class="mt-2 ml-4 space-y-1">
+                                <li class="flex items-center">
+                                    <span class="text-[#FF7825] mr-2">•</span>
+                                    <span>Machine breakdown</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-[#FF7825] mr-2">•</span>
+                                    <span>Waiting for materials</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-[#FF7825] mr-2">•</span>
+                                    <span>Break time</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box mt-6">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">⏱️</span>
+                        <strong class="text-[#070711]">Timeline Visualization</strong>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 mt-3">
+                        <div class="text-sm text-gray-600 mb-2">08:00 ━━━━━━━━━━━━━━━━━━━━━━━━━ 12:00</div>
+                        <div class="bg-[#FF7825] h-8 rounded flex items-center px-4 text-white font-semibold">
+                            ████████ (Downtime)
+                        </div>
+                        <p class="text-gray-600 text-sm mt-3">Colored bar shows downtime period</p>
+                    </div>
+                </div>
+
+                <div class="checklist-box mt-6">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">✅</span>
+                        <strong class="text-[#070711]">Completion Checklist</strong>
+                    </div>
+                    <ul class="space-y-2 ml-9">
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Navigate to Downtime menu</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Add Record button</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Enter machine code</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Set start and end time</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Select/enter cause</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> View timeline visualization</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Tips -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6">Tips for Effective Monitoring</h2>
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span>Check the OEE Dashboard regularly to maintain the 85% target standard</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span>Review Top Downtime Reasons to identify recurring issues</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span>Use the Timeline view to spot patterns in downtime occurrences</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span>Monitor WIP to ensure production flow is smooth and on schedule</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#070711] text-white py-8 px-4 mt-16">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400 font-light">&copy; 2026 Mana MES. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Translation object
+        const translations = {
+            en: {
+                nav: {
+                    home: "Home",
+                    userManual: "User Manual",
+                    contact: "Contact",
+                    language: "Language / ภาษา"
+                },
+                page: {
+                    backToManual: "Back to User Manual",
+                    title: "Monitoring Production Performance",
+                    subtitle: "Track OEE metrics and manage downtime",
+                    previous: "Previous",
+                    next: "Next"
+                },
+                content: {
+                    intro: "Mana MES provides comprehensive monitoring tools to measure factory performance according to international standards and view an overview of your factory's production status.",
+                    intro2: "This guide covers how to read the OEE Dashboard metrics and how to manually add downtime records.",
+                    overview: {
+                        title: "Monitoring Overview",
+                        description: "The production monitoring system consists of:",
+                        card1: { title: "OEE Dashboard", desc: "แดชบอร์ดข้อมูลเชิงลึก" },
+                        card2: { title: "WIP Tracking", desc: "การติดตามงาน" },
+                        card3: { title: "Downtime Records", desc: "บันทึกการหยุดผลิต" }
+                    },
+                    oee: {
+                        title: "OEE Dashboard (แดชบอร์ดข้อมูลเชิงลึก)",
+                        intro: "The OEE Dashboard is a summary screen for managers to view the \"health\" of the factory.",
+                        navTitle: "Navigation Path",
+                        navPath: "สถานะการทำงาน (WIP and OEE)",
+                        metricsTitle: "Understanding OEE Metrics",
+                        metricsDesc: "The dashboard displays the following key metrics:",
+                        metric1: { title: "OEE (Overall Equipment Effectiveness)", measure: "What it measures: Overall equipment effectiveness of machines", target: "Target standard: 85%", desc: "This is the main indicator of your factory's production efficiency" },
+                        metric2: { title: "Availability (ความพร้อมใช้งาน)", measure: "What it measures: Whether machines are running according to scheduled time", desc: "Indicates if your machines are available when they should be operating" },
+                        metric3: { title: "Performance (ประสิทธิภาพ)", measure: "What it measures: Whether production speed matches the standard speed", desc: "Shows if you're producing at the expected rate" },
+                        metric4: { title: "Quality (คุณภาพ)", measure: "What it measures: How many good quality products are produced", desc: "Indicates the percentage of acceptable output" },
+                        featuresTitle: "Dashboard Features",
+                        featuresDesc: "The dashboard also includes:",
+                        accessTitle: "How to Access",
+                        accessDesc: "Go to the สถานะการทำงาน (WIP and OEE) menu to view the OEE Dashboard and see real-time production overview."
+                    },
+                    wip: {
+                        title: "WIP Tracking (การติดตามงาน)",
+                        intro: "The WIP (Work in Progress) screen shows all work currently in progress.",
+                        valuesTitle: "WIP Dashboard Values",
+                        value1: { title: "Today's Completed Items", desc: "(รายการสำเร็จในวันนี้) - Check if production meets targets" },
+                        value2: { title: "Total Defects", desc: "(จำนวนของเสียทั้งหมด) - View defects in the production line" },
+                        value3: { title: "Work in Production Line", desc: "(งานในไลน์ผลิต) - See what work is pending" },
+                        value4: { title: "Current Production Orders", desc: "(เอกสารสั่งผลิตปัจจุบัน) - View active work orders" }
+                    },
+                    downtime: {
+                        title: "Manually Adding Downtime Records",
+                        intro: "Normally, downtime is automatically recorded when an operator stops production. However, you can also manually add downtime records.",
+                        navTitle: "Navigation Path",
+                        navPath: "การหยุดผลิต (Downtime)",
+                        step1: "Go to the การหยุดผลิต (Downtime) menu.",
+                        step2: "Click + เพิ่มบันทึก (+ Add Record).",
+                        step3: { title: "Enter the following information:", item1: "รหัสเครื่อง (Machine Code)", item2: "เวลาที่เริ่มหยุด-สิ้นสุด (Start and End Time)", item3: "สาเหตุ (Cause) - Examples: machine breakdown, waiting for materials, break time" },
+                        step4: "Timeline: The system will display a colored bar showing the time period when the machine stopped, providing a visual overview."
+                    }
+                }
+            },
+            th: {
+                nav: {
+                    home: "หน้าแรก",
+                    userManual: "คู่มือการใช้งาน",
+                    contact: "ติดต่อ",
+                    language: "Language / ภาษา"
+                },
+                page: {
+                    backToManual: "กลับไปที่คู่มือการใช้งาน",
+                    title: "การติดตามประสิทธิภาพการผลิต",
+                    subtitle: "ติดตามตัวชี้วัด OEE และจัดการการหยุดทำงาน",
+                    previous: "ก่อนหน้า",
+                    next: "ถัดไป"
+                },
+                content: {
+                    intro: "Mana MES มีเครื่องมือติดตามที่ครอบคลุมเพื่อวัดผลประสิทธิภาพโรงงานตามมาตรฐานสากล และการดูภาพรวมการผลิตของโรงงาน",
+                    intro2: "คู่มือนี้ครอบคลุมวิธีการอ่าน OEE Dashboard metrics และวิธีการเพิ่มบันทึก Downtime ด้วยตนเอง",
+                    overview: {
+                        title: "ภาพรวมการติดตาม",
+                        description: "ระบบติดตามการผลิตประกอบด้วย:",
+                        card1: { title: "OEE Dashboard", desc: "แดชบอร์ดข้อมูลเชิงลึก" },
+                        card2: { title: "WIP Tracking", desc: "การติดตามงาน" },
+                        card3: { title: "Downtime Records", desc: "บันทึกการหยุดผลิต" }
+                    },
+                    oee: {
+                        title: "OEE Dashboard (แดชบอร์ดข้อมูลเชิงลึก)",
+                        intro: "หน้าจอสรุปผลสำหรับผู้จัดการ เพื่อดู \"สุขภาพ\" ของโรงงาน",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "สถานะการทำงาน (WIP and OEE)",
+                        metricsTitle: "ค่าที่แสดงผล",
+                        metricsDesc: "แดชบอร์ดแสดงค่าต่อไปนี้:",
+                        metric1: { title: "OEE (Overall Equipment Effectiveness)", measure: "ประสิทธิผลโดยรวมของเครื่องจักร", target: "เป้าหมายมาตรฐาน: 85%", desc: "นี่คือตัวชี้วัดหลักของประสิทธิภาพการผลิตของโรงงาน" },
+                        metric2: { title: "Availability (ความพร้อมใช้งาน)", measure: "เครื่องจักรเดินเครื่องได้ตามเวลาที่กำหนดหรือไม่", desc: "บ่งชี้ว่าเครื่องจักรของคุณพร้อมใช้งานเมื่อควรจะทำงานหรือไม่" },
+                        metric3: { title: "Performance (ประสิทธิภาพ)", measure: "ผลิตได้เร็วตามความเร็วมาตรฐานหรือไม่", desc: "แสดงว่าคุณกำลังผลิตในอัตราที่คาดหวังหรือไม่" },
+                        metric4: { title: "Quality (คุณภาพ)", measure: "ผลิตของดีได้มากน้อยแค่ไหน", desc: "บ่งชี้เปอร์เซ็นต์ของผลผลิตที่ยอมรับได้" },
+                        featuresTitle: "กราฟ",
+                        featuresDesc: "แสดงแนวโน้ม OEE รายวัน/รายกะ และสาเหตุหลักที่ทำให้เครื่องหยุด (Top Downtime Reasons)",
+                        accessTitle: "วิธีการเข้าถึง",
+                        accessDesc: "ไปที่เมนู สถานะการทำงาน (WIP and OEE) เพื่อดู OEE Dashboard และดูภาพรวมการผลิตแบบ Real-time"
+                    },
+                    wip: {
+                        title: "WIP Tracking (การติดตามงาน)",
+                        intro: "หน้าจอสรุปผลเพื่อดูงานทั้งหมดที่ดำเนินงานอยู่",
+                        valuesTitle: "ค่าที่แสดงผล",
+                        value1: { title: "รายการสำเร็จในวันนี้", desc: "เพื่อดูว่าทำได้ตามเป้าหรือไม่" },
+                        value2: { title: "จำนวนของเสียทั้งหมด", desc: "เพื่อดูของเสียในไลน์การผลิต" },
+                        value3: { title: "งานในไลน์ผลิต", desc: "มีงานอะไรค้างอยู่บ้าง" },
+                        value4: { title: "เอกสารสั่งผลิตปัจจุบัน", desc: "ดูคำสั่งงาน" }
+                    },
+                    downtime: {
+                        title: "การจัดการการหยุดผลิต (Downtime Management)",
+                        intro: "บันทึกสาเหตุเมื่อเครื่องจักรหยุดทำงาน เพื่อนำไปวิเคราะห์และแก้ไข โดยปกติแล้วการหยุดผลิตจะถูกบันทึกโดยอัตโนมัติเมื่อ Operator กดหยุดการผลิต อย่างไรก็ตาม ผู้ใช้งานยังสามารถเพิ่มการหยุดผลิตด้วยตนเอง",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "การหยุดผลิต (Downtime)",
+                        step1: "ไปที่เมนู การหยุดผลิต (Downtime)",
+                        step2: "คลิก + เพิ่มบันทึก",
+                        step3: { title: "ระบุข้อมูล:", item1: "รหัสเครื่อง (Machine Code)", item2: "เวลาที่เริ่มหยุด-สิ้นสุด (Start and End Time)", item3: "สาเหตุ (Cause) - เช่น เครื่องเสีย, รอของ, พักเบรค" },
+                        step4: "Timeline: ระบบจะแสดงแถบสีช่วงเวลาที่เครื่องจักรหยุดทำงานให้เห็นภาพรวม"
+                    }
+                }
+            }
+        };
+
+        // Get current language from localStorage or default to 'th' (Thai)
+        let currentLang = localStorage.getItem('language') || 'th';
+
+        // Function to update language display
+        function updateLanguageDisplay(lang) {
+            const langDisplay = document.getElementById('lang-display');
+            if (langDisplay) {
+                langDisplay.textContent = lang.toUpperCase();
+            }
+        }
+
+        // Function to translate page
+        function translatePage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            document.documentElement.lang = lang;
+            document.body.lang = lang;
+            updateLanguageDisplay(lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                
+                for (let k of keys) {
+                    if (translation && translation[k]) {
+                        translation = translation[k];
+                    } else {
+                        translation = null;
+                        break;
+                    }
+                }
+                
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            translatePage(currentLang);
+            updateLanguageDisplay(currentLang);
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+                var menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
+            
+            // Language dropdown toggle
+            document.getElementById('lang-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                var dropdown = document.getElementById('lang-dropdown');
+                dropdown.classList.toggle('hidden');
+            });
+            
+            // Language selection handlers
+            document.querySelectorAll('.lang-option').forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    translatePage(lang);
+                    document.getElementById('lang-dropdown').classList.add('hidden');
+                });
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                var dropdown = document.getElementById('lang-dropdown');
+                var btn = document.getElementById('lang-btn');
+                if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

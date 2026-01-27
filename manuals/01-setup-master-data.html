@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting Up Master Data - Mana MES Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mana-orange': '#FF7825',
+                        'mana-dark': '#070711',
+                        'mana-dark-blue': '#28334E',
+                        'mana-light': '#EFF3FD',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        /* IBM Plex Sans Thai Font Faces */
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Thin.ttf') format('truetype');
+            font-weight: 100;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-ExtraLight.ttf') format('truetype');
+            font-weight: 200;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Sans Thai';
+            src: url('../IBM_Plex_Sans_Thai/IBMPlexSansThai-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        body[lang="th"] {
+            font-family: 'IBM Plex Sans Thai', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        .flow-box {
+            background: linear-gradient(135deg, #EFF3FD 0%, #ffffff 100%);
+            border: 2px solid #FF7825;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .info-box {
+            background: #EFF3FD;
+            border-left: 4px solid #FF7825;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
+        .checklist-box {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
+        .nav-box {
+            background: #fff7ed;
+            border-left: 4px solid #FF7825;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Top Menu Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#070711] border-b border-[#28334E]/50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <a href="../index.html" class="flex items-center gap-3 group">
+                    <img src="../mana_logo.png" alt="Mana MES Logo" class="h-8 md:h-10 w-auto">
+                    <span class="text-xl md:text-2xl font-bold text-white tracking-tight group-hover:text-[#FF7825] transition">Mana MES</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="../index.html" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.home">Home</a>
+                    <a href="../user-manual.html" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.userManual">User Manual</a>
+                    <a href="../index.html#contact" class="text-gray-300 hover:text-[#FF7825] font-medium transition" data-i18n="nav.contact">Contact</a>
+                    
+                    <!-- Language Selector -->
+                    <div class="relative group">
+                        <button id="lang-btn" class="flex items-center gap-2 text-gray-300 hover:text-[#FF7825] font-medium transition px-3 py-2 rounded-lg hover:bg-white/5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                            </svg>
+                            <span id="lang-display">EN</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-[#28334E] rounded-lg shadow-xl border border-[#28334E]/50 overflow-hidden z-50">
+                            <a href="#" data-lang="en" class="lang-option block px-4 py-3 text-gray-300 hover:bg-[#FF7825] hover:text-white transition flex items-center justify-between">
+                                <span>English</span>
+                                <span class="text-xs">EN</span>
+                            </a>
+                            <a href="#" data-lang="th" class="lang-option block px-4 py-3 text-gray-300 hover:bg-[#FF7825] hover:text-white transition flex items-center justify-between">
+                                <span>ไทย</span>
+                                <span class="text-xs">TH</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-[#FF7825] rounded-lg transition" aria-label="Open menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#070711] border-t border-[#28334E]/50">
+            <div class="px-4 py-4 space-y-1">
+                <a href="../index.html" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.home">Home</a>
+                <a href="../user-manual.html" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.userManual">User Manual</a>
+                <a href="../index.html#contact" class="block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition" data-i18n="nav.contact">Contact</a>
+                <div class="border-t border-[#28334E]/50 mt-2 pt-2">
+                    <div class="px-4 py-2 text-gray-400 text-sm font-medium" data-i18n="nav.language">Language / ภาษา</div>
+                    <a href="#" data-lang="en" class="lang-option block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition">English (EN)</a>
+                    <a href="#" data-lang="th" class="lang-option block py-3 text-gray-300 hover:text-[#FF7825] hover:bg-white/5 rounded-lg px-4 font-medium transition">ไทย (TH)</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer to prevent content from sitting under fixed nav -->
+    <div class="h-16 md:h-20"></div>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-[#070711] to-[#28334E] py-12 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <a href="../user-manual.html" class="inline-flex items-center text-white hover:text-[#FF7825] transition group">
+                    <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span class="font-medium" data-i18n="page.backToManual">Back to User Manual</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <a href="05-system-overview.html" class="inline-flex items-center text-white hover:text-[#FF7825] transition group">
+                        <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        <span class="font-medium" data-i18n="page.previous">Previous</span>
+                    </a>
+                    <a href="02-running-production.html" class="inline-flex items-center text-white hover:text-[#FF7825] transition group">
+                        <span class="font-medium mr-2" data-i18n="page.next">Next</span>
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center">
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight" data-i18n="page.title">
+                    Setting Up Master Data
+                </h1>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto font-light" data-i18n="page.subtitle">
+                    Complete guide to configuring your factory's master data
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-gray-700 leading-relaxed mb-8" data-i18n="content.intro">
+                ก่อนเริ่มใช้งาน จำเป็นต้องตั้งค่าข้อมูลพื้นฐานของโรงงานให้ครบถ้วนในเมนู <strong>ข้อมูลการผลิต</strong> (Production Data) และ <strong>ข้อมูลอุปกรณ์</strong> (Equipment Data)
+            </p>
+            <p class="text-lg text-gray-600 mb-12" data-i18n="content.intro2">
+                คู่มือนี้จะแนะนำคุณในการตั้งค่าข้อมูลหลักที่จำเป็นทั้งหมด: Machine Data, Process Data, Production Routes, และ SKUs
+            </p>
+
+            <!-- Setup Flow Overview -->
+            <div class="flow-box">
+                <h2 class="text-2xl font-bold text-[#070711] mb-6 flex items-center" data-i18n="content.flow.title">
+                    <span class="text-3xl mr-3">📊</span>
+                    ภาพรวมลำดับการตั้งค่า
+                </h2>
+                <p class="text-gray-600 mb-6 text-center" data-i18n="content.flow.description">ทำตามลำดับนี้เพื่อตั้งค่าข้อมูลหลักของคุณอย่างถูกต้อง:</p>
+                
+                <!-- Sequential Flow -->
+                <div class="space-y-4">
+                    <!-- Step 1: Machine Data -->
+                    <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300">
+                        <div class="flex items-center">
+                            <div class="bg-[#FF7825] text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">
+                                1
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-[#070711] mb-1" data-i18n="content.flow.step1.title">ข้อมูลหลักเครื่องจักร (Machine Data)</h3>
+                                <p class="text-gray-600 text-sm" data-i18n="content.flow.step1.subtitle">ข้อมูลอุปกรณ์ (Equipment Data)</p>
+                            </div>
+                            <div class="text-[#FF7825] text-2xl">⚙️</div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="flex justify-center">
+                        <div class="w-0.5 h-8 bg-gradient-to-b from-[#FF7825] to-[#FF7825]/50"></div>
+                    </div>
+                    <div class="flex justify-center -mt-6">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Step 2: Process Data -->
+                    <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300">
+                        <div class="flex items-center">
+                            <div class="bg-[#FF7825] text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">
+                                2
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-[#070711] mb-1" data-i18n="content.flow.step2.title">ข้อมูลหลักกระบวนการผลิต (Process Data)</h3>
+                                <p class="text-gray-600 text-sm" data-i18n="content.flow.step2.subtitle">ข้อมูลหลักกระบวนการผลิต (Process Data)</p>
+                            </div>
+                            <div class="text-[#FF7825] text-2xl">🔄</div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="flex justify-center">
+                        <div class="w-0.5 h-8 bg-gradient-to-b from-[#FF7825] to-[#FF7825]/50"></div>
+                    </div>
+                    <div class="flex justify-center -mt-6">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Step 3: Production Routes -->
+                    <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300">
+                        <div class="flex items-center">
+                            <div class="bg-[#FF7825] text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">
+                                3
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-[#070711] mb-1" data-i18n="content.flow.step3.title">เส้นทางการผลิต (Production Routes)</h3>
+                                <p class="text-gray-600 text-sm" data-i18n="content.flow.step3.subtitle">เส้นทางการผลิต (Production Routes)</p>
+                            </div>
+                            <div class="text-[#FF7825] text-2xl">🛤️</div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="flex justify-center">
+                        <div class="w-0.5 h-8 bg-gradient-to-b from-[#FF7825] to-[#FF7825]/50"></div>
+                    </div>
+                    <div class="flex justify-center -mt-6">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Step 4: SKU Data -->
+                    <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300">
+                        <div class="flex items-center">
+                            <div class="bg-[#FF7825] text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">
+                                4
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-[#070711] mb-1" data-i18n="content.flow.step4.title">ข้อมูลหลักสินค้า (SKU Data)</h3>
+                                <p class="text-gray-600 text-sm" data-i18n="content.flow.step4.subtitle">ข้อมูลหลักสินค้า (SKU Master Data)</p>
+                            </div>
+                            <div class="text-[#FF7825] text-2xl">📦</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">⚠️</span>
+                        <div>
+                            <strong class="text-blue-800" data-i18n="content.flow.warning.title">สำคัญ:</strong>
+                            <p class="text-blue-700 text-sm mt-1" data-i18n="content.flow.warning.text">ต้องทำตามลำดับนี้ตามลำดับ แต่ละขั้นตอนขึ้นอยู่กับการเสร็จสิ้นของขั้นตอนก่อนหน้า</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Machine Data -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.machine.title">ข้อมูลหลักเครื่องจักร (Machine Data)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.machine.intro">
+                    กำหนดรายละเอียดของเครื่องจักรที่มีอยู่ในโรงงานของผู้ใช้งาน เพื่อนำเข้าสู่ระบบการวางแผนงาน
+                </p>
+
+                <div class="nav-box">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]" data-i18n="content.machine.navTitle">เส้นทางการนำทาง</strong>
+                    </div>
+                    <p class="text-gray-700 ml-9" data-i18n="content.machine.navPath">ข้อมูลอุปกรณ์ (Equipment Data)</p>
+                </div>
+
+                <div class="space-y-4 my-8">
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.machine.step1">ไปที่เมนู <strong>ข้อมูลอุปกรณ์</strong> (Equipment Data)</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.machine.step2">คลิก <strong>+ เพิ่มเครื่อง</strong></h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.machine.step3">ระบุชื่อกระบวนการและรายละเอียดต่าง ๆ</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.machine.step4">คลิก <strong>"บันทึก"</strong> เพื่อบันทึกผล</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Machine Data Image -->
+                <div class="my-8">
+                    <img src="../artwork/add%20new%20machine.png" alt="Adding Machine to System" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.machine.imageCaption">การเพิ่มเครื่องจักรในระบบ</p>
+                </div>
+            </section>
+
+            <!-- Process Data -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.process.title">ข้อมูลหลักกระบวนการผลิต (Process Data)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.process.intro">
+                    กำหนดรายละเอียดของแต่ละขั้นตอนการผลิตเพื่อนำไปประกอบเป็น <strong>Production Routes</strong> (เช่น ตัด, ประกอบ, พ่นสี)
+                </p>
+
+                <div class="nav-box">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]" data-i18n="content.process.navTitle">เส้นทางการนำทาง</strong>
+                    </div>
+                    <p class="text-gray-700 ml-9" data-i18n="content.process.navPath">ข้อมูลการผลิต > ข้อมูลหลักกระบวนการผลิต</p>
+                    <p class="text-gray-600 ml-9 text-sm" data-i18n="content.process.navPathEn">(Production Data > Process Data)</p>
+                </div>
+
+                <div class="space-y-4 my-8">
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.process.step1">ไปที่เมนู <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักกระบวนการผลิต</strong> (Process Data)</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.process.step2">คลิก <strong>+ เพิ่มกระบวนการผลิต</strong></h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.process.step3">ระบุชื่อกระบวนการและรายละเอียดต่าง ๆ</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.process.step4">คลิก <strong>"เพิ่มการดำเนินงาน"</strong> เพื่อบันทึกผล</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Data Image -->
+                <div class="my-8">
+                    <img src="../artwork/add%20new%20operation%20process.png" alt="Master Data Management - Production Data" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.process.imageCaption">การจัดการข้อมูลหลัก ข้อมูลการผลิต</p>
+                </div>
+            </section>
+
+            <!-- Production Routes -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.routes.title">เส้นทางการผลิต (Production Routes)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.routes.intro">
+                    กำหนดลำดับขั้นตอนการผลิตของสินค้าแต่ละชนิด ว่าต้องผ่านกระบวนการใดบ้าง
+                </p>
+
+                <div class="nav-box">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]" data-i18n="content.routes.navTitle">เส้นทางการนำทาง</strong>
+                    </div>
+                    <p class="text-gray-700 ml-9" data-i18n="content.routes.navPath">ข้อมูลการผลิต > เส้นทางการผลิต</p>
+                    <p class="text-gray-600 ml-9 text-sm" data-i18n="content.routes.navPathEn">(Production Data > Production Routes)</p>
+                </div>
+
+                <div class="space-y-4 my-8">
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step1">ไปที่เมนู <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>เส้นทางการผลิต</strong> (Production Routes)</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step2">คลิก <strong>+ Add</strong> เพื่อสร้างเส้นทางใหม่</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step3">กำหนดลำดับขั้นตอน (Step) จากต้นจนจบกระบวนการ</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">📋</span>
+                        <strong class="text-[#070711]" data-i18n="content.routes.exampleTitle">ตัวอย่างลำดับเส้นทาง</strong>
+                    </div>
+                    <ul class="space-y-2 ml-9">
+                        <li data-i18n="content.routes.example1">Step 1: Cutting (ตัด)</li>
+                        <li data-i18n="content.routes.example2">Step 2: Assembly (ประกอบ)</li>
+                        <li data-i18n="content.routes.example3">Step 3: Painting (พ่นสี)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SKUs -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6">SKUs (ข้อมูลหลักสินค้า)</h2>
+                <p class="text-lg text-gray-700 mb-6">
+                    Register products that your factory produces, which will be used as references when creating work orders.
+                </p>
+
+                <div class="nav-box">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]">Navigation Path</strong>
+                    </div>
+                    <p class="text-gray-700 ml-9">ข้อมูลการผลิต > ข้อมูลหลักสินค้า (SKU)</p>
+                    <p class="text-gray-600 ml-9 text-sm">(Production Data > SKU Master Data)</p>
+                </div>
+
+                <div class="space-y-4 my-8">
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step1">ไปที่เมนู <strong>ข้อมูลการผลิต</strong> (Production Data) > <strong>ข้อมูลหลักสินค้า (SKU)</strong> (SKU Master Data)</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step2">คลิกปุ่ม <strong>+ เพิ่ม SKU</strong> มุมขวาบน</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step3">กรอกรายละเอียดสินค้า (รหัสสินค้า, ชื่อสินค้า, หน่วยนับ) และกด <strong>"Next"</strong></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKU Step 1 Image -->
+                <div class="my-8">
+                    <img src="../artwork/add%20new%20sku1.png" alt="Master Data Management - SKU Master Data (Step 1)" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.sku.image1Caption">การจัดการข้อมูลหลัก ข้อมูลหลักสินค้า</p>
+                </div>
+
+                <div class="space-y-4 my-8">
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step4">เมื่อกด <strong>"Next"</strong> เรียบร้อย จะเข้าสู่หน้าต่อไปที่สามารถเพิ่ม ชิ้นส่วนสำหรับ SKU นั้น ๆ ได้</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">5</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step5">หากมีมากกว่า 1 ชิ้นส่วน สามารถกดเพิ่ม ปุ่มตามลูกศร เพื่อเพิ่มชิ้นส่วนได้</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">6</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.sku.step6">คลิก <strong>"Create"</strong></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKU Step 2 Image -->
+                <div class="my-8">
+                    <img src="../artwork/add%20new%20sku2.png" alt="Master Data Management - SKU Master Data (Step 2)" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.sku.image2Caption">การจัดการข้อมูลหลัก ข้อมูลหลักสินค้า</p>
+                </div>
+
+                <!-- SKU Setup Flow -->
+                <div class="flow-box mt-8">
+                    <div class="flex items-center mb-6">
+                        <span class="text-2xl mr-3">📋</span>
+                        <strong class="text-[#070711] text-xl" data-i18n="content.sku.flow.title">ลำดับการตั้งค่า SKU</strong>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Step 1: Enter Details -->
+                        <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="flex items-center">
+                                <div class="bg-[#FF7825] text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">
+                                    1
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-bold text-[#070711] mb-2" data-i18n="content.sku.flow.step1.title">กรอกรายละเอียดสินค้า</h3>
+                                    <div class="space-y-1 text-sm text-gray-600">
+                                        <div class="flex items-center">
+                                            <span class="text-[#FF7825] mr-2">•</span>
+                                            <span data-i18n="content.sku.flow.step1.item1">รหัสสินค้า (Product Code)</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="text-[#FF7825] mr-2">•</span>
+                                            <span data-i18n="content.sku.flow.step1.item2">ชื่อสินค้า (Product Name)</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="text-[#FF7825] mr-2">•</span>
+                                            <span data-i18n="content.sku.flow.step1.item3">หน่วยนับ (Unit of Measure)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-[#FF7825] text-3xl">📝</div>
+                            </div>
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="flex justify-center">
+                            <div class="w-0.5 h-8 bg-gradient-to-b from-[#FF7825] to-[#FF7825]/50"></div>
+                        </div>
+                        <div class="flex justify-center -mt-6">
+                            <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Step 2: Click Next -->
+                        <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="flex items-center">
+                                <div class="bg-[#FF7825] text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">
+                                    2
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-bold text-[#070711] mb-1" data-i18n="content.sku.flow.step2.title">กด <strong>"Next"</strong></h3>
+                                    <p class="text-gray-600 text-sm" data-i18n="content.sku.flow.step2.desc">เข้าสู่หน้าจอตั้งค่าชิ้นส่วน</p>
+                                </div>
+                                <div class="text-[#FF7825] text-3xl">➡️</div>
+                            </div>
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="flex justify-center">
+                            <div class="w-0.5 h-8 bg-gradient-to-b from-[#FF7825] to-[#FF7825]/50"></div>
+                        </div>
+                        <div class="flex justify-center -mt-6">
+                            <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Step 3: Add Components -->
+                        <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="flex items-center">
+                                <div class="bg-[#FF7825] text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">
+                                    3
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-bold text-[#070711] mb-2" data-i18n="content.sku.flow.step3.title">เพิ่มชิ้นส่วน</h3>
+                                    <p class="text-gray-600 text-sm mb-2" data-i18n="content.sku.flow.step3.desc">เพิ่มชิ้นส่วนสำหรับ SKU (ถ้าจำเป็น)</p>
+                                    <div class="bg-gray-50 rounded-lg p-3 text-xs text-gray-600">
+                                        <span class="text-[#FF7825] font-semibold" data-i18n="content.sku.flow.step3.noteLabel">หมายเหตุ:</span> <span data-i18n="content.sku.flow.step3.note">คลิกปุ่มเพิ่ม (ลูกศร) เพื่อเพิ่มชิ้นส่วนเพิ่มเติมหากมีหลายชิ้นส่วน</span>
+                                    </div>
+                                </div>
+                                <div class="text-[#FF7825] text-3xl">🧩</div>
+                            </div>
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="flex justify-center">
+                            <div class="w-0.5 h-8 bg-gradient-to-b from-[#FF7825] to-[#FF7825]/50"></div>
+                        </div>
+                        <div class="flex justify-center -mt-6">
+                            <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Step 4: Create -->
+                        <div class="bg-gradient-to-r from-[#FF7825] to-[#FF7825]/90 rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="flex items-center">
+                                <div class="bg-white text-[#FF7825] rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 flex-shrink-0">
+                                    4
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-bold text-white mb-1" data-i18n="content.sku.flow.step4.title">คลิก <strong>"Create"</strong></h3>
+                                    <p class="text-white/90 text-sm" data-i18n="content.sku.flow.step4.desc">เสร็จสิ้นการตั้งค่า SKU</p>
+                                </div>
+                                <div class="text-white text-3xl">✅</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bulk Upload -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.bulk.title">การ Import ข้อมูลพร้อมกันปริมาณมาก (Bulk Upload)</h2>
+                
+                <div class="bg-[#FF7825]/10 border-2 border-[#FF7825] rounded-lg p-6 mb-8">
+                    <div class="flex items-start">
+                        <span class="text-3xl mr-4">💡</span>
+                        <div>
+                            <strong class="text-[#070711] text-lg" data-i18n="content.bulk.tipTitle">เคล็ดลับ:</strong>
+                            <p class="text-gray-700 mt-1" data-i18n="content.bulk.tipText">เพื่อขจัดขั้นตอนการใส่ข้อมูลทีละ 1 หน่วย ผู้ใช้งานสามารถ ดาวน์โหลดไฟล์ CSV (เปิดด้วย Excel) ต้นแบบเพื่อนำมา กรอกข้อมูล และอัปโหลดกลับไปในภายหลังพร้อมกันทั้งหมดได้</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-[#070711] mb-4" data-i18n="content.bulk.orderTitle">ลำดับการอัปโหลดที่สำคัญ</h3>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.bulk.orderDesc">อย่างไรก็ตามผู้ใช้งานจะต้องอัปโหลดข้อมูลตามลำดับดังนี้ เพื่อไม่ให้เกิดความผิดพลาดในระบบ</p>
+
+                <div class="flow-box">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl mr-3">📊</span>
+                        <strong class="text-[#070711] text-xl" data-i18n="content.bulk.sequenceTitle">ลำดับการอัปโหลด (ต้องทำตาม)</strong>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <span class="text-2xl mr-4">1️⃣</span>
+                            <div>
+                                <strong class="text-[#070711]" data-i18n="content.bulk.seq1.title">ข้อมูลเครื่องจักร (Machine Data)</strong>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <div class="w-0.5 h-8 bg-[#FF7825]"></div>
+                        </div>
+                        <div class="flex items-center bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <span class="text-2xl mr-4">2️⃣</span>
+                            <div>
+                                <strong class="text-[#070711]" data-i18n="content.bulk.seq2.title">ข้อมูลหลักกระบวนการผลิต (Process Data)</strong>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <div class="w-0.5 h-8 bg-[#FF7825]"></div>
+                        </div>
+                        <div class="flex items-center bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <span class="text-2xl mr-4">3️⃣</span>
+                            <div>
+                                <strong class="text-[#070711]" data-i18n="content.bulk.seq3.title">เส้นทางการผลิต (Production Routes)</strong>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <div class="w-0.5 h-8 bg-[#FF7825]"></div>
+                        </div>
+                        <div class="flex items-center bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <span class="text-2xl mr-4">4️⃣</span>
+                            <div>
+                                <strong class="text-[#070711]" data-i18n="content.bulk.seq4.title">ข้อมูลหลักสินค้า (SKU)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-[#070711] mb-6 mt-12" data-i18n="content.bulk.stepsTitle">ขั้นตอนการ Import ข้อมูลพร้อมกันปริมาณมาก</h3>
+
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-xl font-semibold text-[#070711] mb-3" data-i18n="content.bulk.step1.title">ขั้นตอนแรก: ดาวน์โหลดไฟล์</h4>
+                        <p class="text-gray-700" data-i18n="content.bulk.step1.desc">ให้ผู้ใช้งานดาวน์โหลดไฟล์ โดยกดที่ลูกศรชี้ลงที่มุมบนขวา และคลิก <strong>"ดาวน์โหลดเทมเพลต"</strong></p>
+                        <!-- Bulk Upload Step 1 Image -->
+                        <div class="my-6">
+                            <img src="../artwork/bulkupload1.png" alt="การดาวน์โหลดไฟล์ CSV ต้นแบบ" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                            <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.bulk.step1.imageCaption">การดาวน์โหลดไฟล์ CSV ต้นแบบ</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-[#070711] mb-3" data-i18n="content.bulk.step2.title">ขั้นตอนต่อไป: กรอกข้อมูล</h4>
+                        <p class="text-gray-700" data-i18n="content.bulk.step2.desc">ให้ผู้ใช้งานกรอกข้อมูลในไฟล์ที่ได้ดาวน์โหลดมา</p>
+                        <!-- Bulk Upload Step 2 Image -->
+                        <div class="my-6">
+                            <img src="../artwork/bulkupload2.png" alt="การกรอกข้อมูลเพื่อเตรียมอัปโหลด" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                            <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.bulk.step2.imageCaption">การกรอกข้อมูลเพื่อเตรียมอัปโหลด</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-[#070711] mb-3" data-i18n="content.bulk.step3.title">บันทึกไฟล์ในรูปแบบที่ถูกต้อง</h4>
+                        <p class="text-gray-700" data-i18n="content.bulk.step3.desc">เมื่อต้องการบันทึกไฟล์ต้องเลือกรูปแบบไฟล์ (File Format) เป็น <strong>"CSV UTF-8 (Comma Delimited) .csv"</strong> เพื่อให้ระบบสามารถนำเข้าภาษาไทยได้อย่างถูกต้อง</p>
+                        <!-- UTF-8 Save Format Image -->
+                        <div class="my-6">
+                            <img src="../artwork/save%20utf%20file.png" alt="การบันทึกไฟล์ในรูปแบบ CSV UTF-8" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                            <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.bulk.step3.utf8ImageCaption">การบันทึกไฟล์ในรูปแบบ CSV UTF-8 เพื่อรองรับภาษาไทย</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-[#070711] mb-3" data-i18n="content.bulk.step4.title">อัปโหลดไฟล์</h4>
+                        <p class="text-gray-700" data-i18n="content.bulk.step4.desc">หลังจากนั้น จึงนำไฟล์ที่กรอกข้อมูลเรียบร้อย มาอัปโหลดเข้าโปรแกรม โดยกดที่ลูกศรชี้ลงที่มุมบนขวา และคลิก <strong>"เพิ่มไฟล์"</strong> โดยเลือกไฟล์ที่ได้ทำการกรอกข้อมูลไว้อย่างถูกต้อง</p>
+                        <!-- Bulk Upload Step 3 Image -->
+                        <div class="my-6">
+                            <img src="../artwork/bulkupload3.png" alt="การอัปโหลดข้อมูลขึ้นโปรแกรม" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                            <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.bulk.step4.imageCaption">การอัปโหลดข้อมูลขึ้นโปรแกรม</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#FF7825]/10 border-2 border-[#FF7825] rounded-lg p-6 mt-8">
+                    <div class="flex items-start">
+                        <span class="text-3xl mr-4">💡</span>
+                        <div>
+                            <strong class="text-[#070711] text-lg" data-i18n="content.bulk.updateTipTitle">เคล็ดลับ:</strong>
+                            <p class="text-gray-700 mt-1" data-i18n="content.bulk.updateTipText">เมื่อต้องการอัปเดตข้อมูล สามารถแก้ไขข้อมูลในไฟล์ที่เคยใช้ในการอัปโหลดไปแล้ว และดำเนินการอัปโหลดซ้ำ ระบบจะทำการตรวจจับ และอัปเดตข้อมูลโดยอัตโนมัติ</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#070711] text-white py-8 px-4 mt-16">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400 font-light">&copy; 2026 Mana MES. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Translation object
+        const translations = {
+            en: {
+                nav: {
+                    home: "Home",
+                    userManual: "User Manual",
+                    contact: "Contact",
+                    language: "Language / ภาษา"
+                },
+                page: {
+                    backToManual: "Back to User Manual",
+                    title: "Setting Up Master Data",
+                    subtitle: "Complete guide to configuring your factory's master data",
+                    previous: "Previous",
+                    next: "Next"
+                },
+                content: {
+                    intro: "Before you can start using Mana MES, you need to set up your factory's basic data in the Production Data and Equipment Data menus.",
+                    intro2: "This guide will walk you through setting up all the essential master data: Machine Data, Process Data, Production Routes, and SKUs.",
+                    flow: {
+                        title: "Setup Flow Overview",
+                        description: "Follow this sequence to set up your master data correctly:",
+                        step1: { title: "Machine Data", subtitle: "ข้อมูลอุปกรณ์ (Equipment Data)" },
+                        step2: { title: "Process Data", subtitle: "ข้อมูลหลักกระบวนการผลิต (Process Data)" },
+                        step3: { title: "Production Routes", subtitle: "เส้นทางการผลิต (Production Routes)" },
+                        step4: { title: "SKU Data", subtitle: "ข้อมูลหลักสินค้า (SKU Master Data)" },
+                        warning: { title: "Important:", text: "This sequence must be followed in order. Each step depends on the previous one being completed." }
+                    },
+                    machine: {
+                        title: "Machine Data (ข้อมูลหลักเครื่องจักร)",
+                        intro: "Define the details of all machines in your factory to integrate them into the production planning system.",
+                        navTitle: "Navigation Path",
+                        navPath: "ข้อมูลอุปกรณ์ (Equipment Data)",
+                        step1: "Go to the ข้อมูลอุปกรณ์ (Equipment Data) menu.",
+                        step2: "Click + เพิ่มเครื่อง (+ Add Machine).",
+                        step3: "Enter the process name and other required details.",
+                        step4: "Click \"บันทึก\" (Save) to save the results.",
+                        imageCaption: "Adding Machine to System"
+                    },
+                    process: {
+                        title: "Process Data (ข้อมูลหลักกระบวนการผลิต)",
+                        intro: "Define the details of each production step to be used in creating Production Routes (e.g., cutting, assembly, painting).",
+                        navTitle: "Navigation Path",
+                        navPath: "ข้อมูลการผลิต > ข้อมูลหลักกระบวนการผลิต",
+                        navPathEn: "(Production Data > Process Data)",
+                        step1: "Go to ข้อมูลการผลิต (Production Data) > ข้อมูลหลักกระบวนการผลิต (Process Data).",
+                        step2: "Click + เพิ่มกระบวนการผลิต (+ Add Process).",
+                        step3: "Enter the process name and other required details.",
+                        step4: "Click \"เพิ่มการดำเนินงาน\" (Add Operation) to save the results.",
+                        imageCaption: "Master Data Management - Production Data"
+                    },
+                    routes: {
+                        title: "Production Routes (เส้นทางการผลิต)",
+                        intro: "Define the sequence of production steps for each product type, specifying which processes it must go through.",
+                        navTitle: "Navigation Path",
+                        navPath: "ข้อมูลการผลิต > เส้นทางการผลิต",
+                        navPathEn: "(Production Data > Production Routes)",
+                        step1: "Go to ข้อมูลการผลิต (Production Data) > เส้นทางการผลิต (Production Routes).",
+                        step2: "Click + Add to create a new route.",
+                        step3: "Define the sequence of steps (Step) from start to finish of the process.",
+                        exampleTitle: "Example Route Sequence",
+                        example1: "Step 1: Cutting (ตัด)",
+                        example2: "Step 2: Assembly (ประกอบ)",
+                        example3: "Step 3: Painting (พ่นสี)"
+                    },
+                    sku: {
+                        title: "SKUs (ข้อมูลหลักสินค้า)",
+                        intro: "Register products that your factory produces, which will be used as references when creating work orders.",
+                        navTitle: "Navigation Path",
+                        navPath: "ข้อมูลการผลิต > ข้อมูลหลักสินค้า (SKU)",
+                        navPathEn: "(Production Data > SKU Master Data)",
+                        step1: "Go to ข้อมูลการผลิต (Production Data) > ข้อมูลหลักสินค้า (SKU) (SKU Master Data).",
+                        step2: "Click the + เพิ่ม SKU (+ Add SKU) button in the top right corner.",
+                        step3: "Enter product details (Product Code, Product Name, Unit of Measure) and click \"Next\".",
+                        step4: "After clicking \"Next\", you'll reach the next screen where you can add components for that SKU.",
+                        step5: "If there is more than 1 component, you can click the add button (following the arrow) to add more components.",
+                        step6: "Click \"Create\" to complete the SKU setup.",
+                        image1Caption: "Master Data Management - SKU Master Data (Step 1)",
+                        image2Caption: "Master Data Management - SKU Master Data (Step 2)",
+                        flow: {
+                            title: "SKU Setup Flow",
+                            step1: { title: "Enter Product Details", item1: "Product Code", item2: "Product Name", item3: "Unit of Measure" },
+                            step2: { title: "Click \"Next\"", desc: "Proceed to component setup screen" },
+                            step3: { title: "Add Components", desc: "Add components for the SKU (if needed)", noteLabel: "Note:", note: "Click the add button (arrow) to add more components if there are multiple" },
+                            step4: { title: "Click \"Create\"", desc: "Complete SKU setup" }
+                        }
+                    },
+                    bulk: {
+                        title: "Bulk Upload (การ Import ข้อมูลพร้อมกันปริมาณมาก)",
+                        tipTitle: "Tip:",
+                        tipText: "To eliminate the need to enter data one unit at a time, you can download a CSV template file (open with Excel), fill in your data, and upload everything at once.",
+                        orderTitle: "Important Upload Order",
+                        orderDesc: "You must upload data in the following order to avoid system errors:",
+                        sequenceTitle: "Upload Sequence (MUST FOLLOW)",
+                        seq1: { title: "Machine Data (ข้อมูลเครื่องจักร)" },
+                        seq2: { title: "Process Data (ข้อมูลหลักกระบวนการผลิต)" },
+                        seq3: { title: "Production Routes (เส้นทางการผลิต)" },
+                        seq4: { title: "SKU Data (ข้อมูลหลักสินค้า)" },
+                        stepsTitle: "Bulk Upload Steps",
+                        step1: { title: "Step 1: Download Template", desc: "Click the downward arrow in the top right corner and click \"ดาวน์โหลดเทมเพลต\" (Download Template).", imageCaption: "Downloading CSV Template File" },
+                        step2: { title: "Step 2: Fill in Data", desc: "Fill in the data in the downloaded file.", imageCaption: "Filling in Data to Prepare for Upload" },
+                        step3: { title: "Step 3: Save in Correct Format", desc: "When saving the file, select the file format as \"CSV UTF-8 (Comma Delimited) .csv\" so the system can correctly import Thai language characters.", utf8ImageCaption: "Saving File in CSV UTF-8 Format to Support Thai Language" },
+                        step4: { title: "Step 4: Upload File", desc: "Upload the completed file by clicking the downward arrow in the top right corner and clicking \"เพิ่มไฟล์\" (Add File). Select the file you've correctly filled in.", imageCaption: "Uploading Data to Program" },
+                        updateTipTitle: "Tip:",
+                        updateTipText: "To update existing data, you can edit the data in the file you previously used for upload and repeat the upload process. The system will automatically detect and update the data."
+                    }
+                }
+            },
+            th: {
+                nav: {
+                    home: "หน้าแรก",
+                    userManual: "คู่มือการใช้งาน",
+                    contact: "ติดต่อ",
+                    language: "Language / ภาษา"
+                },
+                page: {
+                    backToManual: "กลับไปที่คู่มือการใช้งาน",
+                    title: "ตั้งค่าข้อมูลหลัก",
+                    subtitle: "คู่มือฉบับสมบูรณ์สำหรับการกำหนดค่าข้อมูลหลักของโรงงาน",
+                    previous: "ก่อนหน้า",
+                    next: "ถัดไป"
+                },
+                content: {
+                    intro: "ก่อนเริ่มใช้งาน จำเป็นต้องตั้งค่าข้อมูลพื้นฐานของโรงงานให้ครบถ้วนในเมนู ข้อมูลการผลิต (Production Data) และ ข้อมูลอุปกรณ์ (Equipment Data)",
+                    intro2: "คู่มือนี้จะแนะนำคุณในการตั้งค่าข้อมูลหลักที่จำเป็นทั้งหมด: Machine Data, Process Data, Production Routes, และ SKUs",
+                    flow: {
+                        title: "ภาพรวมลำดับการตั้งค่า",
+                        description: "ทำตามลำดับนี้เพื่อตั้งค่าข้อมูลหลักของคุณอย่างถูกต้อง:",
+                        step1: { title: "ข้อมูลหลักเครื่องจักร (Machine Data)", subtitle: "ข้อมูลอุปกรณ์ (Equipment Data)" },
+                        step2: { title: "ข้อมูลหลักกระบวนการผลิต (Process Data)", subtitle: "ข้อมูลหลักกระบวนการผลิต (Process Data)" },
+                        step3: { title: "เส้นทางการผลิต (Production Routes)", subtitle: "เส้นทางการผลิต (Production Routes)" },
+                        step4: { title: "ข้อมูลหลักสินค้า (SKU Data)", subtitle: "ข้อมูลหลักสินค้า (SKU Master Data)" },
+                        warning: { title: "สำคัญ:", text: "ต้องทำตามลำดับนี้ตามลำดับ แต่ละขั้นตอนขึ้นอยู่กับการเสร็จสิ้นของขั้นตอนก่อนหน้า" }
+                    },
+                    machine: {
+                        title: "ข้อมูลหลักเครื่องจักร (Machine Data)",
+                        intro: "กำหนดรายละเอียดของเครื่องจักรที่มีอยู่ในโรงงานของผู้ใช้งาน เพื่อนำเข้าสู่ระบบการวางแผนงาน",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "ข้อมูลอุปกรณ์ (Equipment Data)",
+                        step1: "ไปที่เมนู ข้อมูลอุปกรณ์ (Equipment Data)",
+                        step2: "คลิก + เพิ่มเครื่อง",
+                        step3: "ระบุชื่อกระบวนการและรายละเอียดต่าง ๆ",
+                        step4: "คลิก \"บันทึก\" เพื่อบันทึกผล",
+                        imageCaption: "การเพิ่มเครื่องจักรในระบบ"
+                    },
+                    process: {
+                        title: "ข้อมูลหลักกระบวนการผลิต (Process Data)",
+                        intro: "กำหนดรายละเอียดของแต่ละขั้นตอนการผลิตเพื่อนำไปประกอบเป็น Production Routes (เช่น ตัด, ประกอบ, พ่นสี)",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "ข้อมูลการผลิต > ข้อมูลหลักกระบวนการผลิต",
+                        navPathEn: "(Production Data > Process Data)",
+                        step1: "ไปที่เมนู ข้อมูลการผลิต (Production Data) > ข้อมูลหลักกระบวนการผลิต (Process Data)",
+                        step2: "คลิก + เพิ่มกระบวนการผลิต",
+                        step3: "ระบุชื่อกระบวนการและรายละเอียดต่าง ๆ",
+                        step4: "คลิก \"เพิ่มการดำเนินงาน\" เพื่อบันทึกผล",
+                        imageCaption: "การจัดการข้อมูลหลัก ข้อมูลการผลิต"
+                    },
+                    routes: {
+                        title: "เส้นทางการผลิต (Production Routes)",
+                        intro: "กำหนดลำดับขั้นตอนการผลิตของสินค้าแต่ละชนิด ว่าต้องผ่านกระบวนการใดบ้าง",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "ข้อมูลการผลิต > เส้นทางการผลิต",
+                        navPathEn: "(Production Data > Production Routes)",
+                        step1: "ไปที่เมนู ข้อมูลการผลิต (Production Data) > เส้นทางการผลิต (Production Routes)",
+                        step2: "คลิก + Add เพื่อสร้างเส้นทางใหม่",
+                        step3: "กำหนดลำดับขั้นตอน (Step) จากต้นจนจบกระบวนการ",
+                        exampleTitle: "ตัวอย่างลำดับเส้นทาง",
+                        example1: "Step 1: Cutting (ตัด)",
+                        example2: "Step 2: Assembly (ประกอบ)",
+                        example3: "Step 3: Painting (พ่นสี)"
+                    },
+                    sku: {
+                        title: "ข้อมูลหลักสินค้า (SKU)",
+                        intro: "ใช้สำหรับลงทะเบียนสินค้าที่โรงงานผลิต เพื่อใช้ในการอ้างอิงตอนเปิดใบสั่งงาน",
+                        navTitle: "เส้นทางการนำทาง",
+                        navPath: "ข้อมูลการผลิต > ข้อมูลหลักสินค้า (SKU)",
+                        navPathEn: "(Production Data > SKU Master Data)",
+                        step1: "ไปที่เมนู ข้อมูลการผลิต (Production Data) > ข้อมูลหลักสินค้า (SKU) (SKU Master Data)",
+                        step2: "คลิกปุ่ม + เพิ่ม SKU มุมขวาบน",
+                        step3: "กรอกรายละเอียดสินค้า (รหัสสินค้า, ชื่อสินค้า, หน่วยนับ) และกด \"Next\"",
+                        step4: "เมื่อกด \"Next\" เรียบร้อย จะเข้าสู่หน้าต่อไปที่สามารถเพิ่ม ชิ้นส่วนสำหรับ SKU นั้น ๆ ได้",
+                        step5: "หากมีมากกว่า 1 ชิ้นส่วน สามารถกดเพิ่ม ปุ่มตามลูกศร เพื่อเพิ่มชิ้นส่วนได้",
+                        step6: "คลิก \"Create\"",
+                        image1Caption: "การจัดการข้อมูลหลัก ข้อมูลหลักสินค้า",
+                        image2Caption: "การจัดการข้อมูลหลัก ข้อมูลหลักสินค้า",
+                        flow: {
+                            title: "ลำดับการตั้งค่า SKU",
+                            step1: { title: "กรอกรายละเอียดสินค้า", item1: "รหัสสินค้า (Product Code)", item2: "ชื่อสินค้า (Product Name)", item3: "หน่วยนับ (Unit of Measure)" },
+                            step2: { title: "กด \"Next\"", desc: "เข้าสู่หน้าจอตั้งค่าชิ้นส่วน" },
+                            step3: { title: "เพิ่มชิ้นส่วน", desc: "เพิ่มชิ้นส่วนสำหรับ SKU (ถ้าจำเป็น)", noteLabel: "หมายเหตุ:", note: "คลิกปุ่มเพิ่ม (ลูกศร) เพื่อเพิ่มชิ้นส่วนเพิ่มเติมหากมีหลายชิ้นส่วน" },
+                            step4: { title: "คลิก \"Create\"", desc: "เสร็จสิ้นการตั้งค่า SKU" }
+                        }
+                    },
+                    bulk: {
+                        title: "การ Import ข้อมูลพร้อมกันปริมาณมาก (Bulk Upload)",
+                        tipTitle: "เคล็ดลับ:",
+                        tipText: "เพื่อขจัดขั้นตอนการใส่ข้อมูลทีละ 1 หน่วย ผู้ใช้งานสามารถ ดาวน์โหลดไฟล์ CSV (เปิดด้วย Excel) ต้นแบบเพื่อนำมา กรอกข้อมูล และอัปโหลดกลับไปในภายหลังพร้อมกันทั้งหมดได้",
+                        orderTitle: "ลำดับการอัปโหลดที่สำคัญ",
+                        orderDesc: "อย่างไรก็ตามผู้ใช้งานจะต้องอัปโหลดข้อมูลตามลำดับดังนี้ เพื่อไม่ให้เกิดความผิดพลาดในระบบ",
+                        sequenceTitle: "ลำดับการอัปโหลด (ต้องทำตาม)",
+                        seq1: { title: "ข้อมูลเครื่องจักร (Machine Data)" },
+                        seq2: { title: "ข้อมูลหลักกระบวนการผลิต (Process Data)" },
+                        seq3: { title: "เส้นทางการผลิต (Production Routes)" },
+                        seq4: { title: "ข้อมูลหลักสินค้า (SKU)" },
+                        stepsTitle: "ขั้นตอนการ Import ข้อมูลพร้อมกันปริมาณมาก",
+                        step1: { title: "ขั้นตอนแรก: ดาวน์โหลดไฟล์", desc: "ให้ผู้ใช้งานดาวน์โหลดไฟล์ โดยกดที่ลูกศรชี้ลงที่มุมบนขวา และคลิก \"ดาวน์โหลดเทมเพลต\"", imageCaption: "การดาวน์โหลดไฟล์ CSV ต้นแบบ" },
+                        step2: { title: "ขั้นตอนต่อไป: กรอกข้อมูล", desc: "ให้ผู้ใช้งานกรอกข้อมูลในไฟล์ที่ได้ดาวน์โหลดมา", imageCaption: "การกรอกข้อมูลเพื่อเตรียมอัปโหลด" },
+                        step3: { title: "บันทึกไฟล์ในรูปแบบที่ถูกต้อง", desc: "เมื่อต้องการบันทึกไฟล์ต้องเลือกรูปแบบไฟล์ (File Format) เป็น \"CSV UTF-8 (Comma Delimited) .csv\" เพื่อให้ระบบสามารถนำเข้าภาษาไทยได้อย่างถูกต้อง", utf8ImageCaption: "การบันทึกไฟล์ในรูปแบบ CSV UTF-8 เพื่อรองรับภาษาไทย" },
+                        step4: { title: "อัปโหลดไฟล์", desc: "หลังจากนั้น จึงนำไฟล์ที่กรอกข้อมูลเรียบร้อย มาอัปโหลดเข้าโปรแกรม โดยกดที่ลูกศรชี้ลงที่มุมบนขวา และคลิก \"เพิ่มไฟล์\" โดยเลือกไฟล์ที่ได้ทำการกรอกข้อมูลไว้อย่างถูกต้อง", imageCaption: "การอัปโหลดข้อมูลขึ้นโปรแกรม" },
+                        updateTipTitle: "เคล็ดลับ:",
+                        updateTipText: "เมื่อต้องการอัปเดตข้อมูล สามารถแก้ไขข้อมูลในไฟล์ที่เคยใช้ในการอัปโหลดไปแล้ว และดำเนินการอัปโหลดซ้ำ ระบบจะทำการตรวจจับ และอัปเดตข้อมูลโดยอัตโนมัติ"
+                    }
+                }
+            }
+        };
+
+        // Get current language from localStorage or default to 'th' (Thai)
+        let currentLang = localStorage.getItem('language') || 'th';
+
+        // Function to update language display
+        function updateLanguageDisplay(lang) {
+            const langDisplay = document.getElementById('lang-display');
+            if (langDisplay) {
+                langDisplay.textContent = lang.toUpperCase();
+            }
+        }
+
+        // Function to translate page
+        function translatePage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            document.documentElement.lang = lang;
+            document.body.lang = lang;
+            updateLanguageDisplay(lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                
+                for (let k of keys) {
+                    if (translation && translation[k]) {
+                        translation = translation[k];
+                    } else {
+                        translation = null;
+                        break;
+                    }
+                }
+                
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            translatePage(currentLang);
+            updateLanguageDisplay(currentLang);
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+                var menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
+            
+            // Language dropdown toggle
+            document.getElementById('lang-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                var dropdown = document.getElementById('lang-dropdown');
+                dropdown.classList.toggle('hidden');
+            });
+            
+            // Language selection handlers
+            document.querySelectorAll('.lang-option').forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    translatePage(lang);
+                    document.getElementById('lang-dropdown').classList.add('hidden');
+                });
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                var dropdown = document.getElementById('lang-dropdown');
+                var btn = document.getElementById('lang-btn');
+                if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
