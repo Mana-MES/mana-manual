@@ -79,6 +79,19 @@
         }
         .tutorial-card-wrap {
             position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .tutorial-card-wrap > a {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 0;
+        }
+        .tutorial-card-wrap .tutorial-card-desc {
+            flex: 1;
+            min-height: 3.5rem;
         }
         .tutorial-card-preview {
             visibility: hidden;
@@ -265,7 +278,7 @@
                         <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.systemOverview.title">
                             System Overview
                         </h3>
-                        <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.systemOverview.desc">
+                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.systemOverview.desc">
                             Understand the main menu structure, navigation categories, and how to change the system language.
                         </p>
                         <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
@@ -298,7 +311,7 @@
                         <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.setupMasterData.title">
                             Setup Master Data
                         </h3>
-                        <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.setupMasterData.desc">
+                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.setupMasterData.desc">
                             Learn how to set up Machine Data, Process Data, Production Routes, and SKUs. Includes bulk upload tips.
                         </p>
                         <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
@@ -329,7 +342,7 @@
                         <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.runningProduction.title">
                             Running Production
                         </h3>
-                        <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.runningProduction.desc">
+                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.runningProduction.desc">
                             Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations.
                         </p>
                         <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
@@ -361,7 +374,7 @@
                         <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.monitoring.title">
                             Monitoring
                         </h3>
-                        <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.monitoring.desc">
+                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.monitoring.desc">
                             Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records.
                         </p>
                         <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
@@ -394,7 +407,7 @@
                         <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.editingData.title">
                             Editing Data
                         </h3>
-                        <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.editingData.desc">
+                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.editingData.desc">
                             Learn how to edit Machine Data, Process Data, Production Routes, and SKU data after it has been saved.
                         </p>
                         <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
