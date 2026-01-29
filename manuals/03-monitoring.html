@@ -122,6 +122,35 @@
             font-size: 0.875rem;
             line-height: 1.6;
         }
+        .tip-box {
+            background: #e6f7ff;
+            border: 1px solid rgb(56, 150, 203);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .tip-box-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            color: rgb(56, 150, 203);
+        }
+        .tip-box-content { flex: 1; }
+        .tip-box-label {
+            font-weight: 700;
+            color: rgb(59, 64, 73);
+            margin-bottom: 0.25rem;
+        }
+        .tip-box-text {
+            color: rgb(59, 64, 73);
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+        .tips-list .tip-box { margin: 0.75rem 0; }
+        .tips-list .tip-box:first-of-type { margin-top: 0; }
     </style>
 </head>
 <body class="bg-white">
@@ -403,48 +432,48 @@
 
             <!-- Manually Adding Downtime -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Manually Adding Downtime Records</h2>
-                <p class="text-lg text-gray-700 mb-6">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.downtime.title">Manually Adding Downtime Records</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.downtime.intro">
                     Normally, downtime is automatically recorded when an operator stops production. However, you can also manually add downtime records.
                 </p>
 
                 <div class="nav-box">
                     <div class="flex items-center mb-2">
                         <span class="text-2xl mr-3">📍</span>
-                        <strong class="text-[#070711]">Navigation Path</strong>
+                        <strong class="text-[#070711]" data-i18n="content.downtime.navTitle">Navigation Path</strong>
                     </div>
-                    <p class="text-gray-700 ml-9">การหยุดผลิต (Downtime)</p>
+                    <p class="text-gray-700 ml-9" data-i18n="content.downtime.navPath">การหยุดผลิต (Downtime)</p>
                 </div>
 
                 <div class="space-y-4 my-8">
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Go to the <strong>การหยุดผลิต</strong> (Downtime) menu.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.downtime.step1">Go to the <strong>การหยุดผลิต</strong> (Downtime) menu.</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Click <strong>+ เพิ่มบันทึก</strong> (+ Add Record).</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.downtime.step2">Click <strong>+ เพิ่มบันทึก</strong> (+ Add Record).</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711] mb-2">Enter the following information:</h3>
+                            <h3 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.downtime.step3Title">Enter the following information:</h3>
                             <ul class="space-y-1 ml-4">
                                 <li class="flex items-center">
                                     <span class="text-[#FF7825] mr-2">•</span>
-                                    <span><strong>รหัสเครื่อง</strong> (Machine Code)</span>
+                                    <span data-i18n="content.downtime.step3Item1"><strong>รหัสเครื่อง</strong> (Machine Code)</span>
                                 </li>
                                 <li class="flex items-center">
                                     <span class="text-[#FF7825] mr-2">•</span>
-                                    <span><strong>เวลาที่เริ่มหยุด-สิ้นสุด</strong> (Start and End Time)</span>
+                                    <span data-i18n="content.downtime.step3Item2"><strong>เวลาที่เริ่มหยุด-สิ้นสุด</strong> (Start and End Time)</span>
                                 </li>
                                 <li class="flex items-center">
                                     <span class="text-[#FF7825] mr-2">•</span>
-                                    <span><strong>สาเหตุ</strong> (Cause) - Examples: machine breakdown, waiting for materials, break time</span>
+                                    <span data-i18n="content.downtime.step3Item3"><strong>สาเหตุ</strong> (Cause) - Examples: machine breakdown, waiting for materials, break time</span>
                                 </li>
                             </ul>
                         </div>
@@ -452,7 +481,7 @@
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]"><strong>Timeline View:</strong> The system will display a colored bar showing the time period when the machine was stopped, giving you a visual overview.</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.downtime.step4"><strong>Timeline View:</strong> The system will display a colored bar showing the time period when the machine was stopped, giving you a visual overview.</h3>
                         </div>
                     </div>
                 </div>
@@ -466,26 +495,26 @@
                 <div class="info-box">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">📋</span>
-                        <strong class="text-[#070711]">Downtime Record Form</strong>
+                        <strong class="text-[#070711]" data-i18n="content.downtime.formTitle">Downtime Record Form</strong>
                     </div>
                     <div class="bg-white rounded-lg p-4 mt-3 space-y-3">
-                        <div><strong>Machine Code:</strong> [Select]</div>
-                        <div><strong>Start Time:</strong> [HH:MM]</div>
-                        <div><strong>End Time:</strong> [HH:MM]</div>
+                        <div><strong data-i18n="content.downtime.formMachineCode">Machine Code:</strong> [Select]</div>
+                        <div><strong data-i18n="content.downtime.formStartTime">Start Time:</strong> [HH:MM]</div>
+                        <div><strong data-i18n="content.downtime.formEndTime">End Time:</strong> [HH:MM]</div>
                         <div>
-                            <strong>Cause:</strong> [Select/Enter]
+                            <strong data-i18n="content.downtime.formCause">Cause:</strong> [Select/Enter]
                             <ul class="mt-2 ml-4 space-y-1">
                                 <li class="flex items-center">
                                     <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>Machine breakdown</span>
+                                    <span data-i18n="content.downtime.cause1">Machine breakdown</span>
                                 </li>
                                 <li class="flex items-center">
                                     <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>Waiting for materials</span>
+                                    <span data-i18n="content.downtime.cause2">Waiting for materials</span>
                                 </li>
                                 <li class="flex items-center">
                                     <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>Break time</span>
+                                    <span data-i18n="content.downtime.cause3">Break time</span>
                                 </li>
                             </ul>
                         </div>
@@ -495,55 +524,73 @@
                 <div class="info-box mt-6">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">⏱️</span>
-                        <strong class="text-[#070711]">Timeline Visualization</strong>
+                        <strong class="text-[#070711]" data-i18n="content.downtime.timelineTitle">Timeline Visualization</strong>
                     </div>
                     <div class="bg-white rounded-lg p-4 mt-3">
                         <div class="text-sm text-gray-600 mb-2">08:00 ━━━━━━━━━━━━━━━━━━━━━━━━━ 12:00</div>
                         <div class="bg-[#FF7825] h-8 rounded flex items-center px-4 text-white font-semibold">
                             ████████ (Downtime)
                         </div>
-                        <p class="text-gray-600 text-sm mt-3">Colored bar shows downtime period</p>
+                        <p class="text-gray-600 text-sm mt-3" data-i18n="content.downtime.timelineDesc">Colored bar shows downtime period</p>
                     </div>
                 </div>
 
                 <div class="checklist-box mt-6">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">✅</span>
-                        <strong class="text-[#070711]">Completion Checklist</strong>
+                        <strong class="text-[#070711]" data-i18n="content.downtime.checklistTitle">Completion Checklist</strong>
                     </div>
                     <ul class="space-y-2 ml-9">
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Navigate to Downtime menu</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Add Record button</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Enter machine code</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Set start and end time</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Select/enter cause</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> View timeline visualization</li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.downtime.checklist1">Navigate to Downtime menu</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.downtime.checklist2">Click Add Record button</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.downtime.checklist3">Enter machine code</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.downtime.checklist4">Set start and end time</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.downtime.checklist5">Select/enter cause</span></li>
+                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> <span data-i18n="content.downtime.checklist6">View timeline visualization</span></li>
                     </ul>
                 </div>
             </section>
 
             <!-- Tips -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Tips for Effective Monitoring</h2>
-                <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
-                            <span>Check the OEE Dashboard regularly to maintain the 85% target standard</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
-                            <span>Review Top Downtime Reasons to identify recurring issues</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
-                            <span>Use the Timeline view to spot patterns in downtime occurrences</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
-                            <span>Monitor WIP to ensure production flow is smooth and on schedule</span>
-                        </li>
-                    </ul>
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.tips.title">Tips for Effective Monitoring</h2>
+                <div class="tips-list">
+                    <div class="tip-box">
+                        <span class="tip-box-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
+                        </span>
+                        <div class="tip-box-content">
+                            <div class="tip-box-label" data-i18n="content.tips.tipLabel">Tip:</div>
+                            <p class="tip-box-text" data-i18n="content.tips.tip1">Check the <strong>OEE Dashboard</strong> regularly to maintain the 85% target standard.</p>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <span class="tip-box-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
+                        </span>
+                        <div class="tip-box-content">
+                            <div class="tip-box-label" data-i18n="content.tips.tipLabel">Tip:</div>
+                            <p class="tip-box-text" data-i18n="content.tips.tip2">Review <strong>Top Downtime Reasons</strong> to identify recurring issues.</p>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <span class="tip-box-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
+                        </span>
+                        <div class="tip-box-content">
+                            <div class="tip-box-label" data-i18n="content.tips.tipLabel">Tip:</div>
+                            <p class="tip-box-text" data-i18n="content.tips.tip3">Use the <strong>Timeline view</strong> to spot patterns in downtime occurrences.</p>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <span class="tip-box-icon" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
+                        </span>
+                        <div class="tip-box-content">
+                            <div class="tip-box-label" data-i18n="content.tips.tipLabel">Tip:</div>
+                            <p class="tip-box-text" data-i18n="content.tips.tip4">Monitor <strong>WIP</strong> to ensure production flow is smooth and on schedule.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -615,11 +662,39 @@
                         intro: "Normally, downtime is automatically recorded when an operator stops production. However, you can also manually add downtime records.",
                         navTitle: "Navigation Path",
                         navPath: "การหยุดผลิต (Downtime)",
-                        step1: "Go to the การหยุดผลิต (Downtime) menu.",
-                        step2: "Click + เพิ่มบันทึก (+ Add Record).",
-                        step3: { title: "Enter the following information:", item1: "รหัสเครื่อง (Machine Code)", item2: "เวลาที่เริ่มหยุด-สิ้นสุด (Start and End Time)", item3: "สาเหตุ (Cause) - Examples: machine breakdown, waiting for materials, break time" },
-                        step4: "Timeline: The system will display a colored bar showing the time period when the machine stopped, providing a visual overview.",
-                        img1: "Downtime Management - Adding and Viewing Downtime Records"
+                        step1: "Go to the <strong>การหยุดผลิต</strong> (Downtime) menu.",
+                        step2: "Click <strong>+ เพิ่มบันทึก</strong> (+ Add Record).",
+                        step3Title: "Enter the following information:",
+                        step3Item1: "<strong>รหัสเครื่อง</strong> (Machine Code)",
+                        step3Item2: "<strong>เวลาที่เริ่มหยุด-สิ้นสุด</strong> (Start and End Time)",
+                        step3Item3: "<strong>สาเหตุ</strong> (Cause) - Examples: machine breakdown, waiting for materials, break time",
+                        step4: "<strong>Timeline View:</strong> The system will display a colored bar showing the time period when the machine was stopped, giving you a visual overview.",
+                        img1: "Downtime Management - Adding and Viewing Downtime Records",
+                        formTitle: "Downtime Record Form",
+                        formMachineCode: "Machine Code:",
+                        formStartTime: "Start Time:",
+                        formEndTime: "End Time:",
+                        formCause: "Cause:",
+                        cause1: "Machine breakdown",
+                        cause2: "Waiting for materials",
+                        cause3: "Break time",
+                        timelineTitle: "Timeline Visualization",
+                        timelineDesc: "Colored bar shows downtime period",
+                        checklistTitle: "Completion Checklist",
+                        checklist1: "Navigate to Downtime menu",
+                        checklist2: "Click Add Record button",
+                        checklist3: "Enter machine code",
+                        checklist4: "Set start and end time",
+                        checklist5: "Select/enter cause",
+                        checklist6: "View timeline visualization"
+                    },
+                    tips: {
+                        title: "Tips for Effective Monitoring",
+                        tipLabel: "Tip:",
+                        tip1: "Check the <strong>OEE Dashboard</strong> regularly to maintain the 85% target standard.",
+                        tip2: "Review <strong>Top Downtime Reasons</strong> to identify recurring issues.",
+                        tip3: "Use the <strong>Timeline view</strong> to spot patterns in downtime occurrences.",
+                        tip4: "Monitor <strong>WIP</strong> to ensure production flow is smooth and on schedule."
                     }
                 }
             },
@@ -679,11 +754,39 @@
                         intro: "บันทึกสาเหตุเมื่อเครื่องจักรหยุดทำงาน เพื่อนำไปวิเคราะห์และแก้ไข โดยปกติแล้วการหยุดผลิตจะถูกบันทึกโดยอัตโนมัติเมื่อ Operator กดหยุดการผลิต อย่างไรก็ตาม ผู้ใช้งานยังสามารถเพิ่มการหยุดผลิตด้วยตนเอง",
                         navTitle: "เส้นทางการนำทาง",
                         navPath: "การหยุดผลิต (Downtime)",
-                        step1: "ไปที่เมนู การหยุดผลิต (Downtime)",
-                        step2: "คลิก + เพิ่มบันทึก",
-                        step3: { title: "ระบุข้อมูล:", item1: "รหัสเครื่อง (Machine Code)", item2: "เวลาที่เริ่มหยุด-สิ้นสุด (Start and End Time)", item3: "สาเหตุ (Cause) - เช่น เครื่องเสีย, รอของ, พักเบรค" },
-                        step4: "Timeline: ระบบจะแสดงแถบสีช่วงเวลาที่เครื่องจักรหยุดทำงานให้เห็นภาพรวม",
-                        img1: "การจัดการการหยุดผลิต - การเพิ่มและดูบันทึกการหยุดผลิต"
+                        step1: "ไปที่เมนู <strong>การหยุดผลิต</strong> (Downtime)",
+                        step2: "คลิก <strong>+ เพิ่มบันทึก</strong>",
+                        step3Title: "ระบุข้อมูลดังนี้:",
+                        step3Item1: "<strong>รหัสเครื่อง</strong> (Machine Code)",
+                        step3Item2: "<strong>เวลาที่เริ่มหยุด-สิ้นสุด</strong> (Start and End Time)",
+                        step3Item3: "<strong>สาเหตุ</strong> (Cause) - เช่น เครื่องเสีย, รอของ, พักเบรค",
+                        step4: "<strong>มุมมองไทม์ไลน์:</strong> ระบบจะแสดงแถบสีช่วงเวลาที่เครื่องจักรหยุดทำงานให้เห็นภาพรวม",
+                        img1: "การจัดการการหยุดผลิต - การเพิ่มและดูบันทึกการหยุดผลิต",
+                        formTitle: "ฟอร์มบันทึกการหยุดผลิต",
+                        formMachineCode: "รหัสเครื่อง:",
+                        formStartTime: "เวลาเริ่มต้น:",
+                        formEndTime: "เวลาสิ้นสุด:",
+                        formCause: "สาเหตุ:",
+                        cause1: "เครื่องจักรเสีย",
+                        cause2: "รอวัสดุ",
+                        cause3: "พักเบรก",
+                        timelineTitle: "การแสดงผลไทม์ไลน์",
+                        timelineDesc: "แถบสีแสดงช่วงเวลาที่เกิดการหยุดผลิต",
+                        checklistTitle: "รายการตรวจสอบความสมบูรณ์",
+                        checklist1: "ไปที่เมนูการหยุดผลิต",
+                        checklist2: "คลิกปุ่มเพิ่มบันทึก",
+                        checklist3: "กรอกรหัสเครื่อง",
+                        checklist4: "กำหนดเวลาเริ่มต้นและสิ้นสุด",
+                        checklist5: "เลือกหรือกรอกสาเหตุ",
+                        checklist6: "ดูการแสดงผลไทม์ไลน์"
+                    },
+                    tips: {
+                        title: "เคล็ดลับสำหรับการติดตามที่มีประสิทธิภาพ",
+                        tipLabel: "เคล็ดลับ:",
+                        tip1: "ตรวจสอบ <strong>OEE Dashboard</strong> เป็นประจำเพื่อรักษาเป้าหมายมาตรฐาน 85%",
+                        tip2: "ตรวจสอบ <strong>สาเหตุหลักที่ทำให้เครื่องหยุด</strong> เพื่อระบุปัญหาที่เกิดขึ้นซ้ำ",
+                        tip3: "ใช้ <strong>มุมมองไทม์ไลน์</strong> เพื่อดูรูปแบบการเกิดการหยุดผลิต",
+                        tip4: "ติดตาม <strong>WIP</strong> เพื่อให้การไหลของการผลิตราบรื่นและเป็นไปตามกำหนด"
                     }
                 }
             }

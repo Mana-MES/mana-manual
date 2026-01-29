@@ -114,6 +114,33 @@
             font-size: 0.875rem;
             line-height: 1.6;
         }
+        .tip-box {
+            background: #e6f7ff;
+            border: 1px solid rgb(56, 150, 203);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .tip-box-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            color: rgb(56, 150, 203);
+        }
+        .tip-box-content { flex: 1; }
+        .tip-box-label {
+            font-weight: 700;
+            color: rgb(59, 64, 73);
+            margin-bottom: 0.25rem;
+        }
+        .tip-box-text {
+            color: rgb(59, 64, 73);
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -770,13 +797,13 @@
                     </div>
                 </div>
 
-                <div class="bg-[#FF7825]/10 border-2 border-[#FF7825] rounded-lg p-6 mt-8">
-                    <div class="flex items-start">
-                        <span class="text-3xl mr-4">💡</span>
-                        <div>
-                            <strong class="text-[#070711] text-lg" data-i18n="content.bulk.updateTipTitle">เคล็ดลับ:</strong>
-                            <p class="text-gray-700 mt-1" data-i18n="content.bulk.updateTipText">เมื่อต้องการอัปเดตข้อมูล สามารถแก้ไขข้อมูลในไฟล์ที่เคยใช้ในการอัปโหลดไปแล้ว และดำเนินการอัปโหลดซ้ำ ระบบจะทำการตรวจจับ และอัปเดตข้อมูลโดยอัตโนมัติ</p>
-                        </div>
+                <div class="tip-box mt-8">
+                    <span class="tip-box-icon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
+                    </span>
+                    <div class="tip-box-content">
+                        <div class="tip-box-label" data-i18n="content.bulk.updateTipTitle">Tip:</div>
+                        <p class="tip-box-text" data-i18n="content.bulk.updateTipText">To update existing data, you can edit the data in the file you previously used for upload and repeat the upload process. The system will automatically detect and update the data.</p>
                     </div>
                 </div>
             </section>
