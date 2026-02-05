@@ -221,35 +221,6 @@
             border-right: 8px solid transparent;
             border-top: 12px solid #FF7825;
         }
-        .tip-box {
-            background: #e6f7ff;
-            border: 1px solid rgb(56, 150, 203);
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        .tip-box-icon {
-            flex-shrink: 0;
-            width: 28px;
-            height: 28px;
-            color: rgb(56, 150, 203);
-        }
-        .tip-box-content { flex: 1; }
-        .tip-box-label {
-            font-weight: 700;
-            color: rgb(59, 64, 73);
-            margin-bottom: 0.25rem;
-        }
-        .tip-box-text {
-            color: rgb(59, 64, 73);
-            font-size: 0.9375rem;
-            line-height: 1.5;
-        }
-        .tips-list .tip-box { margin: 0.75rem 0; }
-        .tips-list .tip-box:first-of-type { margin-top: 0; }
     </style>
 </head>
 <body class="bg-white">
@@ -830,42 +801,22 @@
             <!-- Tips -->
             <section class="my-16">
                 <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.tips.title">Tips for Editing Data</h2>
-                <div class="tips-list">
-                    <div class="tip-box">
-                        <span class="tip-box-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
-                        </span>
-                        <div class="tip-box-content">
-                            <div class="tip-box-label" data-i18n="content.tips.tipLabel">Tip:</div>
-                            <p class="tip-box-text"><strong data-i18n="content.tips.tip1.title">Bulk Updates</strong> — <span data-i18n="content.tips.tip1.desc">If you need to update multiple items, consider using the Bulk Upload feature with your previously used CSV file. The system will automatically detect and update the data.</span></p>
-                        </div>
+                <div class="space-y-4">
+                    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.tips.tip1.title">Bulk Updates</h4>
+                        <p class="text-gray-700" data-i18n="content.tips.tip1.desc">If you need to update multiple items, consider using the Bulk Upload feature with your previously used CSV file. The system will automatically detect and update the data.</p>
                     </div>
-                    <div class="tip-box">
-                        <span class="tip-box-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
-                        </span>
-                        <div class="tip-box-content">
-                            <div class="tip-box-label" data-i18n="content.tips.tipLabel">Tip:</div>
-                            <p class="tip-box-text"><strong data-i18n="content.tips.tip2.title">Data Integrity</strong> — <span data-i18n="content.tips.tip2.desc">When editing Production Routes, ensure the sequence of steps remains logical and complete.</span></p>
-                        </div>
+                    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.tips.tip2.title">Data Integrity</h4>
+                        <p class="text-gray-700" data-i18n="content.tips.tip2.desc">When editing Production Routes, ensure the sequence of steps remains logical and complete.</p>
                     </div>
-                    <div class="tip-box">
-                        <span class="tip-box-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
-                        </span>
-                        <div class="tip-box-content">
-                            <div class="tip-box-label" data-i18n="content.tips.tipLabel">Tip:</div>
-                            <p class="tip-box-text"><strong data-i18n="content.tips.tip3.title">SKU Components</strong> — <span data-i18n="content.tips.tip3.desc">When editing SKU data, you can add or remove components as needed.</span></p>
-                        </div>
+                    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.tips.tip3.title">SKU Components</h4>
+                        <p class="text-gray-700" data-i18n="content.tips.tip3.desc">When editing SKU data, you can add or remove components as needed.</p>
                     </div>
-                    <div class="tip-box">
-                        <span class="tip-box-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
-                        </span>
-                        <div class="tip-box-content">
-                            <div class="tip-box-label" data-i18n="content.tips.tipLabel">Tip:</div>
-                            <p class="tip-box-text"><strong data-i18n="content.tips.tip4.title">Work Orders</strong> — <span data-i18n="content.tips.tip4.desc">Edit work orders promptly if errors are detected to avoid production issues.</span></p>
-                        </div>
+                    <div class="bg-white border-2 border-gray-200 rounded-lg p-6">
+                        <h4 class="font-semibold text-lg text-[#070711] mb-2" data-i18n="content.tips.tip4.title">Work Orders</h4>
+                        <p class="text-gray-700" data-i18n="content.tips.tip4.desc">Edit work orders promptly if errors are detected to avoid production issues.</p>
                     </div>
                 </div>
             </section>
@@ -1012,7 +963,6 @@
                     },
                     tips: {
                         title: "Tips for Editing Data",
-                        tipLabel: "Tip:",
                         tip1: { title: "Bulk Updates", desc: "If you need to update multiple items, consider using the Bulk Upload feature with your previously used CSV file. The system will automatically detect and update the data." },
                         tip2: { title: "Data Integrity", desc: "When editing Production Routes, ensure the sequence of steps remains logical and complete." },
                         tip3: { title: "SKU Components", desc: "When editing SKU data, you can add or remove components as needed." },
@@ -1150,7 +1100,6 @@
                     },
                     tips: {
                         title: "เคล็ดลับสำหรับการแก้ไขข้อมูล",
-                        tipLabel: "เคล็ดลับ",
                         tip1: { title: "การอัปเดตแบบกลุ่ม", desc: "หากคุณต้องการอัปเดตหลายรายการ พิจารณาใช้ฟีเจอร์ Bulk Upload ด้วยไฟล์ CSV ที่ใช้ก่อนหน้านี้ ระบบจะตรวจจับและอัปเดตข้อมูลโดยอัตโนมัติ" },
                         tip2: { title: "ความสมบูรณ์ของข้อมูล", desc: "เมื่อแก้ไขเส้นทางการผลิต ตรวจสอบให้แน่ใจว่าลำดับขั้นตอนยังคงสมเหตุสมผลและครบถ้วน" },
                         tip3: { title: "ส่วนประกอบ SKU", desc: "เมื่อแก้ไขข้อมูล SKU คุณสามารถเพิ่มหรือลบส่วนประกอบตามต้องการ" },

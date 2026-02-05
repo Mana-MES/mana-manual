@@ -91,35 +91,6 @@
             padding: 1rem;
             margin: 1rem 0;
         }
-        .tip-box {
-            background: #e6f7ff;
-            border: 1px solid rgb(56, 150, 203);
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        .tip-box-icon {
-            flex-shrink: 0;
-            width: 28px;
-            height: 28px;
-            color: rgb(56, 150, 203);
-        }
-        .tip-box-content { flex: 1; }
-        .tip-box-label {
-            font-weight: 700;
-            color: rgb(59, 64, 73);
-            margin-bottom: 0.25rem;
-        }
-        .tip-box-text {
-            color: rgb(59, 64, 73);
-            font-size: 0.9375rem;
-            line-height: 1.5;
-        }
-        .tips-list .tip-box { margin: 0.75rem 0; }
-        .tips-list .tip-box:first-of-type { margin-top: 0; }
     </style>
 </head>
 <body class="bg-white">
@@ -330,43 +301,26 @@
             <!-- Quick Reference -->
             <section class="my-16">
                 <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.quickRef.title">ข้อมูลอ้างอิงด่วน</h2>
-                <div class="tips-list">
-                    <div class="tip-box">
-                        <span class="tip-box-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
-                        </span>
-                        <div class="tip-box-content">
-                            <div class="tip-box-label" data-i18n="content.quickRef.tipLabel">Tip:</div>
-                            <p class="tip-box-text" data-i18n="content.quickRef.tip1">The main menu is always visible on the left side of the screen for easy access to all features.</p>
-                        </div>
-                    </div>
-                    <div class="tip-box">
-                        <span class="tip-box-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
-                        </span>
-                        <div class="tip-box-content">
-                            <div class="tip-box-label" data-i18n="content.quickRef.tipLabel">Tip:</div>
-                            <p class="tip-box-text" data-i18n="content.quickRef.tip2">Each menu category groups related functions together for better organization.</p>
-                        </div>
-                    </div>
-                    <div class="tip-box">
-                        <span class="tip-box-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
-                        </span>
-                        <div class="tip-box-content">
-                            <div class="tip-box-label" data-i18n="content.quickRef.tipLabel">Tip:</div>
-                            <p class="tip-box-text" data-i18n="content.quickRef.tip3">Use the Activity Log to review your system usage history and track changes.</p>
-                        </div>
-                    </div>
-                    <div class="tip-box">
-                        <span class="tip-box-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="m3 21 9-9"/><path d="M12 16l4-4 4 4"/><path d="m16 12 4-4-4-4"/></svg>
-                        </span>
-                        <div class="tip-box-content">
-                            <div class="tip-box-label" data-i18n="content.quickRef.tipLabel">Tip:</div>
-                            <p class="tip-box-text" data-i18n="content.quickRef.tip4">The language can be changed at any time through the profile menu without affecting your data.</p>
-                        </div>
-                    </div>
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
+                    <h3 class="font-semibold text-lg text-[#070711] mb-4" data-i18n="content.quickRef.tipsTitle">เคล็ดลับการนำทางเมนู</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span data-i18n="content.quickRef.tip1">เมนูหลักจะแสดงอยู่ทางด้านซ้ายของหน้าจอเสมอ เพื่อให้เข้าถึงฟีเจอร์ทั้งหมดได้ง่าย</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span data-i18n="content.quickRef.tip2">แต่ละหมวดหมู่เมนูจะจัดกลุ่มฟังก์ชันที่เกี่ยวข้องกันไว้ด้วยกันเพื่อการจัดระเบียบที่ดีขึ้น</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span data-i18n="content.quickRef.tip3">ใช้ Activity Log เพื่อตรวจสอบประวัติการใช้งานระบบและติดตามการเปลี่ยนแปลง</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#FF7825] mr-3 mt-1">•</span>
+                            <span data-i18n="content.quickRef.tip4">สามารถเปลี่ยนภาษาได้ตลอดเวลาผ่านเมนูโปรไฟล์โดยไม่กระทบต่อข้อมูลของคุณ</span>
+                        </li>
+                    </ul>
                 </div>
             </section>
         </div>
@@ -418,8 +372,7 @@
                         imageCaption: "System Overview - Language Change"
                     },
                     quickRef: {
-                        title: "Tips for Managing the Overview",
-                        tipLabel: "Tip:",
+                        title: "Quick Reference",
                         tipsTitle: "Menu Navigation Tips",
                         tip1: "The main menu is always visible on the left side of the screen for easy access to all features.",
                         tip2: "Each menu category groups related functions together for better organization.",
@@ -464,8 +417,7 @@
                         imageCaption: "System Overview - การเปลี่ยนภาษา"
                     },
                     quickRef: {
-                        title: "เคล็ดลับในการจัดการภาพรวม",
-                        tipLabel: "เคล็ดลับ",
+                        title: "ข้อมูลอ้างอิงด่วน",
                         tipsTitle: "เคล็ดลับการนำทางเมนู",
                         tip1: "เมนูหลักจะแสดงอยู่ทางด้านซ้ายของหน้าจอเสมอ เพื่อให้เข้าถึงฟีเจอร์ทั้งหมดได้ง่าย",
                         tip2: "แต่ละหมวดหมู่เมนูจะจัดกลุ่มฟังก์ชันที่เกี่ยวข้องกันไว้ด้วยกันเพื่อการจัดระเบียบที่ดีขึ้น",

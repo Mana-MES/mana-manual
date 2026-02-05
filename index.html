@@ -77,6 +77,33 @@
         html {
             scroll-behavior: smooth;
         }
+        .feature-card-clickable {
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .feature-card-clickable:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 60px -15px rgba(7,7,17,0.3), 0 15px 30px -10px rgba(7,7,17,0.2);
+            border-color: #FF7825 !important;
+        }
+        .feature-card-inner {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .feature-card-inner.feature-card-middle {
+            box-shadow: 0 25px 50px -12px rgba(7,7,17,0.25), 0 12px 24px -8px rgba(7,7,17,0.15);
+        }
+        .feature-card-clickable:hover .feature-card-inner {
+            box-shadow: 0 30px 60px -15px rgba(7,7,17,0.3), 0 15px 30px -10px rgba(7,7,17,0.2) !important;
+            border-color: #FF7825 !important;
+        }
+        #feature-modal {
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+        #feature-modal:not(.visible) {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -185,53 +212,42 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Feature 1: Real-time OEE -->
-                <div class="bg-white border-2 border-gray-100 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30">
-                    <div class="w-16 h-16 bg-[#FF7825]/10 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
+            <!-- Feature cards: middle overlaps left & right -->
+            <div class="flex flex-col md:flex-row items-end justify-center gap-0 md:gap-0 pt-4 pb-8">
+                <!-- Left: Dashboard -->
+                <div class="feature-card-side w-full md:w-96 lg:w-[26rem] xl:w-[28rem] flex-shrink-0 relative z-0 md:mr-[-2.5rem] order-2 md:order-1">
+                    <div class="feature-card-clickable feature-card-inner bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100/80 cursor-pointer" role="button" tabindex="0" data-feature="oee" onclick="openFeatureModal('oee')" onkeydown="if(event.key==='Enter')openFeatureModal('oee')">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="artwork/dashboarddisplay.png" alt="OEE Dashboard" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4 text-center border-t border-gray-100">
+                            <h3 class="text-base font-bold text-[#070711] tracking-tight" data-i18n="features.oee.title">Real-time OEE</h3>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-[#070711] mb-4 tracking-tight" data-i18n="features.oee.title">Real-time OEE</h3>
-                    <p class="text-gray-700 leading-relaxed mb-4 font-light" data-i18n="features.oee.desc1">
-                        Monitor your factory's health with real-time Overall Equipment Effectiveness tracking. Our system helps you achieve the industry-standard 85% OEE target by providing instant visibility into availability, performance, and quality metrics.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed font-light" data-i18n="features.oee.desc2">
-                        Get daily and shift-by-shift OEE trends, plus insights into top downtime reasons to identify bottlenecks and optimize production flow.
-                    </p>
                 </div>
 
-                <!-- Feature 2: Work Order Management -->
-                <div class="bg-white border-2 border-gray-100 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30">
-                    <div class="w-16 h-16 bg-[#FF7825]/10 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                        </svg>
+                <!-- Middle: WOOP (largest, laps above) -->
+                <div class="feature-card-center w-full md:w-[28rem] lg:w-[32rem] xl:w-[36rem] flex-shrink-0 relative z-10 order-1 md:order-2 mb-6 md:mb-0 md:-translate-y-8">
+                    <div class="feature-card-clickable feature-card-inner feature-card-middle bg-white rounded-2xl overflow-hidden border border-gray-100/80 cursor-pointer" role="button" tabindex="0" data-feature="wo" onclick="openFeatureModal('wo')" onkeydown="if(event.key==='Enter')openFeatureModal('wo')">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="artwork/WOOP.png" alt="Work Order Management" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-5 text-center border-t border-gray-100">
+                            <h3 class="text-lg font-bold text-[#070711] tracking-tight" data-i18n="features.wo.title">Work Order Management</h3>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-[#070711] mb-4 tracking-tight" data-i18n="features.wo.title">Work Order Management</h3>
-                    <p class="text-gray-700 leading-relaxed mb-4 font-light" data-i18n="features.wo.desc1">
-                        Streamline your production workflow with comprehensive Work Order (WO) and Operation (OP) management. Create, track, and manage production orders with ease, linking SKUs to production routes and quantities.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed font-light" data-i18n="features.wo.desc2">
-                        Track Work in Progress (WIP) in real-time, monitor daily completion rates, identify defects, and see all active production lines at a glance. Keep your team aligned with current production documents and status updates.
-                    </p>
                 </div>
 
-                <!-- Feature 3: Downtime Tracking -->
-                <div class="bg-white border-2 border-gray-100 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30">
-                    <div class="w-16 h-16 bg-[#FF7825]/10 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                <!-- Right: Downtime -->
+                <div class="feature-card-side w-full md:w-96 lg:w-[26rem] xl:w-[28rem] flex-shrink-0 relative z-0 md:ml-[-2.5rem] order-3">
+                    <div class="feature-card-clickable feature-card-inner bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100/80 cursor-pointer" role="button" tabindex="0" data-feature="downtime" onclick="openFeatureModal('downtime')" onkeydown="if(event.key==='Enter')openFeatureModal('downtime')">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="artwork/Downtimemng.png" alt="Downtime Management" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4 text-center border-t border-gray-100">
+                            <h3 class="text-base font-bold text-[#070711] tracking-tight" data-i18n="features.downtime.title">Downtime Tracking</h3>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-[#070711] mb-4 tracking-tight" data-i18n="features.downtime.title">Downtime Tracking</h3>
-                    <p class="text-gray-700 leading-relaxed mb-4 font-light" data-i18n="features.downtime.desc1">
-                        Analyze and eliminate production stoppages with intelligent downtime management. Automatically record machine stops or manually log downtime events with detailed cause tracking.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed font-light" data-i18n="features.downtime.desc2">
-                        Visualize downtime patterns with timeline views, categorize stop causes (machine breakdown, material waiting, breaks), and use AI-powered insights to identify recurring issues and optimize your production schedule.
-                    </p>
                 </div>
             </div>
         </div>
@@ -296,6 +312,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- Feature modal popup -->
+    <div id="feature-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onclick="if(event.target===this)closeFeatureModal()">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col" onclick="event.stopPropagation()">
+            <div class="aspect-video overflow-hidden rounded-t-2xl bg-gray-50 shrink-0">
+                <img id="feature-modal-image" src="" alt="" class="w-full h-full object-cover object-top">
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1">
+                <div class="flex items-start justify-between gap-4 mb-4">
+                    <h3 id="feature-modal-title" class="text-2xl font-bold text-[#070711] tracking-tight"></h3>
+                    <button type="button" onclick="closeFeatureModal()" class="p-2 -m-2 text-gray-400 hover:text-[#070711] rounded-lg transition shrink-0" aria-label="Close">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="feature-modal-body" class="text-gray-600 leading-relaxed space-y-3 font-light"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Translation object
@@ -392,6 +428,36 @@
 
         // Get current language from localStorage or default to 'en'
         let currentLang = localStorage.getItem('language') || 'en';
+        let openFeatureId = null;
+
+        const featureImages = { oee: 'artwork/dashboarddisplay.png', wo: 'artwork/WOOP.png', downtime: 'artwork/Downtimemng.png' };
+        function openFeatureModal(featureId) {
+            const t = translations[currentLang]?.features?.[featureId];
+            if (!t) return;
+            const modal = document.getElementById('feature-modal');
+            const imgEl = document.getElementById('feature-modal-image');
+            const titleEl = document.getElementById('feature-modal-title');
+            const bodyEl = document.getElementById('feature-modal-body');
+            if (!modal || !titleEl || !bodyEl) return;
+            if (imgEl && featureImages[featureId]) {
+                imgEl.src = featureImages[featureId];
+                imgEl.alt = t.title;
+            }
+            titleEl.textContent = t.title;
+            bodyEl.innerHTML = '<p>' + t.desc1 + '</p><p>' + t.desc2 + '</p>';
+            openFeatureId = featureId;
+            modal.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFeatureModal() {
+            const modal = document.getElementById('feature-modal');
+            if (modal) {
+                modal.classList.remove('visible');
+                document.body.style.overflow = '';
+            }
+            openFeatureId = null;
+        }
 
         // Function to update language display
         function updateLanguageDisplay(lang) {
@@ -408,6 +474,19 @@
             document.documentElement.lang = lang;
             document.body.lang = lang;
             updateLanguageDisplay(lang);
+
+            // Update feature modal content if open
+            if (openFeatureId) {
+                const t = translations[lang]?.features?.[openFeatureId];
+                if (t) {
+                    const imgEl = document.getElementById('feature-modal-image');
+                    const titleEl = document.getElementById('feature-modal-title');
+                    const bodyEl = document.getElementById('feature-modal-body');
+                    if (imgEl) imgEl.alt = t.title;
+                    if (titleEl) titleEl.textContent = t.title;
+                    if (bodyEl) bodyEl.innerHTML = '<p>' + t.desc1 + '</p><p>' + t.desc2 + '</p>';
+                }
+            }
 
             // Update all elements with data-i18n attribute
             document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -464,6 +543,11 @@
                 });
             });
             
+            // Close feature modal on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && openFeatureId) closeFeatureModal();
+            });
+
             // Close dropdown when clicking outside
             document.addEventListener('click', function(e) {
                 var dropdown = document.getElementById('lang-dropdown');

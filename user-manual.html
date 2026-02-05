@@ -77,80 +77,6 @@
         html {
             scroll-behavior: smooth;
         }
-        .tutorial-card-wrap {
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .tutorial-card-wrap > a {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            min-height: 0;
-        }
-        .tutorial-card-wrap .tutorial-card-desc {
-            flex: 1;
-            min-height: 3.5rem;
-        }
-        .tutorial-card-preview {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            z-index: 20;
-            bottom: 100%;
-            left: 0;
-            right: 0;
-            margin-bottom: 8px;
-            min-width: 200px;
-            max-width: 320px;
-            padding: 1rem 1.25rem;
-            background: #070711;
-            color: #fff;
-            border-radius: 12px;
-            font-size: 0.8125rem;
-            line-height: 1.5;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2), 0 8px 10px -6px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: visibility 0.2s, opacity 0.2s ease;
-            pointer-events: none;
-        }
-        .tutorial-card-preview::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 1.5rem;
-            border: 8px solid transparent;
-            border-top-color: #070711;
-        }
-        .tutorial-card-wrap:hover .tutorial-card-preview {
-            visibility: visible;
-            opacity: 1;
-        }
-        .tutorial-card-preview-title {
-            font-weight: 700;
-            color: #FF7825;
-            margin-bottom: 0.5rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .tutorial-card-preview ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .tutorial-card-preview li {
-            padding: 0.2rem 0;
-            padding-left: 1rem;
-            position: relative;
-        }
-        .tutorial-card-preview li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #FF7825;
-        }
     </style>
 </head>
 <body class="bg-white">
@@ -233,191 +159,114 @@
         </div>
     </section>
 
-    <!-- Search Bar -->
-    <section class="py-8 px-4 bg-[#EFF3FD] border-b border-gray-200/50">
-        <div class="max-w-3xl mx-auto">
-            <div class="relative">
-                <label for="manual-search" class="sr-only">Search manuals</label>
-                <input type="search" id="manual-search" placeholder="Search manuals..." autocomplete="off"
-                    class="w-full pl-12 pr-4 py-3.5 rounded-xl border-2 border-gray-200 bg-white text-[#070711] placeholder-gray-400 focus:border-[#FF7825] focus:ring-2 focus:ring-[#FF7825]/20 outline-none transition shadow-sm">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </span>
-                <button type="button" id="manual-search-clear" class="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-[#070711] rounded-lg transition hidden" aria-label="Clear search">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <p id="manual-search-results" class="text-sm text-gray-500 mt-2 text-center hidden"></p>
-        </div>
-    </section>
-
     <!-- Tutorials Grid -->
     <section class="py-20 px-4 bg-[#EFF3FD]">
         <div class="max-w-7xl mx-auto">
-            <div id="manual-cards-grid" class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
                 <!-- Tutorial 1: System Overview -->
-                <div class="tutorial-card-wrap" data-manual-id="systemOverview">
-                    <div class="tutorial-card-preview">
-                        <div class="tutorial-card-preview-title" data-i18n="tutorials.previewTitle">Topics in this guide:</div>
-                        <ul>
-                            <li data-i18n="tutorials.systemOverview.topic1">Main menu structure</li>
-                            <li data-i18n="tutorials.systemOverview.topic2">Navigation categories</li>
-                            <li data-i18n="tutorials.systemOverview.topic3">Language settings</li>
-                        </ul>
+                <a href="manuals/05-system-overview.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                        </svg>
                     </div>
-                    <a href="manuals/05-system-overview.html" class="group block bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.systemOverview.title">
-                            System Overview
-                        </h3>
-                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.systemOverview.desc">
-                            Understand the main menu structure, navigation categories, and how to change the system language.
-                        </p>
-                        <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
-                            <span data-i18n="tutorials.readGuide">Read Guide</span>
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </div>
-                    </a>
-                </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.systemOverview.title">
+                        System Overview
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.systemOverview.desc">
+                        Understand the main menu structure, navigation categories, and how to change the system language.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
 
                 <!-- Tutorial 2: Setup Master Data -->
-                <div class="tutorial-card-wrap" data-manual-id="setupMasterData">
-                    <div class="tutorial-card-preview">
-                        <div class="tutorial-card-preview-title" data-i18n="tutorials.previewTitle">Topics in this guide:</div>
-                        <ul>
-                            <li data-i18n="tutorials.setupMasterData.topic1">Machine Data</li>
-                            <li data-i18n="tutorials.setupMasterData.topic2">Process Data</li>
-                            <li data-i18n="tutorials.setupMasterData.topic3">Production Routes</li>
-                            <li data-i18n="tutorials.setupMasterData.topic4">SKUs</li>
-                            <li data-i18n="tutorials.setupMasterData.topic5">Bulk upload</li>
-                        </ul>
+                <a href="manuals/01-setup-master-data.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
                     </div>
-                    <a href="manuals/01-setup-master-data.html" class="group block bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.setupMasterData.title">
-                            Setup Master Data
-                        </h3>
-                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.setupMasterData.desc">
-                            Learn how to set up Machine Data, Process Data, Production Routes, and SKUs. Includes bulk upload tips.
-                        </p>
-                        <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
-                            <span data-i18n="tutorials.readGuide">Read Guide</span>
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </div>
-                    </a>
-                </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.setupMasterData.title">
+                        Setup Master Data
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.setupMasterData.desc">
+                        Learn how to set up Machine Data, Process Data, Production Routes, and SKUs. Includes bulk upload tips.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
 
                 <!-- Tutorial 3: Running Production -->
-                <div class="tutorial-card-wrap" data-manual-id="runningProduction">
-                    <div class="tutorial-card-preview">
-                        <div class="tutorial-card-preview-title" data-i18n="tutorials.previewTitle">Topics in this guide:</div>
-                        <ul>
-                            <li data-i18n="tutorials.runningProduction.topic1">Work Orders (WO/OP)</li>
-                            <li data-i18n="tutorials.runningProduction.topic2">Machine selection</li>
-                            <li data-i18n="tutorials.runningProduction.topic3">Production operations</li>
-                        </ul>
+                <a href="manuals/02-running-production.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
                     </div>
-                    <a href="manuals/02-running-production.html" class="group block bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.runningProduction.title">
-                            Running Production
-                        </h3>
-                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.runningProduction.desc">
-                            Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations.
-                        </p>
-                        <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
-                            <span data-i18n="tutorials.readGuide">Read Guide</span>
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </div>
-                    </a>
-                </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.runningProduction.title">
+                        Running Production
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.runningProduction.desc">
+                        Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
 
                 <!-- Tutorial 4: Monitoring -->
-                <div class="tutorial-card-wrap" data-manual-id="monitoring">
-                    <div class="tutorial-card-preview">
-                        <div class="tutorial-card-preview-title" data-i18n="tutorials.previewTitle">Topics in this guide:</div>
-                        <ul>
-                            <li data-i18n="tutorials.monitoring.topic1">OEE Dashboard</li>
-                            <li data-i18n="tutorials.monitoring.topic2">Availability, Performance, Quality</li>
-                            <li data-i18n="tutorials.monitoring.topic3">WIP Tracking</li>
-                            <li data-i18n="tutorials.monitoring.topic4">Downtime records</li>
-                        </ul>
+                <a href="manuals/03-monitoring.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
                     </div>
-                    <a href="manuals/03-monitoring.html" class="group block bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.monitoring.title">
-                            Monitoring
-                        </h3>
-                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.monitoring.desc">
-                            Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records.
-                        </p>
-                        <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
-                            <span data-i18n="tutorials.readGuide">Read Guide</span>
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </div>
-                    </a>
-                </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.monitoring.title">
+                        Monitoring
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.monitoring.desc">
+                        Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
 
                 <!-- Tutorial 5: Editing Data -->
-                <div class="tutorial-card-wrap" data-manual-id="editingData">
-                    <div class="tutorial-card-preview">
-                        <div class="tutorial-card-preview-title" data-i18n="tutorials.previewTitle">Topics in this guide:</div>
-                        <ul>
-                            <li data-i18n="tutorials.editingData.topic1">Edit Machine Data</li>
-                            <li data-i18n="tutorials.editingData.topic2">Edit Process Data</li>
-                            <li data-i18n="tutorials.editingData.topic3">Edit Production Routes</li>
-                            <li data-i18n="tutorials.editingData.topic4">Edit SKU data</li>
-                            <li data-i18n="tutorials.editingData.topic5">Edit Work Orders</li>
-                        </ul>
+                <a href="manuals/04-editing-data.html" class="group bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
                     </div>
-                    <a href="manuals/04-editing-data.html" class="group block bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-[#FF7825]/10 rounded-lg flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.editingData.title">
-                            Editing Data
-                        </h3>
-                        <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.editingData.desc">
-                            Learn how to edit Machine Data, Process Data, Production Routes, and SKU data after it has been saved.
-                        </p>
-                        <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
-                            <span data-i18n="tutorials.readGuide">Read Guide</span>
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </div>
-                    </a>
-                </div>
+                    <h3 class="text-xl font-bold text-[#070711] mb-2 tracking-tight group-hover:text-[#FF7825] transition" data-i18n="tutorials.editingData.title">
+                        Editing Data
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.editingData.desc">
+                        Learn how to edit Machine Data, Process Data, Production Routes, and SKU data after it has been saved.
+                    </p>
+                    <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
+                        <span data-i18n="tutorials.readGuide">Read Guide</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -481,53 +330,27 @@
                     title: "User Manual",
                     subtitle: "Step-by-step guides to help you get started with Mana MES and master all features"
                 },
-                search: {
-                    placeholder: "Search manuals...",
-                    resultsCount: "{{count}} results found",
-                    noResults: "No results found"
-                },
                 tutorials: {
                     readGuide: "Read Guide",
-                    previewTitle: "Topics in this guide:",
                     systemOverview: {
                         title: "System Overview",
-                        desc: "Understand the main menu structure, navigation categories, and how to change the system language.",
-                        topic1: "Main menu structure",
-                        topic2: "Navigation categories",
-                        topic3: "Language settings"
+                        desc: "Understand the main menu structure, navigation categories, and how to change the system language."
                     },
                     setupMasterData: {
                         title: "Setup Master Data",
-                        desc: "Learn how to set up Machine Data, Process Data, Production Routes, and SKUs. Includes bulk upload tips.",
-                        topic1: "Machine Data",
-                        topic2: "Process Data",
-                        topic3: "Production Routes",
-                        topic4: "SKUs",
-                        topic5: "Bulk upload"
+                        desc: "Learn how to set up Machine Data, Process Data, Production Routes, and SKUs. Includes bulk upload tips."
                     },
                     runningProduction: {
                         title: "Running Production",
-                        desc: "Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations.",
-                        topic1: "Work Orders (WO/OP)",
-                        topic2: "Machine selection",
-                        topic3: "Production operations"
+                        desc: "Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations."
                     },
                     monitoring: {
                         title: "Monitoring",
-                        desc: "Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records.",
-                        topic1: "OEE Dashboard",
-                        topic2: "Availability, Performance, Quality",
-                        topic3: "WIP Tracking",
-                        topic4: "Downtime records"
+                        desc: "Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records."
                     },
                     editingData: {
                         title: "Editing Data",
-                        desc: "Learn how to edit Machine Data, Process Data, Production Routes, and SKU data after it has been saved.",
-                        topic1: "Edit Machine Data",
-                        topic2: "Edit Process Data",
-                        topic3: "Edit Production Routes",
-                        topic4: "Edit SKU data",
-                        topic5: "Edit Work Orders"
+                        desc: "Learn how to edit Machine Data, Process Data, Production Routes, and SKU data after it has been saved."
                     }
                 },
                 footer: {
@@ -547,53 +370,27 @@
                     title: "คู่มือการใช้งาน",
                     subtitle: "คู่มือทีละขั้นตอนเพื่อช่วยให้คุณเริ่มต้นใช้งาน Mana MES และเชี่ยวชาญฟีเจอร์ทั้งหมด"
                 },
-                search: {
-                    placeholder: "ค้นหาคู่มือ...",
-                    resultsCount: "พบ {{count}} รายการ",
-                    noResults: "ไม่พบผลลัพธ์"
-                },
                 tutorials: {
                     readGuide: "อ่านคู่มือ",
-                    previewTitle: "หัวข้อในคู่มือนี้:",
                     systemOverview: {
                         title: "ภาพรวมระบบ",
-                        desc: "ทำความเข้าใจโครงสร้างเมนูหลัก หมวดหมู่การนำทาง และวิธีเปลี่ยนภาษาของระบบ",
-                        topic1: "โครงสร้างเมนูหลัก",
-                        topic2: "หมวดหมู่การนำทาง",
-                        topic3: "การตั้งค่าภาษา"
+                        desc: "ทำความเข้าใจโครงสร้างเมนูหลัก หมวดหมู่การนำทาง และวิธีเปลี่ยนภาษาของระบบ"
                     },
                     setupMasterData: {
                         title: "ตั้งค่าข้อมูลหลัก",
-                        desc: "เรียนรู้วิธีตั้งค่าข้อมูลเครื่องจักร ข้อมูลกระบวนการ เส้นทางการผลิต และ SKU รวมถึงเคล็ดลับการอัปโหลดแบบกลุ่ม",
-                        topic1: "ข้อมูลเครื่องจักร",
-                        topic2: "ข้อมูลกระบวนการ",
-                        topic3: "เส้นทางการผลิต",
-                        topic4: "SKU",
-                        topic5: "การอัปโหลดแบบกลุ่ม"
+                        desc: "เรียนรู้วิธีตั้งค่าข้อมูลเครื่องจักร ข้อมูลกระบวนการ เส้นทางการผลิต และ SKU รวมถึงเคล็ดลับการอัปโหลดแบบกลุ่ม"
                     },
                     runningProduction: {
                         title: "การสั่งงานและการผลิต",
-                        desc: "คู่มือทีละขั้นตอนในการสร้างใบสั่งงาน (WO/OP) และเลือกเครื่องจักรสำหรับการดำเนินงานการผลิต",
-                        topic1: "ใบสั่งงาน (WO/OP)",
-                        topic2: "การเลือกเครื่องจักร",
-                        topic3: "การดำเนินงานการผลิต"
+                        desc: "คู่มือทีละขั้นตอนในการสร้างใบสั่งงาน (WO/OP) และเลือกเครื่องจักรสำหรับการดำเนินงานการผลิต"
                     },
                     monitoring: {
                         title: "การติดตาม",
-                        desc: "ทำความเข้าใจตัวชี้วัดแดชบอร์ด OEE (ความพร้อมใช้งาน ประสิทธิภาพ คุณภาพ) และเรียนรู้วิธีเพิ่มบันทึกการหยุดทำงานด้วยตนเอง",
-                        topic1: "แดชบอร์ด OEE",
-                        topic2: "ความพร้อมใช้งาน ประสิทธิภาพ คุณภาพ",
-                        topic3: "การติดตาม WIP",
-                        topic4: "บันทึกการหยุดผลิต"
+                        desc: "ทำความเข้าใจตัวชี้วัดแดชบอร์ด OEE (ความพร้อมใช้งาน ประสิทธิภาพ คุณภาพ) และเรียนรู้วิธีเพิ่มบันทึกการหยุดทำงานด้วยตนเอง"
                     },
                     editingData: {
                         title: "การแก้ไขข้อมูล",
-                        desc: "เรียนรู้วิธีแก้ไขข้อมูลเครื่องจักร ข้อมูลกระบวนการ เส้นทางการผลิต และข้อมูล SKU หลังจากบันทึกแล้ว",
-                        topic1: "แก้ไขข้อมูลเครื่องจักร",
-                        topic2: "แก้ไขข้อมูลกระบวนการ",
-                        topic3: "แก้ไขเส้นทางการผลิต",
-                        topic4: "แก้ไขข้อมูล SKU",
-                        topic5: "แก้ไขใบสั่งงาน"
+                        desc: "เรียนรู้วิธีแก้ไขข้อมูลเครื่องจักร ข้อมูลกระบวนการ เส้นทางการผลิต และข้อมูล SKU หลังจากบันทึกแล้ว"
                     }
                 },
                 footer: {
@@ -642,55 +439,6 @@
                     element.textContent = translation;
                 }
             });
-
-            // Update search placeholder (attribute, not text content)
-            const searchInput = document.getElementById('manual-search');
-            if (searchInput && translations[lang].search && translations[lang].search.placeholder) {
-                searchInput.placeholder = translations[lang].search.placeholder;
-            }
-            // Re-run search so results message and card visibility use new language
-            if (typeof runManualSearch === 'function') runManualSearch();
-        }
-
-        // Build searchable text for a manual in the given language
-        function getSearchableText(manualId, lang) {
-            const t = translations[lang] && translations[lang].tutorials && translations[lang].tutorials[manualId];
-            if (!t) return '';
-            const parts = [t.title, t.desc, t.topic1, t.topic2, t.topic3, t.topic4, t.topic5].filter(Boolean);
-            return parts.join(' ').toLowerCase();
-        }
-
-        function runManualSearch() {
-            const input = document.getElementById('manual-search');
-            const clearBtn = document.getElementById('manual-search-clear');
-            const resultsEl = document.getElementById('manual-search-results');
-            const grid = document.getElementById('manual-cards-grid');
-            if (!input || !grid) return;
-
-            const query = input.value.trim().toLowerCase();
-            clearBtn.classList.toggle('hidden', !query);
-
-            const cards = grid.querySelectorAll('.tutorial-card-wrap[data-manual-id]');
-            let visibleCount = 0;
-
-            cards.forEach(function(card) {
-                const manualId = card.getAttribute('data-manual-id');
-                const searchText = getSearchableText(manualId, currentLang);
-                const match = !query || searchText.indexOf(query) !== -1;
-                card.style.display = match ? '' : 'none';
-                if (match) visibleCount++;
-            });
-
-            if (!query) {
-                resultsEl.classList.add('hidden');
-                resultsEl.textContent = '';
-            } else {
-                resultsEl.classList.remove('hidden');
-                const msg = visibleCount === 0
-                    ? translations[currentLang].search.noResults
-                    : translations[currentLang].search.resultsCount.replace('{{count}}', String(visibleCount));
-                resultsEl.textContent = msg;
-            }
         }
 
         // Initialize language on page load
@@ -735,24 +483,6 @@
                     dropdown.classList.add('hidden');
                 }
             });
-
-            // Manual search
-            var manualSearchInput = document.getElementById('manual-search');
-            var manualSearchClear = document.getElementById('manual-search-clear');
-            if (manualSearchInput) {
-                manualSearchInput.addEventListener('input', runManualSearch);
-                manualSearchInput.addEventListener('keyup', runManualSearch);
-            }
-            if (manualSearchClear) {
-                manualSearchClear.addEventListener('click', function() {
-                    var input = document.getElementById('manual-search');
-                    if (input) {
-                        input.value = '';
-                        input.focus();
-                        runManualSearch();
-                    }
-                });
-            }
         });
     </script>
 </body>
