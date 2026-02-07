@@ -447,6 +447,18 @@
                     หลังจากสร้างใบสั่งงานแล้ว คุณจะต้องเลือกเครื่องจักรที่เหมาะสมสำหรับการดำเนินการผลิต
                 </p>
 
+                <div class="nav-box">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]" data-i18n="content.machine.navTitle">วิธีใช้งาน</strong>
+                    </div>
+                    <div class="space-y-2 ml-9">
+                        <p class="text-gray-700" data-i18n="content.machine.step1">1. เลือก WO ที่ต้องการเลือกเครื่องจักร</p>
+                        <p class="text-gray-700" data-i18n="content.machine.step2">2. คลิกที่ลูกศรชี้ลงของแต่ละขั้นตอนการผลิต เพื่อเลือกเครื่องจักรสำหรับขั้นตอนนั้น</p>
+                        <p class="text-gray-700" data-i18n="content.machine.step3">3. เลือกเครื่องจักรในหน้า "เลือกเครื่องจักร" และกด "บันทึก"</p>
+                    </div>
+                </div>
+
                 <div class="info-box">
                     <div class="flex items-center mb-3">
                         <span class="text-2xl mr-3">🔧</span>
@@ -482,6 +494,16 @@
                     </div>
                 </div>
 
+                <!-- Machine Assignment Images -->
+                <div class="my-8">
+                    <img src="../artwork/add%20machine%20to%20wo.png" alt="Selecting WO for Machine Assignment" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.machine.image1Caption">การเลือก WO</p>
+                </div>
+                <div class="my-8">
+                    <img src="../artwork/add%20machine%20to%20wo2.png" alt="Selecting Machine" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.machine.image2Caption">การเลือกเครื่องจักร</p>
+                </div>
+
                 <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mt-6">
                     <div class="flex items-start">
                         <span class="text-2xl mr-4">ℹ️</span>
@@ -493,45 +515,89 @@
                 </div>
             </section>
 
-            <!-- What's Next -->
+            <!-- 4.3 Production Release & Print OP -->
             <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">What's Next?</h2>
-                <p class="text-lg text-gray-700 mb-6">
-                    Once your work order is created and the machine is selected, production can begin. You can track the status of your work orders and monitor production progress through the <strong>WIP and OEE</strong> dashboard.
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.release.title">ส่งงานเข้าสู่ไลน์ผลิต (Production Release & Print OP)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.release.intro">
+                    เมื่อเลือกเครื่องจักรเสร็จเรียบร้อย ผู้ใช้งานต้องกด ปล่อย เพื่อปล่อยรายการผลิตเข้าสู่ไลน์ผลิต
+                </p>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.release.print">
+                    ผู้ใช้งานสามารถกด "พิมพ์ OP" เพื่อส่งเอกสารทางกายภาพเข้าสู่ไลน์ผลิต
+                </p>
+                <div class="info-box">
+                    <p class="text-gray-700" data-i18n="content.release.note">กรอกรายละเอียดอื่น ๆ ที่ระบบไม่ได้นำใส่อัตโนมัติ ก่อนกดพิมพ์</p>
+                </div>
+
+                <div class="my-8">
+                    <img src="../artwork/let%20the%20wo%20in1.png" alt="Production Release" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.release.image1Caption">การปล่อยการผลิต</p>
+                </div>
+                <div class="my-8">
+                    <img src="../artwork/print%20wo.png" alt="Print OP" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.release.image2Caption">การพิมพ์ใบสั่งผลิต</p>
+                </div>
+            </section>
+
+            <!-- 4.4 Production Log & Data Recovery -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.productionLog.title">ตรวจบันทึกการผลิต (Production Log & Data Recovery)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.productionLog.intro">
+                    ผู้ใช้งานสามารถตรวจบันทึกการผลิตได้ด้วยการคลิก "บันทึก"
+                </p>
+                <div class="info-box mb-6">
+                    <div class="space-y-3">
+                        <p class="text-gray-700" data-i18n="content.productionLog.waiting">ส่วน <strong>"รอกรอกข้อมูล"</strong> จะแสดงผลข้อมูลที่ถูกข้ามไปและไม่ได้กรอก</p>
+                        <p class="text-gray-700" data-i18n="content.productionLog.woLog">ส่วน <strong>บันทึกการสั่งงาน</strong> จะแสดงผลกิจกรรมเกี่ยวกับใบสั่งงานที่เกิดขึ้นก่อนหน้า</p>
+                    </div>
+                </div>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.productionLog.enterData">ผู้ใช้งานสามารถกดเข้าไปส่วนที่รอกรอกข้อมูลเพื่อเพิ่มข้อมูล</p>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.productionLog.recovery">เมื่อเข้ามาในหน้า กรอกข้อมูลที่ขาด ผู้ใช้งานสามารถกรอกข้อมูลเพิ่ม และกดบันทึก</p>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.productionLog.operatorTip">หาก operator ข้ามขั้นตอนตั้งค่าเครื่อง ผู้ใช้งานสามารถใส่ข้อมูลตามหลังได้ที่เมนูนี้เช่นกัน</p>
+
+                <div class="my-8">
+                    <img src="../artwork/wo%20op%20missing%20data.png" alt="Production Log - Missing Data" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.productionLog.image1Caption">การตรวจสอบบันทึกการผลิต</p>
+                </div>
+                <div class="my-8">
+                    <img src="../artwork/wo%20op%20filling%20missed%20data.png" alt="Enter Missing Data" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.productionLog.image2Caption">การแก้ไขส่วนรอกรอกข้อมูล</p>
+                </div>
+                <div class="my-8">
+                    <img src="../artwork/woop%20filling%20missed%20data%202.png" alt="Filling Missing Data" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.productionLog.image3Caption">การกรอกข้อมูลที่ขาด</p>
+                </div>
+            </section>
+
+            <!-- 4.5 Downtime Management -->
+            <section id="downtime" class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.downtime.title">การจัดการการหยุดผลิต (Downtime Management)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.downtime.intro">
+                    บันทึกสาเหตุเมื่อเครื่องจักรหยุดทำงาน เพื่อนำไปวิเคราะห์และแก้ไข
+                </p>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.downtime.auto">
+                    โดยปกติแล้วการหยุดผลิตจะถูกบันทึกโดยอัตโนมัติเมื่อ Operator กดหยุดการผลิต อย่างไรก็ตาม ผู้ใช้งานยังสามารถเพิ่มการหยุดผลิตด้วยตนเอง
                 </p>
 
-                <div class="info-box">
-                    <div class="flex items-center mb-3">
-                        <span class="text-2xl mr-3">🎯</span>
-                        <strong class="text-[#070711]">Next Steps</strong>
+                <div class="nav-box mb-6">
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-3">📍</span>
+                        <strong class="text-[#070711]" data-i18n="content.downtime.stepsTitle">วิธีใช้งาน</strong>
                     </div>
-                    <div class="bg-white rounded-lg p-4 mt-3 space-y-4">
-                        <div class="flex items-center">
-                            <span class="text-green-600 mr-3 text-xl">✅</span>
-                            <span class="text-gray-700">Work Order Created</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-green-600 mr-3 text-xl">✅</span>
-                            <span class="text-gray-700">Machine Selected</span>
-                        </div>
-                        <div class="border-t border-gray-200 pt-4 mt-4">
-                            <strong class="text-[#070711] mb-2 block">📊 Monitor via:</strong>
-                            <ul class="space-y-2 ml-4 mt-2">
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>WIP Dashboard</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>OEE Dashboard</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>Production Status</span>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="space-y-2 ml-9">
+                        <p class="text-gray-700" data-i18n="content.downtime.step1">1. ไปที่เมนู การหยุดผลิต</p>
+                        <p class="text-gray-700" data-i18n="content.downtime.step2">2. คลิก + เพิ่มบันทึก</p>
+                        <p class="text-gray-700" data-i18n="content.downtime.step3">3. ระบุข้อมูล: รหัสเครื่อง, เวลาที่เริ่มหยุด-สิ้นสุด, และสาเหตุ (เช่น เครื่องเสีย, รอของ, พักเบรค)</p>
+                        <p class="text-gray-700" data-i18n="content.downtime.step4">4. Timeline: ระบบจะแสดงแถบสีช่วงเวลาที่เครื่องจักรหยุดทำงานให้เห็นภาพรวม</p>
                     </div>
+                </div>
+
+                <div class="my-8">
+                    <img src="../artwork/add%20downtime.png" alt="Add Downtime" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.downtime.image1Caption">การติดตามการหยุดผลิต</p>
+                </div>
+                <div class="my-8">
+                    <img src="../artwork/downtime%20management.png" alt="Downtime Management" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.downtime.image2Caption">การจัดการการหยุดผลิต</p>
                 </div>
             </section>
         </div>
@@ -595,6 +661,10 @@
                     machine: {
                         title: "Selecting a Machine",
                         intro: "After creating your work order, you'll need to select the appropriate machine for the production operation.",
+                        navTitle: "How to use",
+                        step1: "1. Select the WO for which you want to select a machine",
+                        step2: "2. Click the dropdown arrow for each production step to select the machine for that step",
+                        step3: "3. Select the machine in the \"Select Machine\" screen and click \"บันทึก\" (Save)",
                         selectionTitle: "Machine Selection",
                         availableTitle: "Available Machines:",
                         machine1: "Machine 1",
@@ -603,7 +673,41 @@
                         prerequisiteTitle: "Prerequisite:",
                         prerequisiteText: "Machine Data must be set up in Master Data first",
                         noteTitle: "Note:",
-                        noteText: "The manual indicates that machine selection is part of the work order process. Ensure you have set up your Machine Data in the master data setup before creating work orders, as you'll need to reference these machines during work order creation."
+                        noteText: "The manual indicates that machine selection is part of the work order process. Ensure you have set up your Machine Data in the master data setup before creating work orders, as you'll need to reference these machines during work order creation.",
+                        image1Caption: "Selecting WO",
+                        image2Caption: "Selecting Machine"
+                    },
+                    release: {
+                        title: "Production Release & Print OP",
+                        intro: "Once the machine is selected, the user must press ปล่อย (Release) to release production items into the production line.",
+                        print: "Users can press \"พิมพ์ OP\" (Print OP) to send physical documents to the production line.",
+                        note: "Fill in any other details that the system does not prefill before printing.",
+                        image1Caption: "Production Release",
+                        image2Caption: "Printing Production Order"
+                    },
+                    productionLog: {
+                        title: "Production Log & Data Recovery",
+                        intro: "Users can view the production log by clicking \"บันทึก\" (Log).",
+                        waiting: "The \"รอกรอกข้อมูล\" (Awaiting data entry) section shows data that was skipped and not filled in.",
+                        woLog: "The \"บันทึกการสั่งงาน\" (Work order log) section shows activities related to previous work orders.",
+                        enterData: "Users can go to the section awaiting data entry to add information.",
+                        recovery: "On the \"กรอกข้อมูลที่ขาด\" (Fill missing data) page, users can enter additional data and click Save.",
+                        operatorTip: "If the operator skips machine setup steps, users can enter the data later from this menu as well.",
+                        image1Caption: "Viewing Production Log",
+                        image2Caption: "Editing Awaiting Data Section",
+                        image3Caption: "Filling Missing Data"
+                    },
+                    downtime: {
+                        title: "Downtime Management",
+                        intro: "Record the cause when a machine stops working for analysis and correction.",
+                        auto: "Normally, downtime is recorded automatically when the Operator presses stop. However, users can also add downtime manually.",
+                        stepsTitle: "How to use",
+                        step1: "1. Go to the Downtime menu",
+                        step2: "2. Click + เพิ่มบันทึก (+ Add record)",
+                        step3: "3. Enter: Machine code, Start-End time, and Cause (e.g. machine breakdown, material waiting, break)",
+                        step4: "4. Timeline: The system displays a colored bar showing the time period when the machine was stopped for an overview.",
+                        image1Caption: "Downtime Tracking",
+                        image2Caption: "Downtime Management"
                     }
                 }
             },
@@ -655,6 +759,10 @@
                     machine: {
                         title: "การเลือกเครื่องจักร",
                         intro: "หลังจากสร้างใบสั่งงานแล้ว คุณจะต้องเลือกเครื่องจักรที่เหมาะสมสำหรับการดำเนินการผลิต",
+                        navTitle: "วิธีใช้งาน",
+                        step1: "1. เลือก WO ที่ต้องการเลือกเครื่องจักร",
+                        step2: "2. คลิกที่ลูกศรชี้ลงของแต่ละขั้นตอนการผลิต เพื่อเลือกเครื่องจักรสำหรับขั้นตอนนั้น",
+                        step3: "3. เลือกเครื่องจักรในหน้า \"เลือกเครื่องจักร\" และกด \"บันทึก\"",
                         selectionTitle: "การเลือกเครื่องจักร",
                         availableTitle: "เครื่องจักรที่มีอยู่:",
                         machine1: "Machine 1",
@@ -663,7 +771,41 @@
                         prerequisiteTitle: "ข้อกำหนดเบื้องต้น:",
                         prerequisiteText: "ต้องตั้งค่า Machine Data ใน Master Data ก่อน",
                         noteTitle: "หมายเหตุ:",
-                        noteText: "การเลือกเครื่องจักรเป็นส่วนหนึ่งของกระบวนการสร้างใบสั่งงาน ตรวจสอบให้แน่ใจว่าคุณได้ตั้งค่า Machine Data ใน master data setup ก่อนสร้างใบสั่งงาน เนื่องจากคุณจะต้องอ้างอิงเครื่องจักรเหล่านี้ระหว่างการสร้างใบสั่งงาน"
+                        noteText: "การเลือกเครื่องจักรเป็นส่วนหนึ่งของกระบวนการสร้างใบสั่งงาน ตรวจสอบให้แน่ใจว่าคุณได้ตั้งค่า Machine Data ใน master data setup ก่อนสร้างใบสั่งงาน เนื่องจากคุณจะต้องอ้างอิงเครื่องจักรเหล่านี้ระหว่างการสร้างใบสั่งงาน",
+                        image1Caption: "การเลือก WO",
+                        image2Caption: "การเลือกเครื่องจักร"
+                    },
+                    release: {
+                        title: "ส่งงานเข้าสู่ไลน์ผลิต (Production Release & Print OP)",
+                        intro: "เมื่อเลือกเครื่องจักรเสร็จเรียบร้อย ผู้ใช้งานต้องกด ปล่อย เพื่อปล่อยรายการผลิตเข้าสู่ไลน์ผลิต",
+                        print: "ผู้ใช้งานสามารถกด \"พิมพ์ OP\" เพื่อส่งเอกสารทางกายภาพเข้าสู่ไลน์ผลิต",
+                        note: "กรอกรายละเอียดอื่น ๆ ที่ระบบไม่ได้นำใส่อัตโนมัติ ก่อนกดพิมพ์",
+                        image1Caption: "การปล่อยการผลิต",
+                        image2Caption: "การพิมพ์ใบสั่งผลิต"
+                    },
+                    productionLog: {
+                        title: "ตรวจบันทึกการผลิต (Production Log & Data Recovery)",
+                        intro: "ผู้ใช้งานสามารถตรวจบันทึกการผลิตได้ด้วยการคลิก \"บันทึก\"",
+                        waiting: "ส่วน \"รอกรอกข้อมูล\" จะแสดงผลข้อมูลที่ถูกข้ามไปและไม่ได้กรอก",
+                        woLog: "ส่วน บันทึกการสั่งงาน จะแสดงผลกิจกรรมเกี่ยวกับใบสั่งงานที่เกิดขึ้นก่อนหน้า",
+                        enterData: "ผู้ใช้งานสามารถกดเข้าไปส่วนที่รอกรอกข้อมูลเพื่อเพิ่มข้อมูล",
+                        recovery: "เมื่อเข้ามาในหน้า กรอกข้อมูลที่ขาด ผู้ใช้งานสามารถกรอกข้อมูลเพิ่ม และกดบันทึก",
+                        operatorTip: "หาก operator ข้ามขั้นตอนตั้งค่าเครื่อง ผู้ใช้งานสามารถใส่ข้อมูลตามหลังได้ที่เมนูนี้เช่นกัน",
+                        image1Caption: "การตรวจสอบบันทึกการผลิต",
+                        image2Caption: "การแก้ไขส่วนรอกรอกข้อมูล",
+                        image3Caption: "การกรอกข้อมูลที่ขาด"
+                    },
+                    downtime: {
+                        title: "การจัดการการหยุดผลิต (Downtime Management)",
+                        intro: "บันทึกสาเหตุเมื่อเครื่องจักรหยุดทำงาน เพื่อนำไปวิเคราะห์และแก้ไข",
+                        auto: "โดยปกติแล้วการหยุดผลิตจะถูกบันทึกโดยอัตโนมัติเมื่อ Operator กดหยุดการผลิต อย่างไรก็ตาม ผู้ใช้งานยังสามารถเพิ่มการหยุดผลิตด้วยตนเอง",
+                        stepsTitle: "วิธีใช้งาน",
+                        step1: "1. ไปที่เมนู การหยุดผลิต",
+                        step2: "2. คลิก + เพิ่มบันทึก",
+                        step3: "3. ระบุข้อมูล: รหัสเครื่อง, เวลาที่เริ่มหยุด-สิ้นสุด, และสาเหตุ (เช่น เครื่องเสีย, รอของ, พักเบรค)",
+                        step4: "4. Timeline: ระบบจะแสดงแถบสีช่วงเวลาที่เครื่องจักรหยุดทำงานให้เห็นภาพรวม",
+                        image1Caption: "การติดตามการหยุดผลิต",
+                        image2Caption: "การจัดการการหยุดผลิต"
                     }
                 }
             }

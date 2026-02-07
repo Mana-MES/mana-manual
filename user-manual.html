@@ -235,6 +235,16 @@
         </div>
     </section>
 
+    <!-- Introduction -->
+    <section class="py-8 px-4 bg-[#EFF3FD] border-b border-gray-200/50">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-lg text-gray-700 leading-relaxed text-center" data-i18n="intro.text">
+                Mana MES คือระบบบริหารจัดการการผลิตสำหรับโรงงานยุคใหม่ ที่ช่วยเปลี่ยนข้อมูลกระดาษให้เป็นดิจิทัล เชื่อมต่อข้อมูลเครื่องจักร และใช้ AI ช่วยวิเคราะห์เพื่อเพิ่มประสิทธิภาพการผลิต ลดความสูญเสีย และช่วยให้ผู้บริหารตัดสินใจได้แม่นยำขึ้น
+            </p>
+            <p class="text-sm text-gray-500 mt-4 text-center" data-i18n="intro.version">เวอร์ชัน 1.0</p>
+        </div>
+    </section>
+
     <!-- Search manuals -->
     <section class="py-8 px-4 bg-[#EFF3FD] border-b border-gray-200/50">
         <div class="max-w-3xl mx-auto">
@@ -267,8 +277,8 @@
                         <div class="tutorial-card-preview-title" data-i18n="tutorials.previewTitle">Topics in this guide:</div>
                         <ul>
                             <li data-i18n="tutorials.systemOverview.topic1">Main menu structure</li>
-                            <li data-i18n="tutorials.systemOverview.topic2">Navigation categories</li>
-                            <li data-i18n="tutorials.systemOverview.topic3">Language settings</li>
+                            <li data-i18n="tutorials.systemOverview.topic2">Language settings</li>
+                            <li data-i18n="tutorials.systemOverview.topic3">Activity Log & Audit</li>
                         </ul>
                     </div>
                     <a href="manuals/05-system-overview.html" class="group block bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
@@ -331,8 +341,10 @@
                         <div class="tutorial-card-preview-title" data-i18n="tutorials.previewTitle">Topics in this guide:</div>
                         <ul>
                             <li data-i18n="tutorials.runningProduction.topic1">Work Orders (WO/OP)</li>
-                            <li data-i18n="tutorials.runningProduction.topic2">Machine selection</li>
-                            <li data-i18n="tutorials.runningProduction.topic3">Production operations</li>
+                            <li data-i18n="tutorials.runningProduction.topic2">Machine assignment</li>
+                            <li data-i18n="tutorials.runningProduction.topic3">Production release & Print OP</li>
+                            <li data-i18n="tutorials.runningProduction.topic4">Production Log & Data Recovery</li>
+                            <li data-i18n="tutorials.runningProduction.topic5">Downtime Management</li>
                         </ul>
                     </div>
                     <a href="manuals/02-running-production.html" class="group block bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
@@ -345,7 +357,7 @@
                         Running Production
                     </h3>
                     <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.runningProduction.desc">
-                        Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations.
+                        Step-by-step guide to creating Work Orders (WO/OP), selecting machines, production release, and downtime management.
                     </p>
                     <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
                         <span data-i18n="tutorials.readGuide">Read Guide</span>
@@ -361,10 +373,9 @@
                     <div class="tutorial-card-preview">
                         <div class="tutorial-card-preview-title" data-i18n="tutorials.previewTitle">Topics in this guide:</div>
                         <ul>
-                            <li data-i18n="tutorials.monitoring.topic1">OEE Dashboard</li>
-                            <li data-i18n="tutorials.monitoring.topic2">Availability, Performance, Quality</li>
-                            <li data-i18n="tutorials.monitoring.topic3">WIP Tracking</li>
-                            <li data-i18n="tutorials.monitoring.topic4">Downtime records</li>
+                            <li data-i18n="tutorials.monitoring.topic1">WIP Tracking</li>
+                            <li data-i18n="tutorials.monitoring.topic2">OEE Dashboard</li>
+                            <li data-i18n="tutorials.monitoring.topic3">Availability, Performance, Quality</li>
                         </ul>
                     </div>
                     <a href="manuals/03-monitoring.html" class="group block bg-white border-2 border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition duration-300 hover:border-[#FF7825]/30 hover:-translate-y-1">
@@ -377,7 +388,7 @@
                         Monitoring
                     </h3>
                     <p class="tutorial-card-desc text-gray-600 leading-relaxed text-sm font-light" data-i18n="tutorials.monitoring.desc">
-                        Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records.
+                        Understand WIP Tracking and OEE Dashboard metrics (Availability, Performance, Quality).
                     </p>
                     <div class="mt-4 flex items-center text-[#FF7825] text-sm font-semibold">
                         <span data-i18n="tutorials.readGuide">Read Guide</span>
@@ -450,7 +461,7 @@
                             <svg class="w-5 h-5 mr-3 text-[#FF7825]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                             </svg>
-                            <span class="font-light">Line: @Manames</span>
+                            <span class="font-light">Line: @manames</span>
                         </div>
                     </div>
                 </div>
@@ -483,6 +494,10 @@
                     title: "User Manual",
                     subtitle: "Step-by-step guides to help you get started with Mana MES and master all features"
                 },
+                intro: {
+                    text: "Mana MES is a manufacturing execution system for the modern factory that helps turn paper data into digital, connect machine data, and use AI to analyze and improve production efficiency, reduce waste, and help managers make more accurate decisions.",
+                    version: "Version 1.0"
+                },
                 search: {
                     placeholder: "Search manuals...",
                     resultsCount: "{{count}} results found",
@@ -495,8 +510,8 @@
                         title: "System Overview",
                         desc: "Understand the main menu structure, navigation categories, and how to change the system language.",
                         topic1: "Main menu structure",
-                        topic2: "Navigation categories",
-                        topic3: "Language settings"
+                        topic2: "Language settings",
+                        topic3: "Activity Log & Audit"
                     },
                     setupMasterData: {
                         title: "Setup Master Data",
@@ -509,18 +524,19 @@
                     },
                     runningProduction: {
                         title: "Running Production",
-                        desc: "Step-by-step guide to creating Work Orders (WO/OP) and selecting machines for production operations.",
+                        desc: "Step-by-step guide to creating Work Orders (WO/OP), selecting machines, production release, and downtime management.",
                         topic1: "Work Orders (WO/OP)",
-                        topic2: "Machine selection",
-                        topic3: "Production operations"
+                        topic2: "Machine assignment",
+                        topic3: "Production release & Print OP",
+                        topic4: "Production Log & Data Recovery",
+                        topic5: "Downtime Management"
                     },
                     monitoring: {
                         title: "Monitoring",
-                        desc: "Understand OEE Dashboard metrics (Availability, Performance, Quality) and learn to manually add downtime records.",
-                        topic1: "OEE Dashboard",
-                        topic2: "Availability, Performance, Quality",
-                        topic3: "WIP Tracking",
-                        topic4: "Downtime records"
+                        desc: "Understand WIP Tracking and OEE Dashboard metrics (Availability, Performance, Quality).",
+                        topic1: "WIP Tracking",
+                        topic2: "OEE Dashboard",
+                        topic3: "Availability, Performance, Quality"
                     },
                     editingData: {
                         title: "Editing Data",
@@ -549,6 +565,10 @@
                     title: "คู่มือการใช้งาน",
                     subtitle: "คู่มือทีละขั้นตอนเพื่อช่วยให้คุณเริ่มต้นใช้งาน Mana MES และเชี่ยวชาญฟีเจอร์ทั้งหมด"
                 },
+                intro: {
+                    text: "Mana MES คือระบบบริหารจัดการการผลิตสำหรับโรงงานยุคใหม่ ที่ช่วยเปลี่ยนข้อมูลกระดาษให้เป็นดิจิทัล เชื่อมต่อข้อมูลเครื่องจักร และใช้ AI ช่วยวิเคราะห์เพื่อเพิ่มประสิทธิภาพการผลิต ลดความสูญเสีย และช่วยให้ผู้บริหารตัดสินใจได้แม่นยำขึ้น",
+                    version: "เวอร์ชัน 1.0"
+                },
                 search: {
                     placeholder: "ค้นหาคู่มือ...",
                     resultsCount: "พบ {{count}} รายการ",
@@ -561,8 +581,8 @@
                         title: "ภาพรวมระบบ",
                         desc: "ทำความเข้าใจโครงสร้างเมนูหลัก หมวดหมู่การนำทาง และวิธีเปลี่ยนภาษาของระบบ",
                         topic1: "โครงสร้างเมนูหลัก",
-                        topic2: "หมวดหมู่การนำทาง",
-                        topic3: "การตั้งค่าภาษา"
+                        topic2: "การตั้งค่าภาษา",
+                        topic3: "บันทึกกิจกรรมและตรวจสอบ"
                     },
                     setupMasterData: {
                         title: "ตั้งค่าข้อมูลหลัก",
@@ -575,18 +595,19 @@
                     },
                     runningProduction: {
                         title: "การสั่งงานและการผลิต",
-                        desc: "คู่มือทีละขั้นตอนในการสร้างใบสั่งงาน (WO/OP) และเลือกเครื่องจักรสำหรับการดำเนินงานการผลิต",
+                        desc: "คู่มือทีละขั้นตอนในการสร้างใบสั่งงาน (WO/OP) การมอบหมายเครื่องจักร การปล่อยงาน และการจัดการการหยุดผลิต",
                         topic1: "ใบสั่งงาน (WO/OP)",
-                        topic2: "การเลือกเครื่องจักร",
-                        topic3: "การดำเนินงานการผลิต"
+                        topic2: "การมอบหมายเครื่องจักร",
+                        topic3: "การปล่อยงานและพิมพ์ OP",
+                        topic4: "บันทึกการผลิตและการกู้คืนข้อมูล",
+                        topic5: "การจัดการการหยุดผลิต"
                     },
                     monitoring: {
                         title: "การติดตาม",
-                        desc: "ทำความเข้าใจตัวชี้วัดแดชบอร์ด OEE (ความพร้อมใช้งาน ประสิทธิภาพ คุณภาพ) และเรียนรู้วิธีเพิ่มบันทึกการหยุดทำงานด้วยตนเอง",
-                        topic1: "แดชบอร์ด OEE",
-                        topic2: "ความพร้อมใช้งาน ประสิทธิภาพ คุณภาพ",
-                        topic3: "การติดตาม WIP",
-                        topic4: "บันทึกการหยุดผลิต"
+                        desc: "ทำความเข้าใจการติดตามงาน (WIP) และตัวชี้วัดแดชบอร์ด OEE (ความพร้อมใช้งาน ประสิทธิภาพ คุณภาพ)",
+                        topic1: "การติดตามงาน (WIP)",
+                        topic2: "แดชบอร์ด OEE",
+                        topic3: "ความพร้อมใช้งาน ประสิทธิภาพ คุณภาพ"
                     },
                     editingData: {
                         title: "การแก้ไขข้อมูล",

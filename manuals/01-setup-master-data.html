@@ -463,13 +463,19 @@
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step2">คลิก <strong>+ Add</strong> เพื่อสร้างเส้นทางใหม่</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step2">คลิก <strong>+ เพิ่มเส้นทางการผลิต</strong> เพื่อสร้างเส้นทางใหม่</h3>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
                         <div>
-                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step3">กำหนดลำดับขั้นตอน (Step) จากต้นจนจบกระบวนการ</h3>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step3">กรอกชื่อเส้นทางการผลิต (รหัสเส้นทางการผลิตจะถูกสร้างขึ้นโดยอัตโนมัติ)</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
+                        <div>
+                            <h3 class="font-semibold text-lg text-[#070711]" data-i18n="content.routes.step4">คลิกเลือกกระบวนการผลิตที่อยู่ในเส้นทางนั้น</h3>
                         </div>
                     </div>
                 </div>
@@ -484,6 +490,19 @@
                         <li data-i18n="content.routes.example2">Step 2: Assembly (ประกอบ)</li>
                         <li data-i18n="content.routes.example3">Step 3: Painting (พ่นสี)</li>
                     </ul>
+                    <p class="text-gray-600 mt-4 ml-9" data-i18n="content.routes.reorderTip">ผู้ใช้งานสามารถจัดลำดับกระบวนการผลิตในเส้นทางผ่านการคลิกลูกศรขึ้นลง และ "บันทึก"</p>
+                </div>
+
+                <!-- Production Routes Image 1 -->
+                <div class="my-8">
+                    <img src="../artwork/add%20new%20route1.png" alt="Creating Production Route" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.routes.image1Caption">การสร้างเส้นทางการผลิต</p>
+                </div>
+
+                <!-- Production Routes Image 2 -->
+                <div class="my-8">
+                    <img src="../artwork/add%20new%20route%202.png" alt="Production Route - Reorder Processes" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.routes.image2Caption">การจัดการเส้นทางการผลิต</p>
                 </div>
             </section>
 
@@ -845,16 +864,20 @@
                     routes: {
                         title: "Production Routes (เส้นทางการผลิต)",
                         intro: "Define the sequence of production steps for each product type, specifying which processes it must go through.",
+                        step4: "Click to select the production processes that are in that route.",
                         navTitle: "Navigation Path",
                         navPath: "ข้อมูลการผลิต > เส้นทางการผลิต",
                         navPathEn: "(Production Data > Production Routes)",
                         step1: "Go to ข้อมูลการผลิต (Production Data) > เส้นทางการผลิต (Production Routes).",
-                        step2: "Click + Add to create a new route.",
-                        step3: "Define the sequence of steps (Step) from start to finish of the process.",
+                        step2: "Click + เพิ่มเส้นทางการผลิต (+ Add Production Route) to create a new route.",
+                        step3: "Enter the route name (route code will be generated automatically).",
                         exampleTitle: "Example Route Sequence",
                         example1: "Step 1: Cutting (ตัด)",
                         example2: "Step 2: Assembly (ประกอบ)",
-                        example3: "Step 3: Painting (พ่นสี)"
+                        example3: "Step 3: Painting (พ่นสี)",
+                        reorderTip: "Users can reorder production processes in the route by clicking the up/down arrows and \"บันทึก\" (Save).",
+                        image1Caption: "Creating Production Route",
+                        image2Caption: "Production Route Management"
                     },
                     sku: {
                         title: "SKUs (ข้อมูลหลักสินค้า)",
@@ -951,16 +974,20 @@
                     routes: {
                         title: "เส้นทางการผลิต (Production Routes)",
                         intro: "กำหนดลำดับขั้นตอนการผลิตของสินค้าแต่ละชนิด ว่าต้องผ่านกระบวนการใดบ้าง",
+                        step4: "คลิกเลือกกระบวนการผลิตที่อยู่ในเส้นทางนั้น",
                         navTitle: "เส้นทางการนำทาง",
                         navPath: "ข้อมูลการผลิต > เส้นทางการผลิต",
                         navPathEn: "(Production Data > Production Routes)",
                         step1: "ไปที่เมนู ข้อมูลการผลิต (Production Data) > เส้นทางการผลิต (Production Routes)",
-                        step2: "คลิก + Add เพื่อสร้างเส้นทางใหม่",
-                        step3: "กำหนดลำดับขั้นตอน (Step) จากต้นจนจบกระบวนการ",
+                        step2: "คลิก + เพิ่มเส้นทางการผลิต เพื่อสร้างเส้นทางใหม่",
+                        step3: "กรอกชื่อเส้นทางการผลิต (รหัสเส้นทางการผลิตจะถูกสร้างขึ้นโดยอัตโนมัติ)",
                         exampleTitle: "ตัวอย่างลำดับเส้นทาง",
                         example1: "Step 1: Cutting (ตัด)",
                         example2: "Step 2: Assembly (ประกอบ)",
-                        example3: "Step 3: Painting (พ่นสี)"
+                        example3: "Step 3: Painting (พ่นสี)",
+                        reorderTip: "ผู้ใช้งานสามารถจัดลำดับกระบวนการผลิตในเส้นทางผ่านการคลิกลูกศรขึ้นลง และ \"บันทึก\"",
+                        image1Caption: "การสร้างเส้นทางการผลิต",
+                        image2Caption: "การจัดการเส้นทางการผลิต"
                     },
                     sku: {
                         title: "ข้อมูลหลักสินค้า (SKU)",

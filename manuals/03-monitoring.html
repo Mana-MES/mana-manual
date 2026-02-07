@@ -235,7 +235,7 @@
                 Mana MES มีเครื่องมือติดตามที่ครอบคลุมเพื่อวัดผลประสิทธิภาพโรงงานตามมาตรฐานสากล และการดูภาพรวมการผลิตของโรงงาน
             </p>
             <p class="text-lg text-gray-600 mb-12" data-i18n="content.intro2">
-                คู่มือนี้ครอบคลุมวิธีการอ่าน OEE Dashboard metrics และวิธีการเพิ่มบันทึก Downtime ด้วยตนเอง
+                คู่มือนี้ครอบคลุม WIP Tracking และ OEE Dashboard
             </p>
 
             <!-- Monitoring Overview -->
@@ -245,26 +245,72 @@
                     ภาพรวมการติดตาม
                 </h2>
                 <p class="text-gray-600 mb-6 text-center" data-i18n="content.overview.description">ระบบติดตามการผลิตประกอบด้วย:</p>
-                <div class="grid md:grid-cols-3 gap-4 mt-6">
-                    <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300 text-center">
-                        <div class="text-4xl mb-3">📈</div>
-                        <h3 class="text-lg font-bold text-[#070711] mb-2" data-i18n="content.overview.card1.title">OEE Dashboard</h3>
-                        <p class="text-gray-600 text-sm" data-i18n="content.overview.card1.desc">แดชบอร์ดข้อมูลเชิงลึก</p>
-                    </div>
+                <div class="grid md:grid-cols-2 gap-4 mt-6">
                     <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300 text-center">
                         <div class="text-4xl mb-3">🔄</div>
                         <h3 class="text-lg font-bold text-[#070711] mb-2" data-i18n="content.overview.card2.title">WIP Tracking</h3>
                         <p class="text-gray-600 text-sm" data-i18n="content.overview.card2.desc">การติดตามงาน</p>
                     </div>
                     <div class="bg-white rounded-xl p-6 border-2 border-[#FF7825] shadow-lg hover:shadow-xl transition duration-300 text-center">
-                        <div class="text-4xl mb-3">⏸️</div>
-                        <h3 class="text-lg font-bold text-[#070711] mb-2" data-i18n="content.overview.card3.title">Downtime Records</h3>
-                        <p class="text-gray-600 text-sm" data-i18n="content.overview.card3.desc">บันทึกการหยุดผลิต</p>
+                        <div class="text-4xl mb-3">📈</div>
+                        <h3 class="text-lg font-bold text-[#070711] mb-2" data-i18n="content.overview.card1.title">OEE Dashboard</h3>
+                        <p class="text-gray-600 text-sm" data-i18n="content.overview.card1.desc">แดชบอร์ดข้อมูลเชิงลึก</p>
                     </div>
                 </div>
             </div>
 
-            <!-- OEE Dashboard -->
+            <!-- WIP Tracking (5.1.1) - reordered per PDF -->
+            <section class="my-16">
+                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.wip.title">WIP Tracking (การติดตามงาน)</h2>
+                <p class="text-lg text-gray-700 mb-6" data-i18n="content.wip.intro">
+                    หน้าจอสรุปผลเพื่อดูงานทั้งหมดที่ดำเนินงานอยู่
+                </p>
+
+                <div class="info-box">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">📋</span>
+                        <strong class="text-[#070711]" data-i18n="content.wip.valuesTitle">ค่าที่แสดงผล</strong>
+                    </div>
+                    <div class="space-y-4 mt-4">
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <span class="text-green-600 text-xl mr-3">✅</span>
+                                <strong class="text-[#070711]" data-i18n="content.wip.value1.title">รายการสำเร็จในวันนี้</strong>
+                            </div>
+                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value1.desc">เพื่อดูว่าทำได้ตามเป้าหรือไม่</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <span class="text-red-600 text-xl mr-3">❌</span>
+                                <strong class="text-[#070711]" data-i18n="content.wip.value2.title">จำนวนของเสียทั้งหมด</strong>
+                            </div>
+                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value2.desc">เพื่อดูของเสียในไลน์การผลิต</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <span class="text-blue-600 text-xl mr-3">🔄</span>
+                                <strong class="text-[#070711]" data-i18n="content.wip.value3.title">งานในไลน์ผลิต</strong>
+                            </div>
+                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value3.desc">มีงานอะไรค้างอยู่บ้าง</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
+                            <div class="flex items-center mb-2">
+                                <span class="text-purple-600 text-xl mr-3">📄</span>
+                                <strong class="text-[#070711]" data-i18n="content.wip.value4.title">เอกสารสั่งผลิตปัจจุบัน</strong>
+                            </div>
+                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value4.desc">ดูคำสั่งงาน</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WIP Tracking Image -->
+                <div class="my-8">
+                    <img src="../artwork/wip%20tracking.png" alt="WIP Tracking" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
+                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.wip.img1">WIP Tracking - Work in Progress Dashboard</p>
+                </div>
+            </section>
+
+            <!-- OEE Dashboard (5.1.2) -->
             <section class="my-16">
                 <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.oee.title">OEE Dashboard (แดชบอร์ดข้อมูลเชิงลึก)</h2>
                 <p class="text-lg text-gray-700 mb-6" data-i18n="content.oee.intro">
@@ -350,177 +396,20 @@
                 </div>
             </section>
 
-            <!-- WIP Tracking -->
-            <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6" data-i18n="content.wip.title">WIP Tracking (การติดตามงาน)</h2>
-                <p class="text-lg text-gray-700 mb-6" data-i18n="content.wip.intro">
-                    หน้าจอสรุปผลเพื่อดูงานทั้งหมดที่ดำเนินงานอยู่
-                </p>
-
-                <div class="info-box">
-                    <div class="flex items-center mb-3">
-                        <span class="text-2xl mr-3">📋</span>
-                        <strong class="text-[#070711]" data-i18n="content.wip.valuesTitle">ค่าที่แสดงผล</strong>
-                    </div>
-                    <div class="space-y-4 mt-4">
-                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
-                            <div class="flex items-center mb-2">
-                                <span class="text-green-600 text-xl mr-3">✅</span>
-                                <strong class="text-[#070711]" data-i18n="content.wip.value1.title">รายการสำเร็จในวันนี้</strong>
-                            </div>
-                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value1.desc">เพื่อดูว่าทำได้ตามเป้าหรือไม่</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
-                            <div class="flex items-center mb-2">
-                                <span class="text-red-600 text-xl mr-3">❌</span>
-                                <strong class="text-[#070711]" data-i18n="content.wip.value2.title">จำนวนของเสียทั้งหมด</strong>
-                            </div>
-                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value2.desc">เพื่อดูของเสียในไลน์การผลิต</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
-                            <div class="flex items-center mb-2">
-                                <span class="text-blue-600 text-xl mr-3">🔄</span>
-                                <strong class="text-[#070711]" data-i18n="content.wip.value3.title">งานในไลน์ผลิต</strong>
-                            </div>
-                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value3.desc">มีงานอะไรค้างอยู่บ้าง</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 border-2 border-gray-200">
-                            <div class="flex items-center mb-2">
-                                <span class="text-purple-600 text-xl mr-3">📄</span>
-                                <strong class="text-[#070711]" data-i18n="content.wip.value4.title">เอกสารสั่งผลิตปัจจุบัน</strong>
-                            </div>
-                            <p class="text-gray-600 text-sm ml-8" data-i18n="content.wip.value4.desc">ดูคำสั่งงาน</p>
-                        </div>
-                    </div>
+            <!-- Downtime cross-reference -->
+            <div class="nav-box my-16">
+                <div class="flex items-center mb-2">
+                    <span class="text-2xl mr-3">⏸️</span>
+                    <strong class="text-[#070711]" data-i18n="content.downtimeRef.title">การจัดการการหยุดผลิต (Downtime Management)</strong>
                 </div>
-
-                <!-- WIP Tracking Image -->
-                <div class="my-8">
-                    <img src="../artwork/wip%20tracking.png" alt="WIP Tracking" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
-                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.wip.img1">WIP Tracking - Work in Progress Dashboard</p>
-                </div>
-            </section>
-
-            <!-- Manually Adding Downtime -->
-            <section class="my-16">
-                <h2 class="text-3xl font-bold text-[#070711] mb-6">Manually Adding Downtime Records</h2>
-                <p class="text-lg text-gray-700 mb-6">
-                    Normally, downtime is automatically recorded when an operator stops production. However, you can also manually add downtime records.
-                </p>
-
-                <div class="nav-box">
-                    <div class="flex items-center mb-2">
-                        <span class="text-2xl mr-3">📍</span>
-                        <strong class="text-[#070711]">Navigation Path</strong>
-                    </div>
-                    <p class="text-gray-700 ml-9">การหยุดผลิต (Downtime)</p>
-                </div>
-
-                <div class="space-y-4 my-8">
-                    <div class="flex items-start">
-                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span>
-                        <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Go to the <strong>การหยุดผลิต</strong> (Downtime) menu.</h3>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span>
-                        <div>
-                            <h3 class="font-semibold text-lg text-[#070711]">Click <strong>+ เพิ่มบันทึก</strong> (+ Add Record).</h3>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span>
-                        <div>
-                            <h3 class="font-semibold text-lg text-[#070711] mb-2">Enter the following information:</h3>
-                            <ul class="space-y-1 ml-4">
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span><strong>รหัสเครื่อง</strong> (Machine Code)</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span><strong>เวลาที่เริ่มหยุด-สิ้นสุด</strong> (Start and End Time)</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span><strong>สาเหตุ</strong> (Cause) - Examples: machine breakdown, waiting for materials, break time</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="bg-[#FF7825] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span>
-                        <div>
-                            <h3 class="font-semibold text-lg text-[#070711]"><strong>Timeline View:</strong> The system will display a colored bar showing the time period when the machine was stopped, giving you a visual overview.</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Downtime Management Image -->
-                <div class="my-8">
-                    <img src="../artwork/downtime%20management.png" alt="Downtime Management" class="w-full rounded-xl shadow-lg border-2 border-gray-200">
-                    <p class="text-center text-gray-600 text-sm mt-3 italic" data-i18n="content.downtime.img1">Downtime Management - Adding and Viewing Downtime Records</p>
-                </div>
-
-                <div class="info-box">
-                    <div class="flex items-center mb-3">
-                        <span class="text-2xl mr-3">📋</span>
-                        <strong class="text-[#070711]">Downtime Record Form</strong>
-                    </div>
-                    <div class="bg-white rounded-lg p-4 mt-3 space-y-3">
-                        <div><strong>Machine Code:</strong> [Select]</div>
-                        <div><strong>Start Time:</strong> [HH:MM]</div>
-                        <div><strong>End Time:</strong> [HH:MM]</div>
-                        <div>
-                            <strong>Cause:</strong> [Select/Enter]
-                            <ul class="mt-2 ml-4 space-y-1">
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>Machine breakdown</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>Waiting for materials</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[#FF7825] mr-2">•</span>
-                                    <span>Break time</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-box mt-6">
-                    <div class="flex items-center mb-3">
-                        <span class="text-2xl mr-3">⏱️</span>
-                        <strong class="text-[#070711]">Timeline Visualization</strong>
-                    </div>
-                    <div class="bg-white rounded-lg p-4 mt-3">
-                        <div class="text-sm text-gray-600 mb-2">08:00 ━━━━━━━━━━━━━━━━━━━━━━━━━ 12:00</div>
-                        <div class="bg-[#FF7825] h-8 rounded flex items-center px-4 text-white font-semibold">
-                            ████████ (Downtime)
-                        </div>
-                        <p class="text-gray-600 text-sm mt-3">Colored bar shows downtime period</p>
-                    </div>
-                </div>
-
-                <div class="checklist-box mt-6">
-                    <div class="flex items-center mb-3">
-                        <span class="text-2xl mr-3">✅</span>
-                        <strong class="text-[#070711]">Completion Checklist</strong>
-                    </div>
-                    <ul class="space-y-2 ml-9">
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Navigate to Downtime menu</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Click Add Record button</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Enter machine code</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Set start and end time</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> Select/enter cause</li>
-                        <li class="flex items-center"><span class="text-green-600 mr-2">☑</span> View timeline visualization</li>
-                    </ul>
-                </div>
-            </section>
+                <p class="text-gray-700 ml-9" data-i18n="content.downtimeRef.desc">สำหรับวิธีบันทึกและจัดการการหยุดผลิต กรุณาดูที่คู่มือ <strong>การสั่งงานและการผลิต</strong> (Running Production)</p>
+                <a href="02-running-production.html#downtime" class="inline-flex items-center mt-4 ml-9 text-[#FF7825] font-semibold hover:underline">
+                    <span data-i18n="content.downtimeRef.link">ไปที่ Running Production →</span>
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
 
             <!-- Tips -->
             <section class="my-16">
@@ -575,7 +464,7 @@
                 },
                 content: {
                     intro: "Mana MES provides comprehensive monitoring tools to measure factory performance according to international standards and view an overview of your factory's production status.",
-                    intro2: "This guide covers how to read the OEE Dashboard metrics and how to manually add downtime records.",
+                    intro2: "This guide covers WIP Tracking and OEE Dashboard.",
                     overview: {
                         title: "Monitoring Overview",
                         description: "The production monitoring system consists of:",
@@ -620,6 +509,11 @@
                         step3: { title: "Enter the following information:", item1: "รหัสเครื่อง (Machine Code)", item2: "เวลาที่เริ่มหยุด-สิ้นสุด (Start and End Time)", item3: "สาเหตุ (Cause) - Examples: machine breakdown, waiting for materials, break time" },
                         step4: "Timeline: The system will display a colored bar showing the time period when the machine stopped, providing a visual overview.",
                         img1: "Downtime Management - Adding and Viewing Downtime Records"
+                    },
+                    downtimeRef: {
+                        title: "Downtime Management",
+                        desc: "For instructions on recording and managing downtime, please see the Running Production guide.",
+                        link: "Go to Running Production →"
                     }
                 }
             },
@@ -639,7 +533,7 @@
                 },
                 content: {
                     intro: "Mana MES มีเครื่องมือติดตามที่ครอบคลุมเพื่อวัดผลประสิทธิภาพโรงงานตามมาตรฐานสากล และการดูภาพรวมการผลิตของโรงงาน",
-                    intro2: "คู่มือนี้ครอบคลุมวิธีการอ่าน OEE Dashboard metrics และวิธีการเพิ่มบันทึก Downtime ด้วยตนเอง",
+                    intro2: "คู่มือนี้ครอบคลุม WIP Tracking และ OEE Dashboard",
                     overview: {
                         title: "ภาพรวมการติดตาม",
                         description: "ระบบติดตามการผลิตประกอบด้วย:",
@@ -684,6 +578,11 @@
                         step3: { title: "ระบุข้อมูล:", item1: "รหัสเครื่อง (Machine Code)", item2: "เวลาที่เริ่มหยุด-สิ้นสุด (Start and End Time)", item3: "สาเหตุ (Cause) - เช่น เครื่องเสีย, รอของ, พักเบรค" },
                         step4: "Timeline: ระบบจะแสดงแถบสีช่วงเวลาที่เครื่องจักรหยุดทำงานให้เห็นภาพรวม",
                         img1: "การจัดการการหยุดผลิต - การเพิ่มและดูบันทึกการหยุดผลิต"
+                    },
+                    downtimeRef: {
+                        title: "การจัดการการหยุดผลิต (Downtime Management)",
+                        desc: "สำหรับวิธีบันทึกและจัดการการหยุดผลิต กรุณาดูที่คู่มือ การสั่งงานและการผลิต (Running Production)",
+                        link: "ไปที่ Running Production →"
                     }
                 }
             }
