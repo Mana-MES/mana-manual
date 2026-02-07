@@ -104,6 +104,13 @@
             visibility: hidden;
             pointer-events: none;
         }
+        .hero-bg {
+            background-image:
+                linear-gradient(to bottom right, rgba(7,7,17,0.92), rgba(40,51,78,0.92)),
+                url('artwork/background.png');
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -175,7 +182,7 @@
     <div class="h-16 md:h-20"></div>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-[#070711] to-[#28334E] py-24 px-4">
+    <section class="hero-bg py-24 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-4xl mx-auto">
                 <div class="flex justify-center mb-8">

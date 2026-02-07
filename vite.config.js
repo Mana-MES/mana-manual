@@ -1,7 +1,18 @@
 import { defineConfig } from 'vite'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        { src: 'artwork', dest: '.' },
+        { src: 'mana_logo.png', dest: '.' },
+        { src: 'IBM_Plex_Sans_Thai', dest: '.' },
+        { src: 'Inclusive_Sans', dest: '.' }
+      ]
+    })
+  ],
   server: {
     host: '0.0.0.0', // Allow all external connections
     port: 5173,
