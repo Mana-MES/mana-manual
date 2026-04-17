@@ -78,6 +78,9 @@ function updateHtmlRefs(htmlPath, convertedPaths) {
   // Update content= attributes (og:image, JSON-LD logo URLs)
   html = html.replace(/content="([^"]*)\.(png|jpg|jpeg)"/gi, (m, p, ext) => `content="${replaceIfConverted(p, ext)}"`)
 
+  // Update JS string literals (e.g. featureImages object, dynamic src assignments)
+  html = html.replace(/'([^'\n]*)\.(png|jpg|jpeg)'/gi, (m, p, ext) => `'${replaceIfConverted(p, ext)}'`)
+
   // Add loading="lazy" to img tags — skip if already has loading= or is mana_logo
   html = html.replace(/<img ([^>]+)>/gi, (match, attrs) => {
     if (/loading=/i.test(attrs)) return match
