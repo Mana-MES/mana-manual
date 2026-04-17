@@ -1,7 +1,7 @@
 module.exports = {
   baseUrl: 'https://mana-mes.com',
   siteName: 'Mana MES',
-  defaultOgImage: '/mana_logo.png',
+  defaultOgImage: '/mana_logo.webp',
   pages: [
     {
       file: 'index.html',
