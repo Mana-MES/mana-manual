@@ -51,11 +51,19 @@ async function convertToWebP(imagePath) {
 
 function updateHtmlRefs(htmlPath, convertedPaths) {
   let html = fs.readFileSync(htmlPath, 'utf-8')
+  const htmlDir = path.dirname(htmlPath)
 
   function replaceIfConverted(urlPath, ext) {
-    const stripped = urlPath.replace(/^https?:\/\/[^/]+/, '')
-    const relPath = stripped.startsWith('/') ? stripped.slice(1) : stripped
-    const absPath = path.join(distDir, relPath) + '.' + ext
+    let absPath
+    const decoded = decodeURIComponent(urlPath)
+    if (decoded.startsWith('http')) {
+      const url = new URL(decoded + '.' + ext)
+      absPath = path.join(distDir, url.pathname.slice(1))
+    } else if (decoded.startsWith('/')) {
+      absPath = path.join(distDir, decoded.slice(1)) + '.' + ext
+    } else {
+      absPath = path.resolve(htmlDir, decoded) + '.' + ext
+    }
     return convertedPaths.has(absPath) ? urlPath + '.webp' : urlPath + '.' + ext
   }
 
