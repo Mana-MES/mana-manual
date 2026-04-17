@@ -35,25 +35,40 @@ async function convertToWebP(imagePath) {
   const before = fs.statSync(imagePath).size
   await sharp(imagePath).webp({ lossless: true }).toFile(webpPath)
   const after = fs.statSync(webpPath).size
-  fs.unlinkSync(imagePath)
-  const saved = Math.round((1 - after / before) * 100)
   const rel = path.relative(distDir, imagePath)
-  console.log(`  ✓ ${rel} → .webp (${saved}% smaller)`)
+
+  if (after < before) {
+    fs.unlinkSync(imagePath)
+    const saved = Math.round((1 - after / before) * 100)
+    console.log(`  ✓ ${rel} → .webp (${saved}% smaller)`)
+    return imagePath
+  } else {
+    fs.unlinkSync(webpPath)
+    console.log(`  = ${rel} kept (original is smaller)`)
+    return null
+  }
 }
 
-function updateHtmlRefs(htmlPath) {
+function updateHtmlRefs(htmlPath, convertedPaths) {
   let html = fs.readFileSync(htmlPath, 'utf-8')
 
-  // Update src attributes (double and single quotes)
-  html = html.replace(/src="([^"]*)\.(png|jpg|jpeg)"/gi, 'src="$1.webp"')
-  html = html.replace(/src='([^']*)\.(png|jpg|jpeg)'/gi, "src='$1.webp'")
+  function replaceIfConverted(urlPath, ext) {
+    const stripped = urlPath.replace(/^https?:\/\/[^/]+/, '')
+    const relPath = stripped.startsWith('/') ? stripped.slice(1) : stripped
+    const absPath = path.join(distDir, relPath) + '.' + ext
+    return convertedPaths.has(absPath) ? urlPath + '.webp' : urlPath + '.' + ext
+  }
 
-  // Update CSS url() references (both quote styles)
-  html = html.replace(/url\('([^']*)\.(png|jpg|jpeg)'\)/gi, "url('$1.webp')")
-  html = html.replace(/url\("([^"]*)\.(png|jpg|jpeg)"\)/gi, 'url("$1.webp")')
+  // Update src attributes
+  html = html.replace(/src="([^"]*)\.(png|jpg|jpeg)"/gi, (m, p, ext) => `src="${replaceIfConverted(p, ext)}"`)
+  html = html.replace(/src='([^']*)\.(png|jpg|jpeg)'/gi, (m, p, ext) => `src='${replaceIfConverted(p, ext)}'`)
+
+  // Update CSS url() references
+  html = html.replace(/url\('([^']*)\.(png|jpg|jpeg)'\)/gi, (m, p, ext) => `url('${replaceIfConverted(p, ext)}')`)
+  html = html.replace(/url\("([^"]*)\.(png|jpg|jpeg)"\)/gi, (m, p, ext) => `url("${replaceIfConverted(p, ext)}")`)
 
   // Update content= attributes (og:image, JSON-LD logo URLs)
-  html = html.replace(/content="([^"]*)\.(png|jpg|jpeg)"/gi, 'content="$1.webp"')
+  html = html.replace(/content="([^"]*)\.(png|jpg|jpeg)"/gi, (m, p, ext) => `content="${replaceIfConverted(p, ext)}"`)
 
   // Add loading="lazy" to img tags — skip if already has loading= or is mana_logo
   html = html.replace(/<img ([^>]+)>/gi, (match, attrs) => {
@@ -69,12 +84,13 @@ async function main() {
   console.log('Converting images to WebP...')
   const images = findImages(distDir)
   console.log(`  Found ${images.length} images`)
-  await Promise.all(images.map(convertToWebP))
+  const results = await Promise.all(images.map(convertToWebP))
+  const convertedPaths = new Set(results.filter(Boolean))
 
   console.log('Updating HTML references...')
   const htmlFiles = findHtmlFiles(distDir)
   for (const htmlPath of htmlFiles) {
-    updateHtmlRefs(htmlPath)
+    updateHtmlRefs(htmlPath, convertedPaths)
     console.log(`  ✓ ${path.relative(distDir, htmlPath)}`)
   }
 
