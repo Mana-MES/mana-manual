@@ -10,7 +10,7 @@ function findImages(dir) {
     const fullPath = path.join(dir, entry.name)
     if (entry.isDirectory()) {
       results.push(...findImages(fullPath))
-    } else if (/\.(png|jpg|jpeg)$/i.test(entry.name)) {
+    } else if (/\.(png|jpg|jpeg)$/i.test(entry.name) && entry.name !== 'favicon.png') {
       results.push(fullPath)
     }
   }

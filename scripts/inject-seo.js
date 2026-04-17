@@ -32,6 +32,7 @@ function buildTags(page, cfg) {
   const jsonLd = buildJsonLd(page, cfg)
 
   return [
+    `  <link rel="icon" type="image/png" href="/favicon.png">`,
     `  <meta name="description" content="${page.descriptionEN}">`,
     `  <meta name="keywords" content="${page.keywords.join(', ')}">`,
     `  <meta property="og:title" content="${page.title}">`,
